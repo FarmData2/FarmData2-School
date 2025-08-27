@@ -39,12 +39,12 @@ img {
 table {
   border: 2px solid #f6d32d;
   color: blue;
+  font-size: 16px;
 }
 
 th,
 td {
   border: 1px solid #f6d32d;
-  font-size: 16px;
 }
 
 .stripe {
