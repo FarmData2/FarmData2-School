@@ -7,3 +7,13 @@ main:
   css:
     component:
       style/style.css: {}
+
+HTML_CSS:
+  js:
+    HTML_CSS/HTML_CSS.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
