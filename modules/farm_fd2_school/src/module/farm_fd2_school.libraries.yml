@@ -17,3 +17,13 @@ HTML_CSS:
   css:
     component:
       style/style.css: {}
+
+Vue1:
+  js:
+    Vue1/Vue1.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
