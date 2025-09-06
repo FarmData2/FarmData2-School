@@ -13,10 +13,10 @@
       <h1>{{header || 'Welcome'}}</h1>
       <ul>
         <li
-          v-for="{id, label} in items"
-          v-bind:key="id"
+          v-for="(item, index) in items"
+          v-bind:key="item.id"
         >
-          {{label}}
+          {{index}} {{item.label}}
         </li>
       </ul>
     </div>
