@@ -26,6 +26,12 @@
           <td>{{item.label}}</td>
         </tr>
       </table>
+
+      <br />
+
+      <select>
+        <option v-for="action in actions">{{action}}</option>
+      </select>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
@@ -38,6 +44,7 @@
               { id: 2, quantity: 2, label: 'board games' },
               { id: 3, quantity: 20, label: 'cups' },
             ],
+            actions: ['Increase', 'Decrease', 'Delete'],
           };
         },
       }).mount('#shopping-list');
