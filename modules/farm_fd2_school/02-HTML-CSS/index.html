@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Dijkstra's Algorithm</title>
+  </head>
+  <body>
+    <h1>Dijkstra's Algorithm</h1>
+
+    <p>
+      Dijkstra's algorithm is a famous algorithm for finding the shortest paths
+      between nodes in a graph, which may represent, for example, road networks.
+      Learn more about the algorithm on
+      <a href="https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm"
+        >Wikipedia</a
+      >.
+    </p>
+
+    <img
+      src="dijkstra-graph.png"
+      height="300px"
+      alt="A directed graph with nodes and weighted edges, showing the shortest path from a starting node."
+    />
+
+    <p>
+      The algorithm is widely used in various applications, from network routing
+      protocols to finding the shortest travel time on a map. It works by
+      systematically exploring the graph and keeping track of the shortest
+      distance found so far to each node.
+    </p>
+
+    <h2>How It Works</h2>
+    <ul>
+      <li>
+        Initialize distances to all nodes as infinity, except the source node,
+        which has a distance of zero.
+      </li>
+      <li>Maintain a set of unvisited nodes.</li>
+      <li>
+        For the current node, consider all of its unvisited neighbors and
+        calculate their tentative distances.
+      </li>
+      <li>
+        If the newly calculated distance is smaller than the previously recorded
+        distance, update it.
+      </li>
+      <li>
+        Once all neighbors have been checked, mark the current node as visited
+        and move to the unvisited node with the smallest distance.
+      </li>
+    </ul>
+  </body>
+</html>
