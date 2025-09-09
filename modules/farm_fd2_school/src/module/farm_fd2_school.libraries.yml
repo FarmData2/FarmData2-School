@@ -28,9 +28,9 @@ Vue1:
     component:
       style/style.css: {}
 
-FD2_Data1:
+Vue2:
   js:
-    FD2_Data1/FD2_Data1.js:
+    Vue2/Vue2.js:
       preprocess: false
       minified: true
       attributes: { type: 'module' }

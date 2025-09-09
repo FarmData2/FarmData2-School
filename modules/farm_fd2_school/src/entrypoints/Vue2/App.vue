@@ -1,7 +1,7 @@
 <template>
   <div
-    id="FD2-Data1"
-    data-cy="FD2-Data1"
+    id="Vue2"
+    data-cy="Vue2"
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 

@@ -16,9 +16,9 @@ farm.fd2_school_Vue1:
   parent: farm.fd2_school_main
   route_name: farm.fd2_school_Vue1.content
   weight: 105
-farm.fd2_school_FD2_Data1:
-  title: 'FD2 Data1'
-  description: 'Harvest form prototype with FD2 data - part 1.'
+farm.fd2_school_Vue2:
+  title: 'Vue2'
+  description: 'Harvest form prototype with Vue - part 2.'
   parent: farm.fd2_school_main
-  route_name: farm.fd2_school_FD2_Data1.content
+  route_name: farm.fd2_school_Vue2.content
   weight: 110
