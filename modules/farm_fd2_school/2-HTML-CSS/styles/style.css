@@ -1,0 +1,26 @@
+html {
+  font-family: 'Oswald', sans-serif;
+  background-color: ghostwhite;
+}
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+p {
+  text-shadow: 1px 4px 1px white;
+}
+li {
+  color: rgb(53, 99, 7);
+  letter-spacing: 4px;
+}
+h1 {
+  font-size: 200;
+  color: red;
+}
+body {
+  margin: 0 auto;
+  padding: 0 20px 20px 20px;
+  width: 200px;
+  background-color: dimgray;
+}
