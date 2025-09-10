@@ -9,12 +9,15 @@ function usage {
   echo "  -h|--help : Display this message."
   echo ""
   echo "  The default behavior if no flags are provided is to install the"
-  echo "  latest release of the sample database."
+  echo "  release of the sample database indicated in .fd2dev/db.conf."
   echo ""
   echo "  -c|--current : Reinstall the most recently installed sample database."
-  echo "    - The file ~/.fd2/db.sample.tar.gz will be installed if it exists."
-  echo "    - If ~/.fd2/db.sample.tar.gz does not exist then the default behavior will be used."
+  echo "    - The file .fd2/db.sample.tar.gz will be installed if it exists."
+  echo "    - If .fd2/db.sample.tar.gz does not exist then the default behavior will be used."
   echo "    - No other flags may be specified with -c|--current."
+  echo ""
+  echo "  -l|--latest : Install the latest release of the sample database."
+  echo "    - No other flags may be specified with -l|--latest."
   echo ""
   echo "  -p|--prompt : Prompt for the release and database artifact to install."
   echo "    - No other flags may be specified with -p|--prompt."
@@ -40,12 +43,12 @@ REPO_DIR=$(git rev-parse --show-toplevel)
 DB_DIR="$REPO_DIR/docker/db"
 
 if [ "$#" == "0" ]; then
-  LATEST=1
+  PREFERRED=1
 else
 
   # Process the command line flags
-  FLAGS=$(getopt -o a::c::h::p::r:: \
-    --long asset::,current::,help::,prompt::,release:: \
+  FLAGS=$(getopt -o a::c::h::l::p::r:: \
+    --long asset::,current::,help::,latest::,prompt::,release:: \
     -- "$@")
   error_check "Unrecognized option provided."
   eval set -- "$FLAGS"
@@ -67,6 +70,10 @@ else
         ;;
       -h | --help)
         usage
+        ;;
+      -l | --latest)
+        LATEST=1
+        shift 2
         ;;
       -p | --prompt)
         PROMPT=1
@@ -107,8 +114,8 @@ if [ -n "$CURRENT" ]; then
     exit 255
   fi
 
-  if [ ! -f "$HOME/.fd2/db.sample.tar.gz" ]; then
-    echo "$HOME/.fd2/db.sample.tar.gz does not exist."
+  if [ ! -f "$REPO_DIR/.fd2/db.sample.tar.gz" ]; then
+    echo "$REPO_DIR/.fd2/db.sample.tar.gz does not exist."
     echo "Defaulting to default behavior."
     unset CURRENT
   fi
@@ -151,6 +158,9 @@ else
 
     DB_RELEASE="${RELEASES[0]}"
     DB_ASSET="db.sample.tar.gz"
+  elif [ -n "$PREFERRED" ]; then
+    DB_RELEASE=$(cat "$REPO_DIR/.fd2dev/db.conf" | head -1)
+    DB_ASSET=$(cat "$REPO_DIR/.fd2dev/db.conf" | tail -1)
   elif [ -n "$PROMPT" ]; then
     # shellcheck disable=SC2207
     RELEASES=(
@@ -254,13 +264,6 @@ echo "Restarting farmOS..."
 docker start fd2_farmos > /dev/null
 error_check "Error starting farmOS."
 echo "  Started."
-
-echo "Reinstalling the FarmData2 module..."
-docker exec fd2_farmos drush pm-uninstall farm_fd2 -y
-error_check "Unable to uninstall the FarmData2 module."
-docker exec fd2_farmos drush pm-enable farm_fd2 -y
-error_check "Unable to enable the FarmData2 module."
-echo "  FarmData2 module reinstalled."
 
 echo "Clearing the Drupal cache..."
 docker exec fd2_farmos drush cr
