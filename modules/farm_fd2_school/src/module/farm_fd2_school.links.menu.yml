@@ -4,3 +4,9 @@ farm.fd2_school_main:
   parent: farm.base
   route_name: farm.fd2_school.content
   weight: 120
+farm.fd2_school_HTML_CSS:
+  title: 'HTML and CSS'
+  description: 'Static Harvest form prototype with HTML and CSS.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_HTML_CSS.content
+  weight: 100
