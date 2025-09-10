@@ -35,3 +35,29 @@ img {
   margin: 0 auto;
   max-width: 100%;
 }
+
+table {
+  border: 2px solid #f6d32d;
+  color: blue;
+  font-size: 16px;
+}
+
+th,
+td {
+  border: 1px solid #f6d32d;
+}
+
+.stripe {
+  background-color: #f6d32d;
+}
+
+#grade-232 {
+  border: 1px solid white;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+}
+
+.red-border {
+  border: 3px dotted red;
+}
+
