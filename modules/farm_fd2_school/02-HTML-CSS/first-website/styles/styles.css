@@ -1,0 +1,43 @@
+html {
+  /* px means "pixels". The base font size is now 10 pixels high */
+  font-size: 14px;
+  /* Replace PLACEHOLDER with the font-family property value you got from Google Fonts */
+  font-family: 'Sorts Mill Goudy', serif;
+}
+
+h1 {
+  font-size: 45px;
+  text-align: center;
+}
+
+p,
+li {
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 1px;
+}
+
+html {
+  background-color: #885239;
+}
+
+body {
+  width: 900px;
+  margin: 0 auto;
+  background-color: #e9e0d2;
+  padding: 0 20px 20px 20px;
+  border: 4px solid rgb(58, 47, 39);
+}
+
+h1 {
+  margin: 0;
+  padding: 20px 0;
+  color: rgb(58, 47, 39);
+  text-shadow: 3px 3px 1px #9c8776;
+}
+
+img {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
