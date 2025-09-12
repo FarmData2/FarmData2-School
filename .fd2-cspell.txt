@@ -1,3 +1,4 @@
+Arda
 autoconnect
 backmerge
 backmerged
@@ -71,6 +72,7 @@ shellcheck
 shfmt
 shinepukur
 Siddiqui
+Silmarillion
 Steiman
 timonwong
 toplevel
