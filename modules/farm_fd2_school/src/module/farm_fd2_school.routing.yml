@@ -5,3 +5,10 @@ farm.fd2_school.content:
     _title: 'FD2 School'
   requirements:
     _permission: 'access content'
+farm.fd2_school_HTML_CSS.content:
+  path: '/fd2_school/HTML_CSS'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'HTML and CSS'
+  requirements:
+    _permission: 'access content'
