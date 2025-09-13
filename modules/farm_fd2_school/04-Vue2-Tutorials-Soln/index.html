@@ -18,20 +18,14 @@
         placeholder="Add an item"
       />
 
-      <label
-        ><input
-          type="radio"
-          v-model="newItemPriority"
-          value="low"
-        />Low</label
-      >
-      <label
-        ><input
-          type="radio"
-          v-model="newItemPriority"
-          value="high"
-        />High</label
-      >
+      <label>
+        Priority
+        <select v-model="newItemPriority">
+          <option value="low">Low</option>
+          <option value="high">High</option>
+        </select>
+      </label>
+
       <br />
 
       {{ newItem }} {{ newItemPriority }}
