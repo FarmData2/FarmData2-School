@@ -14,7 +14,8 @@
 
       <div class="add-item-form">
         <input
-          v-model="newItem"
+          v-model.trim="newItem"
+          v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})"
           type="text"
           placeholder="Add an item"
         />
