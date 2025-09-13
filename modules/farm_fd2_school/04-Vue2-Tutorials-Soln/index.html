@@ -25,7 +25,12 @@
           />
           High Priority
         </label>
-        <button class="btn btn-primary">Save Item</button>
+        <button
+          v-on:click="items.push({id: items.length + 1, label: newItem})"
+          class="btn btn-primary"
+        >
+          Save Item
+        </button>
       </div>
       <ul>
         <li
