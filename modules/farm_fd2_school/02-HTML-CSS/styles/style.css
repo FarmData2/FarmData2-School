@@ -50,6 +50,14 @@ tbody > tr:nth-of-type(even) {
   background-color: rgb(173, 204, 173);
 }
 
+.cool{
+  color: red;
+}
+
+.inputs{
+  border: 3px dotted red;
+}
+
 #special{
   border:4px solid purple;
 }
