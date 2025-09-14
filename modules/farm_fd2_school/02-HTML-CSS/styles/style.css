@@ -38,9 +38,18 @@ img {
 table {
   border: 3px solid black;
   font-size:16px;
+  color: #63452c;
 }
 
 th,td{
   border:1px solid black;
   padding: 8px 10px;
+}
+
+tbody > tr:nth-of-type(even) {
+  background-color: rgb(173, 204, 173);
+}
+
+#special{
+  border:4px solid purple;
 }
