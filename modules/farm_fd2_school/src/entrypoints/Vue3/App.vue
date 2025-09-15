@@ -72,7 +72,10 @@
       class="label-margin"
       v-model="quantity"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="unit"
+    >
       <option
         v-for="unit in unitList"
         v-bind:key="unit.id"
@@ -113,6 +116,7 @@ export default {
       date: '2019-06-15',
       crop: 'RADISH',
       quantity: 1,
+      unit: 'BUNCH',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
