@@ -44,6 +44,9 @@
           {{item.label}}
         </li>
       </ul>
+      The picked item has id: {{ pickedItemId }}
+      <br />
+      <button v-on:click="pickedItemId=-1">Clear</button>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
