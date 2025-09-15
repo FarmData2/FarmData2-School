@@ -1,4 +1,7 @@
 <template>
+  <head>
+    <title>Harvest</title>
+  </head>
   <p>
     <label for="start">Start date:</label>
 
