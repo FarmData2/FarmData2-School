@@ -101,11 +101,13 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-on:click="console.log('Submit button clicked.')"
     />
     <input
       type="button"
       id="harvest-reset"
       value="Reset"
+      v-on:click="console.log('Reset button clicked')"
     />
 
     <hr />
