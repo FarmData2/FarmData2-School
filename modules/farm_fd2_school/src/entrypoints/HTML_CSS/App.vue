@@ -21,8 +21,10 @@
       name="crops"
       id="Crop"
     >
-      <option value="">Radish</option>
-      <option value="arugula">Arugula</option>
+      <option value="radish">RADISH</option>
+      <option value="arugula">ARUGULA</option>
+      <option value="asparagus">ASPARAGUS</option>
+      <option value="bean">BEAN</option>
     </select>
   </p>
 </template>
