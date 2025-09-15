@@ -1,10 +1,16 @@
 <template>
-  <div
-    id="HTML-CSS"
-    data-cy="HTML-CSS"
-  >
-    <p>Add HTML for Harvest form here.</p>
-  </div>
+  <p>
+    <label for="start">Start date:</label>
+
+    <input
+      type="date"
+      id="start"
+      name="trip-start"
+      value="2018-07-22"
+      min="2018-01-01"
+      max="2018-12-31"
+    />
+  </p>
 </template>
 
 <script></script>
@@ -14,4 +20,13 @@
 @import url('@css/fd2-mobile.css');
 
 /* Add CSS for harvest form here */
+p,
+label {
+  display: block;
+}
+
+p,
+input {
+  margin: 0.4rem 0;
+}
 </style>
