@@ -91,6 +91,7 @@
       rows="5"
       cols="35"
       placeholder="Enter a comment..."
+      v-model.trim.lazy="comment"
     />
     <br />
     <input
@@ -117,6 +118,7 @@ export default {
       crop: 'RADISH',
       quantity: 1,
       unit: 'BUNCH',
+      comment: '',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
