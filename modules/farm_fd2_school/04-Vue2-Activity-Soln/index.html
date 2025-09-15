@@ -35,6 +35,12 @@
           v-for="item in items"
           v-bind:key="item.id"
         >
+          <input
+            type="radio"
+            name="items"
+            v-bind:value="item.id"
+            v-model="pickedItemId"
+          />
           {{item.label}}
         </li>
       </ul>
