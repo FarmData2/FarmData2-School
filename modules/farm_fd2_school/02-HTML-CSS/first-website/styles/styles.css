@@ -41,6 +41,7 @@ table {
   border: 1px solid rgb(219, 209, 198);
   padding: 12px;
   font-size: 16px;
+  color: #403263;
 }
 
 td,
@@ -49,4 +50,18 @@ th {
   padding: 8px 10px;
   margin: 5px auto;
   text-align: center;
+}
+
+th {
+  color: #f10505;
+}
+
+.stripe {
+  color: rgb(105, 49, 12);
+}
+
+#unique {
+  border: 3px solid yellow;
+  border-top-width: 6px;
+  border-bottom-width: 6px;
 }
