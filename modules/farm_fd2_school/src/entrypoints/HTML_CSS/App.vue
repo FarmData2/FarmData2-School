@@ -10,10 +10,29 @@
       <label for="date">Date:</label>
       <input
         type="date"
-        label="birthday"
-        name="birthday"
+        value="2019-06-15"
+        label="date"
+        name="date"
       />
     </form>
+
+    <form for="crop">Crop:</form>
+    <select
+      name="crops"
+      id="crops"
+      value="RADISH"
+      autofocus
+    >
+      <option value="ARUGULA">ARUGULA</option>
+      <option value="ASPARAGUS">ASPARAGUS</option>
+      <option value="BEAN">BEAN</option>
+      <option
+        value="RADISH"
+        selected
+      >
+        RADISH
+      </option>
+    </select>
   </body>
 </template>
 
