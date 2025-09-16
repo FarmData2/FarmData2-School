@@ -14,7 +14,7 @@
 
       <div class="add-item-form">
         <input
-          v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})"
+          v-on:keyup.enter="saveItem"
           v-model="newItem"
           type="text"
           placeholder="Add an item"
@@ -27,7 +27,7 @@
           High Priority
         </label>
         <button
-          v-on:click="items.push({id: items.length + 1, label: newItem})"
+          v-on:click="saveItem"
           class="btn btn-primary"
         >
           Save Item
@@ -56,6 +56,11 @@
               { id: 3, label: '20 cups' },
             ],
           };
+        },
+        methods: {
+          saveItem() {
+            this.items.push({ id: this.items.length + 1, label: this.newItem });
+          },
         },
       }).mount('#shopping-list');
     </script>
