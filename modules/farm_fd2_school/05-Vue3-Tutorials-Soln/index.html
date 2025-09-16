@@ -33,6 +33,7 @@
           Save Item
         </button>
       </div>
+      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
           v-for="item in items"
@@ -51,9 +52,9 @@
             newItem: '',
             newItemHighPriority: false,
             items: [
-              { id: 1, label: '10 party hats' },
-              { id: 2, label: '2 board games' },
-              { id: 3, label: '20 cups' },
+              //{ id: 1, label: '10 party hats' },
+              //{ id: 2, label: '2 board games' },
+              //{ id: 3, label: '20 cups' },
             ],
           };
         },
