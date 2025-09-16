@@ -3,7 +3,7 @@
     id="HTML-CSS"
     data-cy="HTML-CSS"
   >
-    <p>Add HTML for Harvest form here.</p>
+    <h1>Harvest</h1>
   </div>
 </template>
 
@@ -14,4 +14,7 @@
 @import url('@css/fd2-mobile.css');
 
 /* Add CSS for harvest form here */
+h1 {
+  text-align: center;
+}
 </style>
