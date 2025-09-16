@@ -125,14 +125,28 @@
     <br />
 
     <label for="comment"></label>
-    <input
-      type="textarea"
+    <textarea
       id="comment"
       name="comment"
       rows="5"
       cols="30"
       placeholder="Add a comment..."
-    />
+    >
+    </textarea
+    ><br />
+
+    <button
+      type="button"
+      id="submit"
+    >
+      <b>Submit</b>
+    </button>
+    <button
+      type="button"
+      id="reset"
+    >
+      <b>Reset</b>
+    </button>
   </body>
 </template>
 
@@ -144,5 +158,18 @@
 
 h1 {
   text-align: center;
+}
+
+#submit {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 75px;
+  margin-right: 6px;
+}
+#reset {
+  background-color: orange;
+  border: none;
+  padding: 5px 30px;
 }
 </style>
