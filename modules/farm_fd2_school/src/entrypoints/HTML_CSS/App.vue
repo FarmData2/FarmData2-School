@@ -104,6 +104,35 @@
         </form>
       </tbody>
     </table>
+
+    <label for="quantity">Quantity:</label>
+    <input
+      type="number"
+      id="quantity"
+      name="quantity"
+      min="1"
+      value="1"
+    />
+    <select
+      name="quantity1"
+      id="quantity1"
+      value="BUNCH"
+    >
+      <option value="BUNCH">BUNCH</option>
+      <option value="EACH">EACH</option>
+      <option value="POUND">POUND</option>
+    </select>
+    <br />
+
+    <label for="comment"></label>
+    <input
+      type="textarea"
+      id="comment"
+      name="comment"
+      rows="5"
+      cols="30"
+      placeholder="Add a comment..."
+    />
   </body>
 </template>
 
