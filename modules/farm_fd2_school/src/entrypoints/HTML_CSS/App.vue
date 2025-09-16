@@ -5,6 +5,16 @@
   >
     <h1>Harvest</h1>
   </div>
+  <body>
+    <form action="action_page.php">
+      <label for="date">Date:</label>
+      <input
+        type="date"
+        label="birthday"
+        name="birthday"
+      />
+    </form>
+  </body>
 </template>
 
 <script></script>
