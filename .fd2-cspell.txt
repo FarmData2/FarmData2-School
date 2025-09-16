@@ -59,6 +59,7 @@ Picklist
 pietmichal
 Pietraszko
 pinia
+plique
 Preconfigured
 preprocess
 printlog
@@ -72,6 +73,7 @@ shfmt
 shinepukur
 Siddiqui
 Steiman
+Thesmar
 timonwong
 toplevel
 transplantings

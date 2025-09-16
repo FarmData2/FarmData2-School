@@ -35,3 +35,17 @@ img {
   margin: 0 auto;
   max-width: 100%;
 }
+table {
+  border: 2px solid rgb(140 140 140);
+  font: 16px 'Open Sans', Helvetica, Arial, sans-serif;
+}
+
+thead > tr,
+tfoot > tr {
+  background-color: rgb(228 240 245);
+}
+
+th,
+td {
+  border: 1px solid rgb(160 160 160);
+}
