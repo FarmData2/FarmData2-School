@@ -60,6 +60,7 @@
         methods: {
           saveItem() {
             this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.newItem = '';
           },
         },
       }).mount('#shopping-list');
