@@ -1,17 +1,21 @@
-<template>
-  <div
-    id="HTML-CSS"
-    data-cy="HTML-CSS"
-  >
-    <p>Add HTML for Harvest form here.</p>
-  </div>
-</template>
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>Harvest</title>
+  </head>
 
-<script></script>
+  <label for="date-input">Date:</label>
+  <input
+    type="date"
+    value="2025-01-02"
+  />
 
-<style>
-/* import some styling that applies to all FD2 entry points */
-@import url('@css/fd2-mobile.css');
+  <script></script>
 
-/* Add CSS for harvest form here */
-</style>
+  <style>
+    /* import some styling that applies to all FD2 entry points */
+    @import url('@css/fd2-mobile.css');
+
+    /* Add CSS for harvest form here */
+  </style>
+</html>
