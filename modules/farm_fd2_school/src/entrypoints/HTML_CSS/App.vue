@@ -36,12 +36,12 @@
   <hr />
 
   <div>
-    <table>
-      <tr>
+    <table class="harvest-table">
+      <tr id="header">
         <th></th>
-        <th>Location</th>
-        <th>Bed</th>
-        <th>Planted Date</th>
+        <th><b>Location</b></th>
+        <th><b>Bed</b></th>
+        <th><b>Planted Date</b></th>
       </tr>
       <tr>
         <td><input type="radio" /></td>
@@ -82,7 +82,17 @@ h1 {
   text-align: center;
 }
 
+.harvest-table {
+  width: 55%;
+  padding-left: 10px;
+  border: 2px solid black;
+}
+
 .input-rectangle {
   padding: 10px;
+}
+
+#header {
+  border: 1px solid black;
 }
 </style>
