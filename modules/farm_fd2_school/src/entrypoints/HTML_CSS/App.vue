@@ -68,7 +68,28 @@
         <td>06/05/2019</td>
       </tr>
     </table>
+    <label
+      for="quantity"
+      class="input-rectangle"
+      id="num-box"
+      >Quantity:
+    </label>
+    <input
+      type="number"
+      value="1"
+      min="1"
+      id="number"
+    />
+    <select
+      name="measurement"
+      margin-left="10px"
+    >
+      <option>BUNCH</option>
+      <option>EACH</option>
+      <option>POUND</option>
+    </select>
   </div>
+  <hr />
 </template>
 
 <script></script>
@@ -94,5 +115,9 @@ h1 {
 
 #header {
   border: 1px solid black;
+}
+
+#number {
+  width: 100px;
 }
 </style>
