@@ -153,4 +153,34 @@ th {
 .header-row {
   border: 1px black solid;
 }
+
+label,
+#quant,
+#quant-dropdown {
+  margin: 8px;
+  font-size: 1.1em;
+}
+
+#comment-box {
+  width: 50%;
+  margin: 5px;
+}
+
+#submit {
+  background-color: blue;
+  color: white;
+  width: 20%;
+  border: 1px solid;
+  font-size: 1.2em;
+  padding: 8px 12px;
+  margin: 4px;
+  font-weight: bolder;
+}
+
+#reset {
+  background-color: orange;
+  font-weight: bolder;
+  padding: 8px 12px;
+  font-size: 1.2em;
+}
 </style>
