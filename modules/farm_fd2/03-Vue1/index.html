@@ -10,8 +10,15 @@
   </head>
   <body>
     <div id="shopping-list">
-      <h1>{{header.toLocaleUpperCase()}}</h1>
-      <input v-model="header" />
+      <h1>{{header || 'Welcome'}}</h1>
+      <ul>
+        <li
+          v-for="(item,key) in items"
+          :key="item.id"
+        >
+          {{item.label}}
+        </li>
+      </ul>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
 
@@ -19,7 +26,13 @@
       const shoppingList = Vue.createApp({
         data() {
           return {
-            header: 'Vue is ready to party!',
+            header: 'Shopping List App',
+
+            items: {
+              'item-1': { id: 1, label: '10 party hats' },
+              'item-2': { id: 2, label: '2 board games' },
+              'item-3': { id: 3, label: '20 cups' },
+            },
           };
         },
       }).mount('#shopping-list');
