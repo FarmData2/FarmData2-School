@@ -134,6 +134,9 @@ label {
   color: black;
   background-color: orange;
 }
+.quantity-unit {
+  padding: 10px;
+}
 .quantity-unit input {
   margin-right: 10px;
 }
