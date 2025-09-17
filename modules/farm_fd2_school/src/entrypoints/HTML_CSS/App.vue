@@ -7,6 +7,7 @@
   />
   <br />
 
+  <label for="crop-select">Crop:</label>
   <select
     name="crops"
     id="crop-select"
@@ -24,38 +25,54 @@
     <thead>
       <tr>
         <th></th>
-        <th>Column A</th>
-        <th>Column B</th>
-        <th>Column C</th>
+        <th>Location</th>
+        <th>Bed</th>
+        <th>Planted Date</th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><input type="checkbox" /></td>
-        <td>Data A1</td>
-        <td>Data B1</td>
-        <td>Data C1</td>
+        <td>D</td>
+        <td></td>
+        <td>date</td>
       </tr>
       <tr>
         <td><input type="checkbox" /></td>
-        <td>Data A2</td>
-        <td>Data B2</td>
-        <td>Data C2</td>
+        <td>Ghana</td>
+        <td>Ghana-2</td>
+        <td>date</td>
       </tr>
       <tr>
         <td><input type="checkbox" /></td>
-        <td>Data A3</td>
-        <td>Data B3</td>
-        <td>Data C3</td>
+        <td>Ghana</td>
+        <td>Ghana-2</td>
+        <td>date</td>
       </tr>
       <tr>
         <td><input type="checkbox" /></td>
-        <td>Data A4</td>
-        <td>Data B4</td>
-        <td>Data C4</td>
+        <td>E</td>
+        <td></td>
+        <td>date</td>
       </tr>
     </tbody>
   </table>
+  <br />
+  <input type="number" />
+  <label for="quantity-select">Quantity:</label>
+  <select
+    name="crops"
+    id="quantity-select"
+  >
+    <option value="broccoli">Broccoli</option>
+    <option
+      value="radish"
+      selected
+    >
+      BUNCH
+    </option>
+    <option value="squash">Squash</option>
+  </select>
 </template>
 
 <script></script>
