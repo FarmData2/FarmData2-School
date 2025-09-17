@@ -9,10 +9,11 @@
     />
   </head>
   <body>
-    <div id="Shopping List">
+    <div id="shopping-list">
       <h1>{{header}}</h1>
       <input v-model="header" />
     </div>
+    <script src="https://unpkg.com/vue@3"></script>
     <script>
       const shoppingList = Vue.createApp({
         data() {
@@ -22,6 +23,5 @@
         },
       }).mount('#shopping-list');
     </script>
-    <script src=""></script>
   </body>
 </html>
