@@ -32,7 +32,42 @@
       <option>BEAN</option>
       <option selected>RADISH</option>
     </select>
-    <p>Testing commit</p>
+  </div>
+  <hr />
+
+  <div>
+    <table>
+      <tr>
+        <th></th>
+        <th>Location</th>
+        <th>Bed</th>
+        <th>Planted Date</th>
+      </tr>
+      <tr>
+        <td><input type="radio" /></td>
+        <td>D</td>
+        <td></td>
+        <td>04/02/2019</td>
+      </tr>
+      <tr>
+        <td><input type="radio" /></td>
+        <td>GHANA</td>
+        <td>GHANA-2</td>
+        <td>02/04/2019</td>
+      </tr>
+      <tr>
+        <td><input type="radio" /></td>
+        <td>GHANA</td>
+        <td>GHANA-4</td>
+        <td>02/04/2019</td>
+      </tr>
+      <tr>
+        <td><input type="radio" /></td>
+        <td>E</td>
+        <td></td>
+        <td>06/05/2019</td>
+      </tr>
+    </table>
   </div>
 </template>
 
