@@ -80,16 +80,32 @@
       min="1"
       id="number"
     />
-    <select
-      name="measurement"
-      margin-left="10px"
-    >
+    <select name="measurement">
       <option>BUNCH</option>
       <option>EACH</option>
       <option>POUND</option>
     </select>
   </div>
   <hr />
+
+  <div>
+    <textarea
+      rows="8"
+      cols="62"
+      placeholder="Enter a comment..."
+    ></textarea>
+    <br />
+    <input
+      type="button"
+      value="Submit"
+      id="submit-button"
+    />
+    <input
+      type="button"
+      value="Reset"
+      id="reset-button"
+    />
+  </div>
 </template>
 
 <script></script>
@@ -119,5 +135,20 @@ h1 {
 
 #number {
   width: 100px;
+  margin-right: 10px;
+}
+
+#submit-button {
+  background-color: blue;
+  color: white;
+  width: 30%;
+  font-weight: bold;
+}
+
+#reset-button {
+  margin-left: 20px;
+  background-color: orange;
+  width: 23%;
+  font-weight: bold;
 }
 </style>
