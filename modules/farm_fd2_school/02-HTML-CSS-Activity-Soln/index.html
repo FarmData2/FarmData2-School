@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width"
+    />
+    <link
+      href="styles/style.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.googleapis.com"
+    />
+    <link
+      rel="preconnect"
+      href="https://fonts.gstatic.com"
+      crossorigin
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <title>02-HTML-CSS-Solution</title>
+  </head>
+  <body>
+    <h1>02-HTML-CSS-Solution</h1>
+    <img
+      src="images/fd2-logo.png"
+      alt="The FarmData2 Logo showing a carrot on a mobile phone screen."
+    />
+    <p>
+      <a href="https://github.com/farmdata2">FarmData2</a> aims to extend farmOS
+      by adding data input forms, reporting, and analytics that support the
+      day-to-day operation of diversified vegetable farms, while also
+      facilitating the keeping of records necessary for organic certification
+      and for
+      <span class="red-border">the study of sustainable farming practices</span
+      >.
+    </p>
+
+    <p>
+      The fork of Farmdata2 used for the FD2 School activities contains features
+      for recording the following activities:
+    </p>
+    <ul>
+      <li>Tray seedings</li>
+      <li>Direct seedings</li>
+      <li>Cover crop seedings</li>
+      <li>Transplantings</li>
+      <li>Soil disturbances</li>
+    </ul>
+
+    <p>
+      Some of the key FarmData2 features are identified in the following table.
+    </p>
+    <table>
+      <tr>
+        <th>Course</th>
+        <th>Semester</th>
+        <th>Grade</th>
+      </tr>
+      <tr class="stripe">
+        <td>COMP 130</td>
+        <td>Fall 2024</td>
+        <td>A-</td>
+      </tr>
+      <tr>
+        <td>COMP 132</td>
+        <td>Spring 2025</td>
+        <td>B+</td>
+      </tr>
+      <tr class="stripe">
+        <td>COMP 190</td>
+        <td>Spring 2025</td>
+        <td>CR</td>
+      </tr>
+      <tr>
+        <td>COMP 232</td>
+        <td>Fall 2025</td>
+        <td id="grade-232">A</td>
+      </tr>
+    </table>
+
+    <br />
+
+    <div class="red-border">
+      <label for="date-input">Date:</label>
+      <input
+        type="date"
+        value="2025-01-02"
+      />
+
+      <br />
+
+      <input
+        type="button"
+        value="Make it happen!"
+      />
+
+      <br />
+
+      <input
+        type="checkbox"
+        id="done-box"
+        checked
+      />
+      <label for="done-box">Done:</label>
+
+      <br />
+
+      <select
+        name="foods"
+        id="food-select"
+      >
+        <option value="thai-curry">Thai Curry</option>
+        <option
+          value="pizza"
+          selected
+        >
+          Pizza
+        </option>
+        <option value="spaghetti">Spaghetti</option>
+        <option value="bbq-ribs">BBQ Ribs</option>
+      </select>
+    </div>
+  </body>
+</html>
