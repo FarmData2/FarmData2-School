@@ -12,3 +12,10 @@ farm.fd2_school_HTML_CSS.content:
     _title: 'HTML and CSS'
   requirements:
     _permission: 'access content'
+farm.fd2_school_Vue1.content:
+  path: '/fd2_school/Vue1'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'Vue1'
+  requirements:
+    _permission: 'access content'
