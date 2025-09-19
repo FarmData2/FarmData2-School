@@ -106,9 +106,13 @@
       class="label-margin"
     />
     <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop"
+        v-bind:value="crop"
+      >
+        {{ crop }}
+      </option>
     </select>
 
     <hr />
@@ -136,7 +140,20 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      items: [
+        { id: 1, label: 'ARUGULA' },
+        { id: 2, label: 'ASPARAGUS' },
+        { id: 3, label: 'BEAN' },
+        { id: 4, label: 'RADISH' },
+      ],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
