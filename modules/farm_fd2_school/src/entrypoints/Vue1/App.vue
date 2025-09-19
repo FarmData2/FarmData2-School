@@ -72,11 +72,11 @@
     />
     <select id="harvest-units">
       <option
-        v-for="crop in crops"
-        v-bind:key="crop"
-        v-bind:value="crop"
+        v-for="unit in units"
+        v-bind:key="unit"
+        v-bind:value="unit"
       >
-        {{ crop }}
+        {{ unit }}
       </option>
     </select>
 
@@ -110,7 +110,7 @@ export default {
   data() {
     return {
       items: [
-        { id: 1, label: 'ARUGULA CHECK' },
+        { id: 1, label: 'ARUGULA' },
         { id: 2, label: 'ASPARAGUS' },
         { id: 3, label: 'BEAN' },
         { id: 4, label: 'RADISH' },
