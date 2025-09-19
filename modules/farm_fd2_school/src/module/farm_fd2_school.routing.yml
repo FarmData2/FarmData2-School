@@ -33,3 +33,10 @@ farm.fd2_school_Vue3.content:
     _title: 'Vue3'
   requirements:
     _permission: 'access content'
+farm.fd2_school_Vue4.content:
+  path: '/fd2_school/Vue4'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'Vue4'
+  requirements:
+    _permission: 'access content'
