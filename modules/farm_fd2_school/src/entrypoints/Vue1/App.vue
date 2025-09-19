@@ -23,10 +23,13 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      <option
+        v-for="crop in items"
+        v-bind:key="crop"
+        v-bind:value="crop"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
@@ -107,7 +110,7 @@ export default {
   data() {
     return {
       items: [
-        { id: 1, label: 'ARUGULA' },
+        { id: 1, label: 'ARUGULA CHECK' },
         { id: 2, label: 'ASPARAGUS' },
         { id: 3, label: 'BEAN' },
         { id: 4, label: 'RADISH' },
@@ -118,6 +121,7 @@ export default {
         { id: 3, date: 'DATE', location: 'GHANA', bed: 'GHANA-4' },
         { id: 4, date: 'DATE', location: 'GHANA', bed: '' },
       ],
+      units: ['ounces', 'pounds', 'bunches'],
     };
   },
 };
