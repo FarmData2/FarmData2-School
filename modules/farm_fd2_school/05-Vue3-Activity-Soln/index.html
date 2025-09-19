@@ -60,10 +60,16 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in items"
+          v-for="(item, index) in items"
           v-bind:key="item.id"
         >
           {{item.label}}
+          <button
+            v-on:click="deleteItem(index)"
+            class="btn btn-cancel"
+          >
+            Delete
+          </button>
         </li>
       </ul>
     </div>
@@ -93,6 +99,9 @@
             this.items.push({ id: 1, label: '10 party hats' });
             this.items.push({ id: 2, label: '2 board games' });
             this.items.push({ id: 3, label: '20 cups' });
+          },
+          deleteItem(index) {
+            this.items.splice(index, 1);
           },
         },
       }).mount('#shopping-list');
