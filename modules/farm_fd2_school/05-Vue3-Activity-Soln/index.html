@@ -26,6 +26,12 @@
         >
           Add Item
         </button>
+        <button
+          v-on:click="populateList"
+          class="btn btn-primary"
+        >
+          Populate
+        </button>
       </div>
       <div
         v-if="editing"
@@ -70,11 +76,7 @@
             editing: false,
             newItem: '',
             newItemHighPriority: false,
-            items: [
-              //{ id: 1, label: '10 party hats' },
-              //{ id: 2, label: '2 board games' },
-              //{ id: 3, label: '20 cups' },
-            ],
+            items: [],
           };
         },
         methods: {
@@ -86,6 +88,11 @@
           doEdit(editing) {
             this.editing = editing;
             this.newItem = '';
+          },
+          populateList() {
+            this.items.push({ id: 1, label: '10 party hats' });
+            this.items.push({ id: 2, label: '2 board games' });
+            this.items.push({ id: 3, label: '20 cups' });
           },
         },
       }).mount('#shopping-list');
