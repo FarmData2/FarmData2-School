@@ -23,10 +23,13 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop"
+        v-bind:value="crop"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
@@ -138,7 +141,16 @@
 
 <script>
 export default {
-  data() {},
+  data() {
+    return {
+      crops: [
+        { id: 1, label: 'ARUGULA' },
+        { id: 2, label: 'ASPARAGUS' },
+        { id: 3, label: 'BEAN' },
+        { id: 4, label: 'RADISH' },
+      ],
+    };
+  },
 };
 </script>
 
