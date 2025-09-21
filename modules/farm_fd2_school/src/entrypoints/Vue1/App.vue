@@ -16,6 +16,7 @@
       value="2019-06-15"
     />
     <br />
+
     <label
       for="harvest-crop"
       class="label-margin"
@@ -23,10 +24,10 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      v-for="crop in crops" v-bind:key="crop.id"
+      {{
+        item.label
+      }}
     </select>
 
     <hr />
@@ -136,7 +137,20 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      crops: [
+        { id: 1, label: 'ARUGULA' },
+        { id: 2, label: 'ASPARAGUS' },
+        { id: 3, label: 'BEAN' },
+        { id: 4, label: 'RADISH' },
+      ],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
