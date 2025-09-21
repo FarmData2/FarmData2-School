@@ -136,7 +136,11 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {},
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
