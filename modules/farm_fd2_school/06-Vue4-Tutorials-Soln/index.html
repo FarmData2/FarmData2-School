@@ -37,6 +37,7 @@
           type="text"
           placeholder="Add an item"
         />
+        <p class="counter">{{characterCount}}/200</p>
         <label>
           <input
             type="checkbox"
@@ -77,6 +78,11 @@
               //{ id: 3, label: '20 cups' },
             ],
           };
+        },
+        computed: {
+          characterCount() {
+            return this.newItem.length;
+          },
         },
         methods: {
           saveItem() {
