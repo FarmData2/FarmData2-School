@@ -24,10 +24,13 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      v-for="crop in crops" v-bind:key="crop.id"
-      {{
-        item.label
-      }}
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop"
+        v-bind:value="crop"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
