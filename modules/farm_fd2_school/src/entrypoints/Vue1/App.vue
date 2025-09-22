@@ -23,10 +23,12 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop.label"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
@@ -38,57 +40,22 @@
         <th>Bed</th>
         <th>Planted Date</th>
       </tr>
-      <tr>
+      <tr
+        v-for="plant in plants"
+        v-bind:key="plant.id"
+      >
         <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant1"
-            value="1"
-          />
+          <input type="radio" />
         </td>
-        <td>D</td>
-        <td></td>
-        <td>04/02/2019</td>
-      </tr>
-      <tr>
         <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant2"
-            value="2"
-          />
+          {{ plant.loc }}
         </td>
-        <td>GHANA</td>
-        <td>GHANA-2</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
         <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant3"
-            value="3"
-          />
+          {{ plant.bed }}
         </td>
-        <td>GHANA</td>
-        <td>GHANA-4</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
         <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant4"
-            value="4"
-          />
+          {{ plant.date }}
         </td>
-        <td>E</td>
-        <td></td>
-        <td>06/05/2019</td>
       </tr>
     </table>
 
@@ -106,9 +73,12 @@
       class="label-margin"
     />
     <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+      <option
+        v-for="unit in units"
+        v-bind:key="unit.label"
+      >
+        {{ unit.label }}
+      </option>
     </select>
 
     <hr />
@@ -136,7 +106,37 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      crops: [
+        { id: 1, label: 'ARUGULA' },
+        { id: 2, label: 'ASPARAGUS' },
+        { id: 3, label: 'BEAN' },
+        { id: 4, label: 'RADISH' },
+      ],
+      plants: [
+        { id: 'harvest-plant1', loc: 'D', bed: '', date: '04/02/2019' },
+        {
+          id: 'harvest-plant2',
+          loc: 'GHANA',
+          bed: 'GHANA-2',
+          date: '02/04/2019',
+        },
+        {
+          id: 'harvest-plant3',
+          loc: 'GHANA',
+          bed: 'GHANA-4',
+          date: '02/04/2019',
+        },
+        { id: 'harvest-plant4', loc: 'E', bed: '', date: '06/05/2019' },
+      ],
+      units: [{ label: 'BUNCH' }, { label: 'EACH' }, { label: 'POUND' }],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
