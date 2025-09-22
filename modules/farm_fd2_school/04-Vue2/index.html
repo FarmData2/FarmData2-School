@@ -10,20 +10,25 @@
   </head>
   <body>
     <div id="shopping-list">
-      <h1>{{header || 'Welcome'}}</h1>
-      <input
-        v-model="newItem"
-        type="text"
-        placeholder="Add an item"
-      />
-      <label>
+      <h1>{{ header }}</h1>
+      <form
+        class="add-item-form"
+        v-on:submit.prevent="items.push({id: items.length + 1,label: newItem})"
+      >
         <input
-          type="checkbox"
-          v-model="newItemHighPriority"
-        />High Priority
-      </label>
+          v-model="newItem"
+          type="text"
+          placeholder="Add an item"
+        />
+        <label>
+          <input
+            type="checkbox"
+            v-model="newItemHighPriority"
+          />High Priority
+        </label>
+        <button class="btn btn-primary">Save Item</button>
+      </form>
       <br />
-      {{ newItem }} {{ newItemHighPriority }}
       <ul>
         <li
           v-for="item in items"
