@@ -23,10 +23,13 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      <option
+        value=""
+        v-for="crop in crops"
+        v-bind:key="crop"
+      >
+        {{ crop }}
+      </option>
     </select>
 
     <hr />
@@ -136,7 +139,15 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      crops: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
