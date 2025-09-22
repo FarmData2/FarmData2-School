@@ -73,10 +73,17 @@
       size="7"
       class="label-margin"
     />
-    <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+    <select
+      id="harvest-units"
+      v-model="selectedUnit"
+    >
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop"
+        v-bind:value="crop"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
@@ -120,6 +127,12 @@ export default {
         { id: 2, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-2' },
         { id: 3, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-4' },
         { id: 4, date: '06/05/2019', location: 'E', bed: '' },
+      ],
+      selectedUnit: { id: 1, label: 'BUNCH' },
+      units: [
+        { id: 1, label: 'BUNCH' },
+        { id: 2, label: 'EACH' },
+        { id: 3, label: 'POUND' },
       ],
     };
   },
