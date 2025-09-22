@@ -12,14 +12,12 @@
     <div id="shopping-list">
       <h1>{{header || 'Welcome'}}</h1>
       <ul>
-        <li
-          v-for="(item,key) in items"
-          :key="item.id"
-        >
-          {{item.label}}
-        </li>
+        <li v-for="item in items" :key="item.id">{{item.quantity}} {{item.label}}</li>
       </ul>
     </div>
+    <select name="actions" id="actions">
+      <option v-for="action in actions">{{action.label}}</option>
+    </select>
     <script src="https://unpkg.com/vue@3"></script>
 
     <script>
@@ -28,11 +26,17 @@
           return {
             header: 'Shopping List App',
 
-            items: {
-              'item-1': { id: 1, label: '10 party hats' },
-              'item-2': { id: 2, label: '2 board games' },
-              'item-3': { id: 3, label: '20 cups' },
-            },
+            items:[
+              {id: 1, quantity: "10", label:"party hats"},
+              {id: 2, quantity: "2", label:"board games"},
+              {id: 3, quantity: "25", label:"cups"},
+            ],
+
+            actions:[
+              {label: "Increase"},
+              {label:"Decrease"},
+              {label:"Delete"},
+            ],
           };
         },
       }).mount('#shopping-list');
