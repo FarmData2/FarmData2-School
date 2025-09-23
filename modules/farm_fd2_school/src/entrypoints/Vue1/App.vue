@@ -104,6 +104,37 @@
           {{ plant2.date }}
         </td>
       </tr>
+      <tr>
+        <td>
+          <input
+            type="radio"
+            name="harvest-plant"
+            id="harvest-plant1"
+            value="1"
+          />
+        </td>
+        <td
+          v-for="plant3 in plant3"
+          v-bind:key="plant3"
+          v-bind:value="location"
+        >
+          {{ plant3.location }}
+        </td>
+        <td
+          v-for="plant3 in plant3"
+          v-bind:key="plant3"
+          v-bind:value="bed"
+        >
+          {{ plant3.bed }}
+        </td>
+        <td
+          v-for="plant3 in plant3"
+          v-bind:key="plant3"
+          v-bind:value="date"
+        >
+          {{ plant3.date }}
+        </td>
+      </tr>
     </table>
     <!-- <table id="harvest-table">
       <tr id="harvest-table-header">
