@@ -45,54 +45,30 @@
       <tr>
         <td>
           <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant1"
-            value="1"
+            v-for="location in locations"
+            v-bind:key="location"
+            v-bind:value="location"
+          />
+          {{ location.label }}
           />
         </td>
-        <td>D</td>
-        <td></td>
-        <td>04/02/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant2"
-            value="2"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-2</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant3"
-            value="3"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-4</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant4"
-            value="4"
-          />
-        </td>
-        <td>E</td>
-        <td></td>
-        <td>06/05/2019</td>
+        <input
+          v-for="bed in beds"
+          v-bind:key="bed"
+          v-bind:value="bed"
+        />
+        {{
+          bed.label
+        }}
+        <input
+          v-for="date in dates"
+          v-bind:key="date"
+          v-bind:value="date"
+        />
+        {{
+          date.label
+        }}
+        />
       </tr>
     </table>
 
@@ -149,6 +125,24 @@ export default {
         { id: 2, label: 'ASPARAGUS' },
         { id: 3, label: 'BEAN' },
         { id: 4, label: 'RADISH' },
+      ],
+      locations: [
+        { id: 1, label: 'D' },
+        { id: 2, label: 'GHANA' },
+        { id: 3, label: 'GHANA' },
+        { id: 4, label: 'E' },
+      ],
+      beds: [
+        { id: 1, label: '' },
+        { id: 2, label: 'GHANA-2' },
+        { id: 3, label: 'GHANA-4' },
+        { id: 4, label: '' },
+      ],
+      dates: [
+        { id: 1, label: '04/02/2019' },
+        { id: 2, label: '02/02/2019' },
+        { id: 3, label: '02/04/2019' },
+        { id: 4, label: '06/05/2019' },
       ],
     };
   },
