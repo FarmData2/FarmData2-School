@@ -35,7 +35,25 @@
 
     <hr />
 
-    <table id="harvest-table">
+    <table>
+      <tr>
+        <th></th>
+        <th>Location</th>
+        <th>Bed</th>
+        <th>Date</th>
+      </tr>
+      <tr>
+        <td>
+          <input
+            type="radio"
+            name="harvest-plant"
+            id="harvest-plant1"
+            value="1"
+          />
+        </td>
+      </tr>
+    </table>
+    <!-- <table id="harvest-table">
       <tr id="harvest-table-header">
         <th></th>
         <th>Location</th>
@@ -70,7 +88,7 @@
         }}
         />
       </tr>
-    </table>
+    </table> -->
 
     <label
       for="harvest-quantity"
