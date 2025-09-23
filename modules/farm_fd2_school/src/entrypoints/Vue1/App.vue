@@ -51,8 +51,26 @@
             value="1"
           />
         </td>
-        <td>
-          {{ plant.location }}
+        <td
+          v-for="plant1 in plant1"
+          v-bind:key="plant1"
+          v-bind:value="location"
+        >
+          {{ plant1.location }}
+        </td>
+        <td
+          v-for="plant1 in plant1"
+          v-bind:key="plant1"
+          v-bind:value="bed"
+        >
+          {{ plant1.bed }}
+        </td>
+        <td
+          v-for="plant1 in plant1"
+          v-bind:key="plant1"
+          v-bind:value="date"
+        >
+          {{ plant1.date }}
         </td>
       </tr>
     </table>
@@ -147,12 +165,10 @@ export default {
         { id: 3, label: 'BEAN' },
         { id: 4, label: 'RADISH' },
       ],
-      plant: [
-        { location: 'D', bed: '', date: '4/02/2019' },
-        { location: 'GHANA', bed: 'GHANA-2', date: '02/04/2019' },
-        { location: 'GHANA', bed: 'GHANA-4', date: '02/04/2019' },
-        { location: 'E', bed: '', date: '06/05/2019' },
-      ],
+      plant1: [{ location: 'D', bed: '', date: '4/02/2019' }],
+      plant2: [{ location: 'GHANA', bed: 'GHANA-2', date: '02/04/2019' }],
+      plant3: [{ location: 'GHANA', bed: 'GHANA-4', date: '02/04/2019' }],
+      plant4: [{ location: 'E', bed: '', date: '06/05/2019' }],
     };
   },
 };
