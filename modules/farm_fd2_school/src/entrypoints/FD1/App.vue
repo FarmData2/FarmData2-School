@@ -106,6 +106,7 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-bind:disabled="!formValid"
       v-on:click="console.log('Submit button clicked.')"
     />
     <input
