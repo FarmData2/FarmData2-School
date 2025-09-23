@@ -125,10 +125,10 @@ export default {
     return {
       date: '2019-06-15',
       crop: '',
+      pickedPlant: -1,
       quantity: 1,
       unit: '',
       comment: '',
-      pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/12/2019', location: 'D', bed: '' },
@@ -143,10 +143,10 @@ export default {
     resetForm() {
       this.date = '2019-06-15';
       this.crop = '';
+      this.pickedPlant = -1;
       this.quantity = 1;
       this.unit = '';
       this.comment = '';
-      this.pickedPlant = -1;
     },
   },
 };
