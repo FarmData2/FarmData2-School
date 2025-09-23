@@ -11,12 +11,16 @@
   <body>
     <div id="shopping-list">
       <h1>{{header || 'Welcome'}}</h1>
-      <input
-        type="text"
-        placeholder="Add an item"
-        v-model.lazy="newItem"
-      />
-      <!-- <select
+      <form
+        class="add-item-form"
+        @submit.prevent="items.push({id:items.length+1, label: newItem})"
+      >
+        <input
+          type="text"
+          placeholder="Add an item"
+          v-model.trim="newItem"
+        />
+        <!-- <select
         name=""
         id=""
         v-model="newItemPriority"
@@ -25,17 +29,18 @@
         <option value="high">High</option>
       </select> -->
 
-      <label
-        ><input
-          type="checkbox"
-          v-model="newItemHighPriority"
-        />
-        High Priority</label
-      >
+        <label
+          ><input
+            type="checkbox"
+            v-model="newItemHighPriority"
+          />
+          High Priority
+        </label>
+
+        <button class="btn btn-primary">Save Item</button>
+      </form>
 
       <!-- <label><input type="radio" v-model="newItemPriority" value="high">High</label> -->
-      <br />
-      {{newItem}} {{newItemHighPriority}}
 
       <!-- <label><input type="checkbox" v-model="iceCreamFlavours" value = 'chocolate'> Chocolate </label>
       <label><input type="checkbox" v-model="iceCreamFlavours" value = 'vanilla'> Vanilla </label>
