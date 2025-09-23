@@ -150,6 +150,11 @@ export default {
         this.unit != ''
       );
     },
+    sortedPlants() {
+      return [...this.plantList].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
+    },
   },
   methods: {
     resetForm() {
