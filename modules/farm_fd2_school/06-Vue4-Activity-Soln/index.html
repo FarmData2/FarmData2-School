@@ -83,6 +83,9 @@
           reversedItems() {
             return [...this.items].reverse();
           },
+          newItemValid() {
+            return this.newItem.length > 5;
+          },
         },
         methods: {
           saveItem() {
