@@ -51,6 +51,9 @@
             value="1"
           />
         </td>
+        <td>
+          {{ plant.location }}
+        </td>
       </tr>
     </table>
     <!-- <table id="harvest-table">
@@ -144,23 +147,11 @@ export default {
         { id: 3, label: 'BEAN' },
         { id: 4, label: 'RADISH' },
       ],
-      locations: [
-        { id: 1, label: 'D' },
-        { id: 2, label: 'GHANA' },
-        { id: 3, label: 'GHANA' },
-        { id: 4, label: 'E' },
-      ],
-      beds: [
-        { id: 1, label: '' },
-        { id: 2, label: 'GHANA-2' },
-        { id: 3, label: 'GHANA-4' },
-        { id: 4, label: '' },
-      ],
-      dates: [
-        { id: 1, label: '04/02/2019' },
-        { id: 2, label: '02/02/2019' },
-        { id: 3, label: '02/04/2019' },
-        { id: 4, label: '06/05/2019' },
+      plant: [
+        { location: 'D', bed: '', date: '4/02/2019' },
+        { location: 'GHANA', bed: 'GHANA-2', date: '02/04/2019' },
+        { location: 'GHANA', bed: 'GHANA-4', date: '02/04/2019' },
+        { location: 'E', bed: '', date: '06/05/2019' },
       ],
     };
   },
