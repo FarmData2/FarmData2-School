@@ -23,10 +23,13 @@
       Crop:
     </label>
     <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+      <option
+        v-for="crop in crops"
+        v-bind:key="crop.id"
+        v-bind:value="crop.label"
+      >
+        {{ crop.label }}
+      </option>
     </select>
 
     <hr />
@@ -38,57 +41,19 @@
         <th>Bed</th>
         <th>Planted Date</th>
       </tr>
-      <tr>
+      <tr
+        v-for="plant in plants"
+        v-bind:key="plant.id"
+      >
         <td>
           <input
             type="radio"
             name="harvest-plant"
-            id="harvest-plant1"
-            value="1"
           />
         </td>
-        <td>D</td>
-        <td></td>
-        <td>04/02/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant2"
-            value="2"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-2</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant3"
-            value="3"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-4</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant4"
-            value="4"
-          />
-        </td>
-        <td>E</td>
-        <td></td>
-        <td>06/05/2019</td>
+        <td>{{ plant.location }}</td>
+        <td>{{ plant.bed }}</td>
+        <td>{{ plant.date }}</td>
       </tr>
     </table>
 
@@ -106,9 +71,13 @@
       class="label-margin"
     />
     <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+      <option
+        v-for="unit in units"
+        v-bind:key="unit.id"
+        v-bind:value="unit.label"
+      >
+        {{ unit.label }}
+      </option>
     </select>
 
     <hr />
@@ -136,7 +105,31 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      crops: [
+        { id: 1, label: 'ARUGULA' },
+        { id: 2, label: 'ASPARAGUS' },
+        { id: 3, label: 'BEAN' },
+        { id: 4, label: 'RADISH' },
+      ],
+      plants: [
+        { id: 1, date: '04/02/2019', location: 'D', bed: ' ' },
+        { id: 2, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 3, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 4, date: '06/05/2019', location: 'E', bed: ' ' },
+      ],
+      units: [
+        { id: 1, label: 'BUNCH' },
+        { id: 2, label: 'EACH' },
+        { id: 3, label: 'POUND' },
+      ],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
