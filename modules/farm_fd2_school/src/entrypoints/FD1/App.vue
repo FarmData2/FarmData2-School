@@ -139,6 +139,17 @@ export default {
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
   },
+  computed: {
+    formValid() {
+      return (
+        this.date != '' &&
+        this.crop != '' &&
+        this.pickedPlant >= 0 &&
+        this.quantity > 0 &&
+        this.unit != ''
+      );
+    },
+  },
   methods: {
     resetForm() {
       this.date = '2019-06-15';
