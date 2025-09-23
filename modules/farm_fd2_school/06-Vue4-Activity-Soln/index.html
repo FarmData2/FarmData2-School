@@ -56,7 +56,7 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in reversedItems"
+          v-for="item in sortedItems"
           v-bind:key="item.id"
         >
           {{item.label}}
