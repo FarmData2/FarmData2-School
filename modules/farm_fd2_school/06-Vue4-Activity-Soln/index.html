@@ -86,6 +86,11 @@
           newItemValid() {
             return this.newItem.length > 5;
           },
+          sortedItems() {
+            return [...this.items].sort((a, b) =>
+              a.label.localeCompare(b.label, undefined, { numeric: true })
+            );
+          },
         },
         methods: {
           saveItem() {
