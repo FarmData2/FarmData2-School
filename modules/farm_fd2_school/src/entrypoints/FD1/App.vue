@@ -131,10 +131,10 @@ export default {
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
+        { id: 1, date: '04/12/2019', location: 'D', bed: '' },
         { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 3, date: '06/22/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 4, date: '05/15/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
