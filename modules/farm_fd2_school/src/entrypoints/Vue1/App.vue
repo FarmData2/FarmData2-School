@@ -135,43 +135,38 @@
           {{ plant3.date }}
         </td>
       </tr>
-    </table>
-    <!-- <table id="harvest-table">
-      <tr id="harvest-table-header">
-        <th></th>
-        <th>Location</th>
-        <th>Bed</th>
-        <th>Planted Date</th>
-      </tr>
       <tr>
         <td>
           <input
-            v-for="location in locations"
-            v-bind:key="location"
-            v-bind:value="location"
-          />
-          {{ location.label }}
+            type="radio"
+            name="harvest-plant"
+            id="harvest-plant1"
+            value="1"
           />
         </td>
-        <input
-          v-for="bed in beds"
-          v-bind:key="bed"
+        <td
+          v-for="plant4 in plant4"
+          v-bind:key="plant4"
+          v-bind:value="location"
+        >
+          {{ plant4.location }}
+        </td>
+        <td
+          v-for="plant4 in plant4"
+          v-bind:key="plant4"
           v-bind:value="bed"
-        />
-        {{
-          bed.label
-        }}
-        <input
-          v-for="date in dates"
-          v-bind:key="date"
+        >
+          {{ plant4.bed }}
+        </td>
+        <td
+          v-for="plant4 in plant4"
+          v-bind:key="plant4"
           v-bind:value="date"
-        />
-        {{
-          date.label
-        }}
-        />
+        >
+          {{ plant4.date }}
+        </td>
       </tr>
-    </table> -->
+    </table>
 
     <label
       for="harvest-quantity"
