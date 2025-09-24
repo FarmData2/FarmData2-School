@@ -22,11 +22,17 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
-      <option>ARUGULA</option>
-      <option>ASPARAGUS</option>
-      <option>BEAN</option>
-      <option selected>RADISH</option>
+    <select
+      v-model="selected"
+      id="harvest-crop"
+    >
+      <option
+        v-for="item in items"
+        v-bind:key="item.id"
+        v-bind:value="item.id"
+      >
+        {{ item.name }}
+      </option>
     </select>
 
     <hr />
@@ -136,7 +142,21 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      selected: 4,
+      items: [
+        { id: 1, name: 'ARUGULA' },
+        { id: 2, name: 'ASPARAGUS' },
+        { id: 3, name: 'BEAN' },
+        { id: 4, name: 'RADISH' },
+      ],
+    };
+  },
+};
+</script>
 
 <style>
 /* import some styling that applies to all FD2 entry points */
