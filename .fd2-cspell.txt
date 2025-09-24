@@ -70,6 +70,7 @@ setsid
 shellcheck
 shfmt
 shinepukur
+shoppinglist
 Siddiqui
 Steiman
 timonwong
