@@ -8,45 +8,57 @@
       href="main.css"
     />
   </head>
+
   <body>
     <div id="shopping-list">
-      <h1>{{header || 'Welcome'}}</h1>
-      <input
-        v-model.lazy="newItem"
-        type="text"
-        placeholder="Add an item"
-      />
-      <label
-        ><input
-          type="checkbox"
-          v-model="newItemHighPriority"
+      <h1>{{ header || 'Welcome' }}</h1>
+      <form
+        v-on:submit.prevent="items.push({id: items.length + 1, label: newItem}); newItem=''; newItemHighPriority=false;"
+        class="add-item-form"
+      >
+        <input
+          type="text"
+          v-model="newItem"
+          placeholder="Add an Item"
         />
-        High Priority
-      </label>
-      <br />
-      {{newItem}} {{newItemHighPriority}}
+        <label>
+          <input
+            type="checkbox"
+            v-model="newItemHighPriority"
+          />
+          High Priority
+        </label>
+        <button
+          type="submit"
+          class="btn btn-primary"
+        >
+          Save Item
+        </button>
+      </form>
+
       <ul>
         <li
-          v-for="(item, key) in items"
+          v-for="item in items"
           :key="item.id"
         >
-          {{key}} {{item.label}}
+          {{ item.label }}
         </li>
       </ul>
     </div>
+
     <script src="https://unpkg.com/vue@3"></script>
     <script>
-      const shoppinglist = Vue.createApp({
+      const shoppingListApp = Vue.createApp({
         data() {
           return {
             header: 'Shopping List App',
             newItem: '',
             newItemHighPriority: false,
-            items: {
-              'item-1': { id: 1, label: '10 part hats' },
-              'item-2': { id: 2, label: '2 board games' },
-              'item-3': { id: 3, label: '20 cups' },
-            },
+            items: [
+              { id: 1, label: '10 party hats' },
+              { id: 2, label: '2 board games' },
+              { id: 3, label: '20 cups' },
+            ],
           };
         },
       }).mount('#shopping-list');
