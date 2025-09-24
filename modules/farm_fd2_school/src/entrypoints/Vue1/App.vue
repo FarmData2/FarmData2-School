@@ -182,9 +182,13 @@
       class="label-margin"
     />
     <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+      <option
+        v-for="unit in unit"
+        v-bind:key="unit"
+        v-bind:value="unit"
+      >
+        {{ unit.unit }}
+      </option>
     </select>
 
     <hr />
@@ -226,6 +230,7 @@ export default {
       plant2: [{ location: 'GHANA', bed: 'GHANA-2', date: '02/04/2019' }],
       plant3: [{ location: 'GHANA', bed: 'GHANA-4', date: '02/04/2019' }],
       plant4: [{ location: 'E', bed: '', date: '06/05/2019' }],
+      unit: [{ unit: 'BUNCH' }, { unit: 'EACH' }, { unit: 'POUND' }],
     };
   },
 };
