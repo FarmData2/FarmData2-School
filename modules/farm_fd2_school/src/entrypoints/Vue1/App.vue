@@ -75,10 +75,17 @@
       size="7"
       class="label-margin"
     />
-    <select id="harvest-units">
-      <option selected>BUNCH</option>
-      <option>EACH</option>
-      <option>POUND</option>
+    <select
+      v-model="unit"
+      id="harvest-units"
+    >
+      <option
+        v-for="unit in units"
+        v-bind:key="unit.id"
+        v-bind:value="unit.id"
+      >
+        {{ unit.name }}
+      </option>
     </select>
 
     <hr />
@@ -111,6 +118,7 @@ export default {
   data() {
     return {
       selected: 4,
+      unit: 1,
       items: [
         { id: 1, name: 'ARUGULA' },
         { id: 2, name: 'ASPARAGUS' },
@@ -122,6 +130,11 @@ export default {
         { id: 2, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-2' },
         { id: 3, date: '02/04/2019', location: 'GHANA', bed: 'GHANA-4' },
         { id: 3, date: '06/05/2019', location: 'Room E', bed: '' },
+      ],
+      units: [
+        { id: 1, name: 'BUNCH' },
+        { id: 2, name: 'EACH' },
+        { id: 3, name: 'POUND' },
       ],
     };
   },
