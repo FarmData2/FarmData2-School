@@ -27,3 +27,13 @@ Vue1:
   css:
     component:
       style/style.css: {}
+
+Vue2:
+  js:
+    Vue2/Vue2.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
