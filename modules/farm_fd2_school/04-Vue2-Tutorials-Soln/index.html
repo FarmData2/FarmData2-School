@@ -11,12 +11,10 @@
   <body>
     <div id="shopping-list">
       <h1>{{header || 'Welcome'}}</h1>
-      <div
-        class="add-item-form"
-        v-on:submit.prevent="items.push({id: items.length + 1, label: newItem})"
-      >
+      <div class="add-item-form">
         <input
-          v-model.trim="newItem"
+          v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})"
+          v-model="newItem"
           type="text"
           placeholder="Add an item"
         />
