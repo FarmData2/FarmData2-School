@@ -40,57 +40,19 @@
         <th>Bed</th>
         <th>Planted Date</th>
       </tr>
-      <tr>
+      <tr
+        v-for="plant in plants"
+        v-bind:key="plant.id"
+      >
         <td>
           <input
             type="radio"
             name="harvest-plant"
-            id="harvest-plant1"
-            value="1"
           />
         </td>
-        <td>D</td>
-        <td></td>
-        <td>04/02/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant2"
-            value="2"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-2</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant3"
-            value="3"
-          />
-        </td>
-        <td>GHANA</td>
-        <td>GHANA-4</td>
-        <td>02/04/2019</td>
-      </tr>
-      <tr>
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            id="harvest-plant4"
-            value="4"
-          />
-        </td>
-        <td>E</td>
-        <td></td>
-        <td>06/05/2019</td>
+        <td>{{ plant.location }}</td>
+        <td>{{ plant.bed }}</td>
+        <td>{{ plant.date }}</td>
       </tr>
     </table>
 
@@ -143,6 +105,12 @@ export default {
   data() {
     return {
       crops: ['ARUGULA', 'ASPARAGUS', 'BEANS', 'RADISH'],
+      plants: [
+        { id: '1', date: '04/02/2019', location: 'D', bed: '' },
+        { id: '2', date: '02/04/2019', location: 'GHANA', bed: 'GHANA-2' },
+        { id: '3', date: '02/04/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: '4', date: '06/05/2019', location: 'E', bed: '' },
+      ],
     };
   },
 };
