@@ -11,10 +11,13 @@
   <body>
     <div id="shopping-list">
       <h1>{{header || 'Welcome'}}</h1>
-      <div class="add-item-form">
+
+      <form
+        class="add-item-form"
+        v-on:submit.prevent="items.push({id: items.length + 1, label: newItem})"
+      >
         <input
-          v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})"
-          v-model="newItem"
+          v-model.trim="newItem"
           type="text"
           placeholder="Add an item"
         />
@@ -25,21 +28,25 @@
           />
           High Priority
         </label>
-        <button
-          v-on:click="items.push({id: items.length + 1, label: newItem})"
-          class="btn btn-primary"
-        >
-          Save Item
-        </button>
-      </div>
+        <button class="btn btn-primary">Save Item</button>
+      </form>
       <ul>
         <li
           v-for="item in items"
           v-bind:key="item.id"
         >
+          <input
+            type="radio"
+            name="items"
+            v-bind:value="item.id"
+            v-model="pickedItemId"
+          />
           {{item.label}}
         </li>
       </ul>
+      The picked item has id: {{ pickedItemId }}
+      <br />
+      <button v-on:click="pickedItemId=-1">Clear</button>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
@@ -49,6 +56,7 @@
             header: 'Shopping List App',
             newItem: '',
             newItemHighPriority: false,
+            pickedItemId: -1,
             items: [
               { id: 1, label: '10 party hats' },
               { id: 2, label: '2 board games' },
