@@ -227,7 +227,7 @@ export default {
         { id: 4, label: 'RADISH' },
       ],
       plant1: [{ location: 'D', bed: '', date: '4/02/2019' }],
-      plant2: [{ location: 'GHANA', bed: 'GHANA-2', date: '02/02/2019' }],
+      plant2: [{ location: 'GHANA', bed: 'GHANA-2', date: '02/04/2019' }],
       plant3: [{ location: 'GHANA', bed: 'GHANA-4', date: '02/04/2019' }],
       plant4: [{ location: 'E', bed: '', date: '06/05/2019' }],
       unit: [{ unit: 'BUNCH' }, { unit: 'EACH' }, { unit: 'POUND' }],
