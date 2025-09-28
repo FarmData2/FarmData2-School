@@ -101,11 +101,13 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-on:click="handleSubmit"
     />
     <input
       type="button"
       id="harvest-reset"
       value="Reset"
+      v-on:click="handleReset"
     />
 
     <hr />
@@ -131,6 +133,14 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  methods: {
+    handleSubmit() {
+      console.log('Submit was clicked.');
+    },
+    handleReset() {
+      console.log('Reset was clicked.');
+    },
   },
 };
 </script>
