@@ -67,12 +67,15 @@
     <input
       type="number"
       id="harvest-quantity"
-      value="1"
+      v-model.number="quantity"
       min="1"
       size="7"
       class="label-margin"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="selectedUnit"
+    >
       <option
         v-for="unit in unitList"
         v-bind:key="unit.id"
@@ -85,6 +88,7 @@
 
     <textarea
       id="harvest-comment"
+      v-model="comment"
       rows="5"
       cols="35"
       placeholder="Enter a comment..."
@@ -110,6 +114,9 @@
 export default {
   data() {
     return {
+      comment: '',
+      selectedUnit: 'BUNCH',
+      quantity: 1,
       selectedCrop: 'RADISH',
       date: '2019-06-15',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
