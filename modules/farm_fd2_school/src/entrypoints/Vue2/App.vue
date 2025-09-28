@@ -22,7 +22,10 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
+    <select
+      id="harvest-crop"
+      v-model="selectedCrop"
+    >
       <option
         v-for="crop in cropList"
         v-bind:key="crop"
@@ -107,6 +110,7 @@
 export default {
   data() {
     return {
+      selectedCrop: 'RADISH',
       date: '2019-06-15',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
