@@ -51,6 +51,8 @@
           <input
             type="radio"
             name="harvest-plant"
+            v-bind:value="plant.id - 1"
+            v-model="pickedPlantIndex"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -128,6 +130,7 @@ export default {
       pickedQuant: 1,
       pickedUnit: 'BUNCH',
       typedComment: '',
+      pickedPlantIndex: -1,
     };
   },
 };
