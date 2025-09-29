@@ -44,13 +44,15 @@
         <th>Planted Date</th>
       </tr>
       <tr
-        v-for="plant in plantList"
+        v-for="(plant, index) in plantList"
         v-bind:key="plant.id"
       >
         <td>
           <input
             type="radio"
             name="harvest-plant"
+            v-model="plantIndex"
+            v-bind:value="index"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -127,6 +129,7 @@ export default {
       quantity: 1,
       unit: 'BUNCH',
       comment: '',
+      plantIndex: '',
     };
   },
 };
