@@ -51,6 +51,8 @@
           <input
             type="radio"
             name="harvest-plant"
+            v-bind:value="plant.id"
+            v-model="plantIndex"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -58,6 +60,10 @@
         <td>{{ plant.date }}</td>
       </tr>
     </table>
+
+    Selected item has an index of: {{ plantIndex }}
+
+    <br />
 
     <label
       for="harvest-quantity"
@@ -115,11 +121,12 @@ export default {
   data() {
     return {
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
+      plantIndex: -1,
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 0, date: '04/02/2019', location: 'D', bed: '' },
+        { id: 1, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 3, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
       date: '2019-06-15',
