@@ -13,7 +13,7 @@
     <input
       type="date"
       id="harvest-date"
-      value="2019-06-15"
+      v-model="date"
     />
     <br />
     <label
@@ -22,10 +22,14 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
+    <select
+      id="harvest-crop"
+      v-model="selectedCrop"
+    >
       <option
         v-for="crop in cropList"
         v-bind:key="crop"
+        v-bind:value="crop"
       >
         {{ crop }}
       </option>
@@ -48,6 +52,8 @@
           <input
             type="radio"
             name="harvest-plant"
+            v-bind:value="plant.id"
+            v-model="selectedPlanId"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -64,12 +70,15 @@
     <input
       type="number"
       id="harvest-quantity"
-      value="1"
       min="1"
       size="7"
       class="label-margin"
+      v-model="initQuantity"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="initUnit"
+    >
       <option
         v-for="unit in unitList"
         v-bind:key="unit.id"
@@ -85,18 +94,21 @@
       rows="5"
       cols="35"
       placeholder="Enter a comment..."
-    />
+      v-model="comment"
+    ></textarea>
     <br />
     <input
       type="button"
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-on:click="console.log('Submit was clicked.')"
     />
     <input
       type="button"
       id="harvest-reset"
       value="Reset"
+      v-on:click="console.log('Reset was clicked.')"
     />
 
     <hr />
@@ -115,6 +127,12 @@ export default {
         { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
+      date: '2019-06-15',
+      selectedCrop: 'RADISH',
+      initQuantity: 1,
+      initUnit: 'BUNCH',
+      comment: '',
+      selectedPlanId: null,
     };
   },
 };
