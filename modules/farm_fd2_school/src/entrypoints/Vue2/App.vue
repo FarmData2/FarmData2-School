@@ -97,12 +97,14 @@
     />
     <br />
     <input
+      v-on:click="submitClicked"
       type="button"
       id="harvest-submit"
       value="Submit"
       class="label-margin"
     />
     <input
+      v-on:click="resetClicked"
       type="button"
       id="harvest-reset"
       value="Reset"
@@ -131,6 +133,14 @@ export default {
       comment: '',
       selectedPlantIndex: null,
     };
+  },
+  methods: {
+    submitClicked() {
+      console.log('Submit was clicked');
+    },
+    resetClicked() {
+      console.log('Reset was clicked');
+    },
   },
 };
 </script>
