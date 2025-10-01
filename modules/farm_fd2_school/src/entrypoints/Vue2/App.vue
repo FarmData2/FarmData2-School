@@ -13,7 +13,7 @@
     <input
       type="date"
       id="harvest-date"
-      value="2019-06-15"
+      v-model="date"
     />
     <br />
     <label
@@ -22,7 +22,10 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
+    <select
+      id="harvest-crop"
+      v-model="initialCrop"
+    >
       <option
         v-for="crop in cropList"
         v-bind:key="crop"
@@ -64,12 +67,15 @@
     <input
       type="number"
       id="harvest-quantity"
-      value="1"
+      v-model="initialQuantity"
       min="1"
       size="7"
       class="label-margin"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="initialUnit"
+    >
       <option
         v-for="unit in unitList"
         v-bind:key="unit.id"
@@ -84,7 +90,7 @@
       id="harvest-comment"
       rows="5"
       cols="35"
-      placeholder="Enter a comment..."
+      v-model="initialComment"
     />
     <br />
     <input
@@ -107,6 +113,11 @@
 export default {
   data() {
     return {
+      date: '2019-06-15',
+      initialCrop: 'RADISH',
+      initialQuantity: 1,
+      initialUnit: 'BUNCH',
+      initialComment: 'Enter a comment...',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
