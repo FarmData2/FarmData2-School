@@ -51,6 +51,8 @@
           <input
             type="radio"
             name="harvest-plant"
+            v-model="initialRadioId"
+            v-bind:value="plant.id"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -118,6 +120,7 @@ export default {
       initialQuantity: 1,
       initialUnit: 'BUNCH',
       initialComment: 'Enter a comment...',
+      initialRadioId: 0,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
