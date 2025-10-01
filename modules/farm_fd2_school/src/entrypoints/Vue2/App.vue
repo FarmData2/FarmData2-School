@@ -13,7 +13,7 @@
     <input
       type="date"
       id="harvest-date"
-      v-model="date"
+      value="2019-06-15"
     />
     <br />
     <label
@@ -107,7 +107,6 @@
 export default {
   data() {
     return {
-      date: '2019-06-15',
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
