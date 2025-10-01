@@ -41,13 +41,15 @@
         <th>Planted Date</th>
       </tr>
       <tr
-        v-for="plant in plantList"
+        v-for="(plant, index) in plantList"
         v-bind:key="plant.id"
       >
         <td>
           <input
             type="radio"
             name="harvest-plant"
+            v-model="selectedPlantIndex"
+            v-bind:value="index"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -93,11 +95,13 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-on:click="handleSubmit"
     />
     <input
       type="button"
       id="harvest-reset"
       value="Reset"
+      v-on:click="handleReset"
     />
     <hr />
   </div>
@@ -111,6 +115,7 @@ export default {
       quantity: 1,
       units: 'BUNCH',
       comment: '',
+      selectedPlantIndex: null,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
@@ -120,6 +125,14 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  methods: {
+    handleSubmit() {
+      console.log('Submit was clicked.');
+    },
+    handleReset() {
+      console.log('Reset was clicked.');
+    },
   },
 };
 </script>
