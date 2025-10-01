@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping List App</title>
+    <link
+      rel="stylesheet"
+      href="main.css"
+    />
+  </head>
+  <body>
+    <div id="shopping-list">
+      <div class="header">
+        <h1>{{header || 'Welcome'}}</h1>
+        <button
+          v-if="editing"
+          @click="doEdit(false)"
+          class="btn btn-cancel"
+        >
+          Cancel
+        </button>
+        <button
+          v-else
+          @click="doEdit(true)"
+          class="btn btn-primy"
+        >
+          Add Item
+        </button>
+      </div>
+      <div
+        v-if="editing"
+        class="add-item-form"
+      >
+        <input
+          v-on:keyup.enter="saveItem"
+          v-model="newItem"
+          type="text"
+          placeholder="Add an item"
+        />
+        <label>
+          <input
+            type="checkbox"
+            v-model="newItemHighPriority"
+          />
+          High Priority
+        </label>
+        <button
+          v-on:click="saveItem"
+          class="btn btn-primary"
+        >
+          Save Item
+        </button>
+      </div>
+      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
+      <ul>
+        <li
+          v-for="item in items"
+          v-bind:key="item.id"
+        >
+          {{item.label}}
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const shoppingListApp = Vue.createApp({
+        data() {
+          return {
+            header: 'Shopping List App',
+            newItem: '',
+            editing: false,
+            newItemHighPriority: false,
+            items: [
+              //{ id: 1, label: '10 party hats' },
+              //{ id: 2, label: '2 board games' },
+              //{ id: 3, label: '20 cups' },
+            ],
+          };
+        },
+        methods: {
+          saveItem() {
+            this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.newItem = '';
+          },
+          doEdit(editing) {
+            this.editing = editing;
+            this.newItem = '';
+          },
+        },
+      }).mount('#shopping-list');
+    </script>
+  </body>
+</html>
