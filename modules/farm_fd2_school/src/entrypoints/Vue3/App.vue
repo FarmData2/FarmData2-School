@@ -25,6 +25,7 @@
     <select
       id="harvest-crop"
       v-model="crop"
+      v-on:click="doSelecting()"
     >
       <option
         v-for="crop in cropList"
@@ -36,7 +37,10 @@
 
     <hr />
 
-    <table id="harvest-table">
+    <table
+      v-if="isSelecting"
+      id="harvest-table"
+    >
       <tr id="harvest-table-header">
         <th></th>
         <th>Location</th>
@@ -62,11 +66,13 @@
     </table>
 
     <label
+      v-if="isSelecting"
       for="harvest-quantity"
       class="label-margin"
       >Quantity:</label
     >
     <input
+      v-if="isSelecting"
       type="number"
       id="harvest-quantity"
       min="1"
@@ -75,6 +81,7 @@
       v-model="quantity"
     />
     <select
+      v-if="isSelecting"
       id="harvest-units"
       v-model="unit"
     >
@@ -89,6 +96,7 @@
     <hr />
 
     <textarea
+      v-if="isSelecting"
       id="harvest-comment"
       rows="5"
       cols="35"
@@ -118,6 +126,7 @@
 export default {
   data() {
     return {
+      isSelecting: false,
       date: '2019-06-15',
       crop: '',
       quantity: 1,
@@ -141,6 +150,11 @@ export default {
       this.quantity = 1;
       this.unit = '';
       this.comment = '';
+    },
+    doSelecting() {
+      if (this.crop !== '') {
+        this.isSelecting = true;
+      }
     },
   },
 };
