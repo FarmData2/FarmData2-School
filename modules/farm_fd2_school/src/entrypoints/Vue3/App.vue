@@ -119,9 +119,9 @@ export default {
   data() {
     return {
       date: '2019-06-15',
-      crop: 'RADISH',
+      crop: '',
       quantity: 1,
-      unit: 'BUNCH',
+      unit: '',
       comment: '',
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
