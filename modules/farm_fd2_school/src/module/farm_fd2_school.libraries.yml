@@ -37,3 +37,13 @@ Vue2:
   css:
     component:
       style/style.css: {}
+
+Vue3:
+  js:
+    Vue3/Vue3.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
