@@ -13,7 +13,7 @@
     <input
       type="date"
       id="harvest-date"
-      value="2019-06-15"
+      v-model="date"
     />
     <br />
     <label
@@ -22,7 +22,10 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
+    <select
+      id="harvest-crop"
+      v-model="selectedCrop"
+    >
       <option
         v-for="crop in cropList"
         v-bind:key="crop"
@@ -64,12 +67,15 @@
     <input
       type="number"
       id="harvest-quantity"
-      value="1"
       min="1"
       size="7"
       class="label-margin"
+      v-model="selectedQuantity"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="selectedUnits"
+    >
       <option
         v-for="unit in unitList"
         v-bind:key="unit.id"
@@ -84,7 +90,7 @@
       id="harvest-comment"
       rows="5"
       cols="35"
-      placeholder="Enter a comment..."
+      v-model="commentText"
     />
     <br />
     <input
@@ -115,6 +121,11 @@ export default {
         { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
+      date: '2019-06-15',
+      selectedCrop: 'RADISH',
+      selectedQuantity: 1,
+      selectedUnits: 'BUNCH',
+      commentText: 'Enter a comment...',
     };
   },
 };
