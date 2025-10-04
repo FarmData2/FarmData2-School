@@ -80,7 +80,7 @@
     >
       <option
         v-for="unit in unitList"
-        v-bind:key="unit.id"
+        v-bind:key="unit"
       >
         {{ unit }}
       </option>
@@ -107,7 +107,7 @@
       type="button"
       id="harvest-reset"
       value="Reset"
-      v-on:click="console.log('Reset button clicked')"
+      v-on:click="console.log('Reset button clicked'), reset()"
     />
 
     <hr />
@@ -133,6 +133,16 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  methods: {
+    reset() {
+      this.date = '2019-06-15';
+      this.crop = this.cropList[3];
+      this.pickedPlant = '';
+      this.quantity = 1;
+      this.unit = this.unitList[0];
+      this.comment = '';
+    },
   },
 };
 </script>

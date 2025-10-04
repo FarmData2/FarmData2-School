@@ -129,6 +129,12 @@ li input {
 
 .btn-primary:hover {
   background: #3490dc;
+  color: #fff;
+}
+
+.btn-show {
+  background: #a160ef;
+  color: #fff;
 }
 
 .btn-cancel {
