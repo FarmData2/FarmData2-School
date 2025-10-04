@@ -40,8 +40,8 @@
             const usersResponse = await fetch(
               'https://jsonplaceholder.typicode.com/users'
             );
-            const usersJSON = await usersResponse.json();
-            console.log(usersJSON);
+            const users = await usersResponse.json();
+            console.log(users);
           },
           clearUsers() {
             this.userList = [];
