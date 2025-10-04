@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07 FD1 Tutorial</title>
+  </head>
+  <body>
+    <div id="fd1-tutorial">
+      <h1>07 FD1 Tutorial</h1>
+
+      <button v-on:click="fetchUsers">Fetch Users</button>
+      <br />
+      <button v-on:click="clearUsers">Clear Users</button>
+      <br /><br />
+
+      <label for="fd1-users">Users:</label>
+      <select
+        id="fd1-users"
+        v-model="selectedUser"
+      >
+        <option
+          v-for="user in userList"
+          v-bind:key="user.id"
+        >
+          {{user.name}}
+        </option>
+      </select>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const fd1Tutorial = Vue.createApp({
+        data() {
+          return {
+            userList: [],
+            selectedUser: '',
+          };
+        },
+        methods: {
+          async fetchUsers() {
+            const usersResponse = await fetch(
+              'https://jsonplaceholder.typicode.com/users'
+            );
+            const usersJSON = await usersResponse.json();
+            console.log(usersJSON);
+          },
+          clearUsers() {
+            this.userList = [];
+            this.selectedUser = '';
+          },
+        },
+      }).mount('#fd1-tutorial');
+    </script>
+  </body>
+</html>
