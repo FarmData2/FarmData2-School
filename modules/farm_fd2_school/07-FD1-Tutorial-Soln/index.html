@@ -8,11 +8,6 @@
     <div id="fd1-tutorial">
       <h1>07 FD1 Tutorial</h1>
 
-      <button v-on:click="fetchUsers">Fetch Users</button>
-      <br />
-      <button v-on:click="clearUsers">Clear Users</button>
-      <br /><br />
-
       <label for="fd1-users">Users:</label>
       <select
         id="fd1-users"
@@ -49,10 +44,6 @@
             // console.log('longitude: ' + user.address.geo.lng);
             // console.log('user 8 name: ' + users[8].name);
             this.userList = users;
-          },
-          clearUsers() {
-            this.userList = [];
-            this.selectedUser = '';
           },
         },
         created() {
