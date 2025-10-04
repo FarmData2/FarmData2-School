@@ -48,11 +48,15 @@
             // console.log('zip code: ' + user.address.zipcode);
             // console.log('longitude: ' + user.address.geo.lng);
             // console.log('user 8 name: ' + users[8].name);
+            this.userList = users;
           },
           clearUsers() {
             this.userList = [];
             this.selectedUser = '';
           },
+        },
+        created() {
+          this.fetchUsers();
         },
       }).mount('#fd1-tutorial');
     </script>
