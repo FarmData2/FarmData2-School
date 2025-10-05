@@ -16,6 +16,7 @@
         <option
           v-for="user in userList"
           v-bind:key="user.id"
+          v-bind:value="user"
         >
           {{user.name}}
         </option>
@@ -23,9 +24,9 @@
 
       <div
         id="user-posts"
-        v-if="selectedUser != ''"
+        v-if="selectedUser"
       >
-        <p>Posts by {{ selectedUser }}:</p>
+        <p>Posts by {{ selectedUser.name }}:</p>
       </div>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
@@ -34,7 +35,7 @@
         data() {
           return {
             userList: [],
-            selectedUser: '',
+            selectedUser: null,
           };
         },
         methods: {
