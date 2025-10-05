@@ -8,14 +8,24 @@
     <div id="fd1-tutorial">
       <h1>07 FD1 Tutorial</h1>
 
-      <button v-on:click="fetchUsers">Fetch Users</button>
+      <button
+        id="fetch-button"
+        v-on:click="fetchUsers"
+      >
+        Fetch Users
+      </button>
       <br />
-      <button v-on:click="clearUsers">Clear Users</button>
+      <button
+        id="clear-button"
+        v-on:click="clearUsers"
+      >
+        Clear Users
+      </button>
       <br /><br />
 
       <label for="fd1-users">Users:</label>
       <select
-        id="fd1-users"
+        id="users"
         v-model="selectedUser"
       >
         <option
@@ -25,6 +35,13 @@
           {{user.name}}
         </option>
       </select>
+
+      <div
+        id="user-posts"
+        v-if="selectedUser != ''"
+      >
+        <p>Posts by {{ selectedUser }}:</p>
+      </div>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
