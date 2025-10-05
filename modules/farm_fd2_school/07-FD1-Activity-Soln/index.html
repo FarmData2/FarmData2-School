@@ -24,7 +24,7 @@
 
       <div
         id="user-posts"
-        v-if="selectedUser != ''"
+        v-if="selectedUser"
       >
         <p>Posts by {{ selectedUser.name }}:</p>
         <ol>
@@ -38,7 +38,7 @@
         data() {
           return {
             userList: [],
-            selectedUser: '',
+            selectedUser: null,
             selectedUserPosts: [],
           };
         },
