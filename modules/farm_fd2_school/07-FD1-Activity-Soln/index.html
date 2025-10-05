@@ -27,6 +27,9 @@
         v-if="selectedUser != ''"
       >
         <p>Posts by {{ selectedUser.name }}:</p>
+        <ol>
+          <li v-for="post in selectedUserPosts">{{post.title}}</li>
+        </ol>
       </div>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
@@ -36,6 +39,7 @@
           return {
             userList: [],
             selectedUser: '',
+            selectedUserPosts: [],
           };
         },
         methods: {
@@ -63,6 +67,7 @@
             const postsResponse = await fetch(endPointURL);
             const posts = await postsResponse.json();
             console.log(posts);
+            this.selectedUserPosts = posts;
           },
         },
         created() {
