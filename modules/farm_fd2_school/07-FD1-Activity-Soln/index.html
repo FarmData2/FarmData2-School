@@ -55,8 +55,14 @@
           },
         },
         watch: {
-          selectedUser() {
+          async selectedUser() {
             console.log('User changed to ' + this.selectedUser.name);
+            const endPointURL =
+              'https://jsonplaceholder.typicode.com/posts?userId=' +
+              this.selectedUser.id;
+            const postsResponse = await fetch(endPointURL);
+            const posts = await postsResponse.json();
+            console.log(posts);
           },
         },
         created() {
