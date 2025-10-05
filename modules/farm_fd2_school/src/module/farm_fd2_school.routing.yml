@@ -47,3 +47,10 @@ farm.fd2_school_FD1.content:
     _title: 'FD1'
   requirements:
     _permission: 'access content'
+farm.fd2_school_FD2.content:
+  path: '/fd2_school/FD2'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD2'
+  requirements:
+    _permission: 'access content'
