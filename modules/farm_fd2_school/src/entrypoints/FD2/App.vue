@@ -1,7 +1,7 @@
 <template>
   <div
-    id="FD2"
-    data-cy="FD2"
+    id="FD1"
+    data-cy="FD1"
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
@@ -56,7 +56,7 @@
             <input
               type="radio"
               name="harvest-plant"
-              v-bind:value="plant.id"
+              v-bind:value="plant"
               v-model="pickedPlant"
             />
           </td>
@@ -86,8 +86,9 @@
         <option
           v-for="unit in unitList"
           v-bind:key="unit.id"
+          v-bind:value="unit"
         >
-          {{ unit }}
+          {{ unit.attributes.name }}
         </option>
       </select>
 
@@ -126,61 +127,55 @@ export default {
   data() {
     return {
       date: '2019-06-15',
-      crop: '',
-      pickedPlant: -1,
+      crop: null,
+      pickedPlant: null,
       quantity: 1,
-      unit: '',
+      unit: null,
       comment: '',
-      cropList: [],
-      plantList: [],
-      unitList: ['BUNCH', 'EACH', 'POUND'],
+      cropList: [
+        { id: 1, attributes: { name: 'ARUGULA' } },
+        { id: 2, attributes: { name: 'ASPARAGUS' } },
+        { id: 3, attributes: { name: 'BEAN' } },
+        { id: 4, attributes: { name: 'RADISH' } },
+      ],
+      plantList: [
+        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
+        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
+        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
+        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
+      ],
+      unitList: [
+        { id: 1, attributes: { name: 'BUNCH' } },
+        { id: 2, attributes: { name: 'EACH' } },
+        { id: 3, attributes: { name: 'POUND' } },
+      ],
     };
   },
   computed: {
     formValid() {
       return (
         this.date != '' &&
-        this.crop != '' &&
-        this.pickedPlant >= 0 &&
+        this.crop != null &&
+        this.pickedPlant != null &&
         this.quantity > 0 &&
-        this.unit != ''
+        this.unit != null
       );
     },
     sortedPlantList() {
       return [...this.plantList].sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
+        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
   },
   methods: {
     resetForm() {
       this.date = '2019-06-15';
-      this.crop = '';
-      this.pickedPlant = -1;
+      this.crop = null;
+      this.pickedPlant = null;
       this.quantity = 1;
-      this.unit = '';
+      this.unit = null;
       this.comment = '';
     },
-  },
-  watch: {
-    async crop() {
-      console.log('Crop changed to: ' + this.crop.attributes.name);
-      const URL =
-        'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name;
-      console.log(URL);
-      const plantResponse = await fetch(URL);
-      const plants = await plantResponse.json();
-      console.log(plants);
-      this.plantList = plants;
-    },
-  },
-  async created() {
-    const cropsResponse = await fetch(
-      'http://farmos/api/taxonomy_term/plant_type'
-    );
-    const crops = await cropsResponse.json();
-    console.log(crops);
-    this.cropList = crops.data;
   },
 };
 </script>
