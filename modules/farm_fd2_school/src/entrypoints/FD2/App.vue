@@ -28,7 +28,8 @@
     >
       <option
         v-for="crop in cropList"
-        v-bind:key="crop"
+        v-bind:key="crop.id"
+        v-bind:value="crop"
       >
         {{ crop.attributes.name }}
       </option>
@@ -38,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop != ''"
+      v-if="crop"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
@@ -164,6 +165,11 @@ export default {
       this.quantity = 1;
       this.unit = '';
       this.comment = '';
+    },
+  },
+  watch: {
+    crop() {
+      console.log('Crop changed to: ' + this.crop.attributes.name);
     },
   },
   async created() {
