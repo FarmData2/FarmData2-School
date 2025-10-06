@@ -61,8 +61,8 @@
             />
           </td>
           <td>{{ plant.location }}</td>
-          <td>{{ plant.bed || '' }}</td>
-          <td>{{ plant.date }}</td>
+          <td>{{ plant.beds || '' }}</td>
+          <td>{{ plant.timestamp }}</td>
         </tr>
       </table>
 
@@ -132,12 +132,7 @@ export default {
       unit: '',
       comment: '',
       cropList: [],
-      plantList: [
-        { id: 1, date: '04/12/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '06/22/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '05/15/2019', location: 'GHANA', bed: 'GHANA-4' },
-      ],
+      plantList: [],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
   },
