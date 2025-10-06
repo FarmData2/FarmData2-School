@@ -168,8 +168,15 @@ export default {
     },
   },
   watch: {
-    crop() {
+    async crop() {
       console.log('Crop changed to: ' + this.crop.attributes.name);
+      const URL =
+        'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name;
+      console.log(URL);
+      const plantResponse = await fetch(URL);
+      const plants = await plantResponse.json();
+      console.log(plants);
+      this.plantList = plants;
     },
   },
   async created() {
