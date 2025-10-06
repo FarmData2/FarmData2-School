@@ -30,7 +30,7 @@
         v-for="crop in cropList"
         v-bind:key="crop"
       >
-        {{ crop }}
+        {{ crop.attributes.name }}
       </option>
     </select>
 
@@ -130,7 +130,7 @@ export default {
       quantity: 1,
       unit: '',
       comment: '',
-      cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
+      cropList: [],
       plantList: [
         { id: 1, date: '04/12/2019', location: 'D', bed: '' },
         { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
@@ -165,6 +165,14 @@ export default {
       this.unit = '';
       this.comment = '';
     },
+  },
+  async created() {
+    const cropsResponse = await fetch(
+      'http://farmos/api/taxonomy_term/plant_type'
+    );
+    const crops = await cropsResponse.json();
+    console.log(crops);
+    this.cropList = crops.data;
   },
 };
 </script>
