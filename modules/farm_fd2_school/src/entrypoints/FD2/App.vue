@@ -39,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop"
+      v-if="plantList.length > 0"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
@@ -101,6 +101,12 @@
         placeholder="Enter a comment..."
         v-model.trim.lazy="comment"
       />
+    </div>
+    <div
+      id="harvest-no-plants"
+      v-if="plantList.length === 0 && crop"
+    >
+      There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
     <input
@@ -183,9 +189,13 @@ export default {
         const plantsResponse = await fetch(URL);
         const plants = await plantsResponse.json();
         console.log(plants);
-        this.plantList = plants;
+        if (Array.isArray(plants)) {
+          this.plantList = plants;
+        } else {
+          this.plantList = [];
+        }
       } else {
-        return [];
+        this.plantList = [];
       }
     },
   },
