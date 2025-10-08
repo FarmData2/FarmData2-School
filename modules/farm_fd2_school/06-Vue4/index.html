@@ -55,7 +55,7 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in items"
+          v-for="item in reversedItems"
           v-bind:key="item.id"
         >
           {{item.label}}
@@ -77,6 +77,11 @@
               //{ id: 3, label: '20 cups' },
             ],
           };
+        },
+        computed: {
+          reversedItems() {
+            return [...this.items].reverse();
+          },
         },
         methods: {
           saveItem() {
