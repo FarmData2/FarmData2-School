@@ -107,7 +107,7 @@
       type="button"
       id="harvest-reset"
       value="Reset"
-      v-on:click="console.log('Reset button clicked')"
+      v-on:click="reset"
     />
 
     <hr />
@@ -133,6 +133,17 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  methods: {
+    reset() {
+      this.date = '2019-06-15';
+      this.crop = null;
+      this.pickedPlant = -1;
+      this.quantity = 1;
+      this.unit = null;
+      this.comment = '';
+      console.log('Reset button clicked');
+    },
   },
 };
 </script>
