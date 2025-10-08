@@ -25,6 +25,7 @@
     <select
       id="harvest-crop"
       v-model="crop"
+      v-on:change="onCropChange"
     >
       <option
         v-for="crop in cropList"
@@ -36,66 +37,71 @@
 
     <hr />
 
-    <table id="harvest-table">
-      <tr id="harvest-table-header">
-        <th></th>
-        <th>Location</th>
-        <th>Bed</th>
-        <th>Planted Date</th>
-      </tr>
-      <tr
-        v-for="plant in plantList"
-        v-bind:key="plant.id"
-      >
-        <td>
-          <input
-            type="radio"
-            name="harvest-plant"
-            v-bind:value="plant.id"
-            v-model="pickedPlant"
-          />
-        </td>
-        <td>{{ plant.location }}</td>
-        <td>{{ plant.bed || '' }}</td>
-        <td>{{ plant.date }}</td>
-      </tr>
-    </table>
-
-    <label
-      for="harvest-quantity"
-      class="label-margin"
-      >Quantity:</label
+    <div
+      id="formContent"
+      v-if="cropSelected"
     >
-    <input
-      type="number"
-      id="harvest-quantity"
-      min="1"
-      size="7"
-      class="label-margin"
-      v-model="quantity"
-    />
-    <select
-      id="harvest-units"
-      v-model="unit"
-    >
-      <option
-        v-for="unit in unitList"
-        v-bind:key="unit.id"
+      <table id="harvest-table">
+        <tr id="harvest-table-header">
+          <th></th>
+          <th>Location</th>
+          <th>Bed</th>
+          <th>Planted Date</th>
+        </tr>
+        <tr
+          v-for="plant in plantList"
+          v-bind:key="plant.id"
+        >
+          <td>
+            <input
+              type="radio"
+              name="harvest-plant"
+              v-bind:value="plant.id"
+              v-model="pickedPlant"
+            />
+          </td>
+          <td>{{ plant.location }}</td>
+          <td>{{ plant.bed || '' }}</td>
+          <td>{{ plant.date }}</td>
+        </tr>
+      </table>
+
+      <label
+        for="harvest-quantity"
+        class="label-margin"
+        >Quantity:</label
       >
-        {{ unit }}
-      </option>
-    </select>
+      <input
+        type="number"
+        id="harvest-quantity"
+        min="1"
+        size="7"
+        class="label-margin"
+        v-model="quantity"
+      />
+      <select
+        id="harvest-units"
+        v-model="unit"
+      >
+        <option
+          v-for="unit in unitList"
+          v-bind:key="unit.id"
+        >
+          {{ unit }}
+        </option>
+      </select>
 
-    <hr />
+      <hr />
 
-    <textarea
-      id="harvest-comment"
-      rows="5"
-      cols="35"
-      placeholder="Enter a comment..."
-      v-model.trim.lazy="comment"
-    />
-    <br />
+      <textarea
+        id="harvest-comment"
+        rows="5"
+        cols="35"
+        placeholder="Enter a comment..."
+        v-model.trim.lazy="comment"
+      />
+      <br />
+    </div>
     <input
       type="button"
       id="harvest-submit"
@@ -132,6 +138,7 @@ export default {
         { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
+      cropSelected: false,
     };
   },
   methods: {
@@ -140,8 +147,19 @@ export default {
       this.crop = null;
       this.pickedPlant = -1;
       this.quantity = 1;
-      this.unit = 'BUNCH';
+      this.unit = '';
       this.comment = '';
+      this.showForm(false);
+    },
+    showForm(cropSelected) {
+      this.cropSelected = cropSelected;
+    },
+    onCropChange() {
+      if (this.crop) {
+        this.showForm(true);
+      } else {
+        return this.showForm(false);
+      }
     },
   },
 };
