@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07 FD1 Tutorial</title>
+  </head>
+  <body>
+    <div id="fd1-tutorial">
+      <h1>07 FD1 Tutorial</h1>
+
+      <button
+        id="fetch-button"
+        v-on:click="fetchUsers"
+      >
+        Fetch Users
+      </button>
+      <br />
+      <button
+        id="clear-button"
+        v-on:click="clearUsers"
+      >
+        Clear Users
+      </button>
+      <br /><br />
+
+      <label for="users">Users:</label>
+      <select
+        id="users"
+        v-model="selectedUser"
+      >
+        <option
+          v-for="user in userList"
+          v-bind:key="user.id"
+          v-bind:value="user"
+        >
+          {{user.name}}
+        </option>
+      </select>
+
+      <div
+        id="user-posts"
+        v-if="selectedUser"
+      >
+        <p>Posts by {{ selectedUser.name }}:</p>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const fd1Tutorial = Vue.createApp({
+        data() {
+          return {
+            userList: [],
+            selectedUser: null,
+          };
+        },
+        methods: {
+          fetchUsers() {
+            this.userList = [
+              { id: 1, name: 'Leanne Graham' },
+              { id: 2, name: 'Ervin Howell' },
+            ];
+          },
+          clearUsers() {
+            this.userList = [];
+            this.selectedUser = null;
+          },
+        },
+      }).mount('#fd1-tutorial');
+    </script>
+  </body>
+</html>
