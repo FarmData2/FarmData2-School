@@ -26,6 +26,12 @@
         >
           Add Item
         </button>
+        <button
+          v-on:click="essentialShop"
+          class="btn-btn-primary"
+        >
+          Add Essential Items
+        </button>
       </div>
       <div
         v-if="editing"
@@ -58,6 +64,7 @@
           v-bind:key="item.id"
         >
           {{item.label}}
+          <button></button>
         </li>
       </ul>
     </div>
@@ -80,8 +87,17 @@
         methods: {
           saveItem() {
             this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.editing = false;
             this.newItem = '';
           },
+          essentialShop() {
+            this.items.push({ id: this.items.length + 1, label: '10 party hats' })
+            this.items.push({ id: this.items.length + 1, label: '2 board games' })
+            this.items.push({ id: this.items.length + 1, label: '20 cups' })
+          },
+          removeItem() {
+            v-for="(item, index)"
+          }
           doEdit(editing) {
             this.editing = editing;
             this.newItem = '';
