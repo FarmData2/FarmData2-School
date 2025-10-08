@@ -106,6 +106,7 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-bind:disabled="!isFormValid"
       v-on:click="console.log('Submit button clicked.')"
     />
     <input
@@ -138,6 +139,17 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  computed: {
+    isFormValid() {
+      return (
+        this.date !== '' &&
+        this.crop !== '' &&
+        this.pickedPlant !== -1 &&
+        this.quantity !== '' &&
+        this.unit !== ''
+      );
+    },
   },
   methods: {
     resetForm() {
