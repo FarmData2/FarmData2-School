@@ -36,7 +36,10 @@
 
     <hr />
 
-    <table id="harvest-table">
+    <table
+      id="harvest-table"
+      v-if="crop"
+    >
       <tr id="harvest-table-header">
         <th></th>
         <th>Location</th>
@@ -60,41 +63,42 @@
         <td>{{ plant.date }}</td>
       </tr>
     </table>
-
-    <label
-      for="harvest-quantity"
-      class="label-margin"
-      >Quantity:</label
-    >
-    <input
-      type="number"
-      id="harvest-quantity"
-      min="1"
-      size="7"
-      class="label-margin"
-      v-model="quantity"
-    />
-    <select
-      id="harvest-units"
-      v-model="unit"
-    >
-      <option
-        v-for="unit in unitList"
-        v-bind:key="unit.id"
+    <div v-if="crop">
+      <label
+        for="harvest-quantity"
+        class="label-margin"
+        >Quantity:</label
       >
-        {{ unit }}
-      </option>
-    </select>
+      <input
+        type="number"
+        id="harvest-quantity"
+        min="1"
+        size="7"
+        class="label-margin"
+        v-model="quantity"
+      />
+      <select
+        id="harvest-units"
+        v-model="unit"
+      >
+        <option
+          v-for="unit in unitList"
+          v-bind:key="unit.id"
+        >
+          {{ unit }}
+        </option>
+      </select>
 
-    <hr />
+      <hr />
 
-    <textarea
-      id="harvest-comment"
-      rows="5"
-      cols="35"
-      placeholder="Enter a comment..."
-      v-model.trim.lazy="comment"
-    />
+      <textarea
+        id="harvest-comment"
+        rows="5"
+        cols="35"
+        placeholder="Enter a comment..."
+        v-model.trim.lazy="comment"
+      />
+    </div>
     <br />
     <input
       type="button"
