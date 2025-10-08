@@ -13,6 +13,12 @@
       <div class="header">
         <h1>{{header || 'Welcome'}}</h1>
         <button
+          v-on:click="populateList"
+          class="btn btn-primary"
+        >
+          Populate List
+        </button>
+        <button
           v-if="editing"
           v-on:click="doEdit(false)"
           class="btn btn-cancel"
@@ -54,10 +60,16 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in items"
+          v-for="(item, index) in items"
           v-bind:key="item.id"
         >
           {{item.label}}
+          <button
+            v-on:click="removeItem(index)"
+            class="btn btn-primary"
+          >
+            Remove Item
+          </button>
         </li>
       </ul>
     </div>
@@ -81,10 +93,21 @@
           saveItem() {
             this.items.push({ id: this.items.length + 1, label: this.newItem });
             this.newItem = '';
+            this.editing = false;
+          },
+          populateList() {
+            this.items.push(
+              { id: this.items.length + 1, label: '10 party hats' },
+              { id: this.items.length + 1, label: '2 board games' },
+              { id: this.items.length + 1, label: '20 cups' }
+            );
           },
           doEdit(editing) {
             this.editing = editing;
             this.newItem = '';
+          },
+          removeItem(index) {
+            this.items = this.items.splice(index, 1);
           },
         },
       }).mount('#shopping-list');
