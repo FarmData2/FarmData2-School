@@ -55,8 +55,11 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
+          v-for="item in reversedItems"
+          @click="togglePurchased(item)"
           v-for="item in items"
           v-bind:key="item.id"
+          :class="{strikeout: item.purchased,priority:item.highPriority}"
         >
           {{item.label}}
         </li>
@@ -72,16 +75,39 @@
             newItem: '',
             newItemHighPriority: false,
             items: [
-              //{ id: 1, label: '10 party hats' },
-              //{ id: 2, label: '2 board games' },
-              //{ id: 3, label: '20 cups' },
+              {
+                id: 1,
+                label: '10 party hats',
+                purchased: true,
+                highPriority: false,
+              },
+              {
+                id: 2,
+                label: '2 board games',
+                purchased: true,
+                highPriority: false,
+              },
+              { id: 3, label: '20 cups', purchased: false, highPriority: true },
             ],
           };
         },
+        computed: {
+          characterCount() {
+            return this.newItem.length;
+          },
+          reversedItems() {
+            return [...this.items].reverse();
+          },
+        },
         methods: {
           saveItem() {
-            this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.items.push({
+              id: this.items.length + 1,
+              label: this.newItem,
+              highPriority: this.newItemHighPriority,
+            });
             this.newItem = '';
+            this.newItemHighPriority = false;
           },
           doEdit(editing) {
             this.editing = editing;
