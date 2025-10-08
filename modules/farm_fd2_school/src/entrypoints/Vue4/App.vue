@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortedPlants"
           v-bind:key="plant.id"
         >
           <td>
@@ -132,9 +132,9 @@ export default {
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 1, date: '07/02/2019', location: 'D', bed: '' },
+        { id: 2, date: '04/20/2019', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 3, date: '11/02/2019', location: 'GHANA', bed: 'GHANA-4' },
         { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
@@ -149,6 +149,11 @@ export default {
         this.quantity !== '' &&
         this.unit !== ''
       );
+    },
+    sortedPlants() {
+      return this.plantList
+        .slice()
+        .sort((a, b) => a.date.localeCompare(b.date));
     },
   },
   methods: {
