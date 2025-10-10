@@ -39,7 +39,7 @@ export async function createHarvestLog(
   const quantitiesArray = getQuantityObjects([quantity]);
 
   let logName = dayjs(harvestDate).format('YYYY-MM-DD');
-  logName += '_h_';
+  logName += '_ha_';
   const cropIdToNameMap = await getCropIdToTermMap();
   logName += plantAsset.relationships.plant_type
     .map((crop) => cropIdToNameMap.get(crop.id).attributes.name)

@@ -45,6 +45,7 @@ describe('Test the harvest log functions', () => {
 
     cy.getAll(['@plantAsset', '@quantity', '@harvestLog']).then(
       ([plantAsset, quantity, harvestLog]) => {
+        
         expect(true).to.equal(false);
 
         /*
