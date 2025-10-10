@@ -8,21 +8,6 @@
     <div id="fd1-tutorial">
       <h1>07 FD1 Tutorial</h1>
 
-      <button
-        id="fetch-button"
-        v-on:click="fetchUsers"
-      >
-        Fetch Users
-      </button>
-      <br />
-      <button
-        id="clear-button"
-        v-on:click="clearUsers"
-      >
-        Clear Users
-      </button>
-      <br /><br />
-
       <label for="users">Users:</label>
       <select
         id="users"
@@ -59,20 +44,8 @@
               'https://jsonplaceholder.typicode.com/users'
             );
             const users = await userResponse.json();
-            // console.log(users);
             const user = users[0];
-            // console.log(
-            //   user.name,
-            //   user.username,
-            //   user.address.zipcode,
-            //   user.address.geo.lng
-            // );
-            // console.log(users[8].name);
             this.userList = users;
-          },
-          clearUsers() {
-            this.userList = [];
-            this.selectedUser = null;
           },
         },
         created() {
