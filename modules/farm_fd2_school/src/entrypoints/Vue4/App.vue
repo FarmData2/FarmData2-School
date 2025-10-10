@@ -107,6 +107,7 @@
       value="Submit"
       class="label-margin"
       v-on:click="console.log('Submit button clicked.')"
+      v-bind:disabled="!validHarvestLog"
     />
     <input
       type="button"
@@ -138,6 +139,17 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  computed: {
+    validHarvestLog() {
+      return (
+        this.date != '' &&
+        this.crop != '' &&
+        this.pickedPlant > 0 &&
+        this.quantity != '' &&
+        this.unit != ''
+      );
+    },
   },
   methods: {
     resetForm() {
