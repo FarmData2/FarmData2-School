@@ -36,7 +36,7 @@ describe('Test the harvest log functions', () => {
         farmosUtil.createHarvestLog(
           '01/02/1999',
           'ALF',
-          [],
+          ['ALF-1', 'ALF-2'],
           plantAsset,
           quantity
         )
@@ -45,39 +45,111 @@ describe('Test the harvest log functions', () => {
 
     cy.getAll(['@plantAsset', '@quantity', '@harvestLog']).then(
       ([plantAsset, quantity, harvestLog]) => {
-        
-        expect(true).to.equal(false);
-
-        /*
         cy.wrap(farmosUtil.getHarvestLog(harvestLog.id)).then((result) => {
           expect(result.attributes.timestamp).to.contain('1999-01-02');
-          expect(result.attributes.purchase_date).to.contain('1999-01-02');
 
-          expect(result.attributes.name).to.equal('1999-01-02_ts_ARUGULA');
+          expect(result.attributes.name).to.equal('1999-01-02_ha_ARUGULA');
 
           expect(result.attributes.status).to.equal('done');
-          expect(result.attributes.is_movement).to.equal(true);
 
-          expect(result.relationships.category.length).to.equal(2);
-          expect(result.relationships.category[0].id).to.equal(
-            categoryMap.get('seeding').id
-          );
-          expect(result.relationships.category[1].id).to.equal(
-            categoryMap.get('seeding_tray').id
-          );
+          // expect(result.relationships.category.length).to.equal(1);
+          // expect(result.relationships.category[0].id).to.equal(
+          //   categoryMap.get('harvest').id
+          // );
 
+          expect(result.relationships.location.length).to.equal(3);
           expect(result.relationships.location[0].id).to.equal(
-            greenhouseMap.get('CHUAU').id
+            fieldMap.get('ALF').id
           );
-          expect(result.relationships.location[0].type).to.equal(
-            'asset--structure'
+          expect(result.relationships.location[1].id).to.equal(
+            bedMap.get('ALF-1').id
           );
+          expect(result.relationships.location[2].id).to.equal(
+            bedMap.get('ALF-2').id
+          );
+
           expect(result.relationships.asset[0].id).to.equal(plantAsset.id);
 
           expect(result.relationships.quantity.length).to.equal(1);
           expect(result.relationships.quantity[0].id).to.equal(quantity.id);
-          */
+        });
       }
+    );
+  });
+
+  it('Error creating harvest log', { retries: 4 }, () => {
+    cy.intercept('POST', '**/api/log/harvest', {
+      statusCode: 401,
+    });
+
+    cy.wrap(
+      farmosUtil.createPlantAsset('1999-01-02', 'ARUGULA', 'testComment')
+    ).as('plantAsset');
+
+    cy.get('@plantAsset').then((plantAsset) => {
+      cy.wrap(
+        farmosUtil
+          .createHarvestLog(
+            '01/02/1999',
+            'ALF',
+            ['ALF-1', 'ALF-2'],
+            plantAsset,
+            []
+          )
+          .then(() => {
+            throw new Error('Creating seeding log should have failed.');
+          })
+          .catch((error) => {
+            expect(error.message).to.equal(
+              'Request failed with status code 401'
+            );
+          })
+      );
+    });
+  });
+
+  it('Delete a harvest log', () => {
+    cy.wrap(
+      farmosUtil.createPlantAsset('1999-01-02', 'ARUGULA', 'testComment')
+    ).as('plantAsset');
+
+    cy.wrap(
+      farmosUtil.createStandardQuantity('weight', 5, 'harvest', 'POUND')
+    ).as('quantity');
+
+    cy.getAll(['@plantAsset', '@quantity']).then(([plantAsset, quantity]) => {
+      cy.wrap(
+        farmosUtil.createHarvestLog(
+          '01/02/1999',
+          'ALF',
+          ['ALF-1', 'ALF-2'],
+          plantAsset,
+          quantity
+        )
+      ).as('harvestLog');
+    });
+
+    cy.get('@harvestLog').then((harvestLog) => {
+      cy.wrap(farmosUtil.deleteHarvestLog(harvestLog.id)).then((result) => {
+        expect(result.status).to.equal(204);
+      });
+    });
+  });
+
+  it('Error deleting harvest log', { retries: 4 }, () => {
+    cy.intercept('DELETE', '**/api/log/harvest/*', {
+      statusCode: 401,
+    });
+
+    cy.wrap(
+      farmosUtil
+        .deleteHarvestLog('1234')
+        .then(() => {
+          throw new Error('Deleting harvest log should have failed.');
+        })
+        .catch((error) => {
+          expect(error.message).to.equal('Request failed with status code 401');
+        })
     );
   });
 });

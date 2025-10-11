@@ -7,7 +7,7 @@ import { getFarmOSInstance } from './farmosUtil.core.js';
 import { getCropIdToTermMap } from './farmosUtil.crops.js';
 import {
   getPlantingLocationObjects,
-  getLogCategoryObjects,
+  //getLogCategoryObjects,
   getQuantityObjects,
 } from './farmosUtil.utilities.js';
 
@@ -37,6 +37,7 @@ export async function createHarvestLog(
   ]);
 
   const quantitiesArray = getQuantityObjects([quantity]);
+  //const logCategoriesArray = await getLogCategoryObjects(['harvest']);
 
   let logName = dayjs(harvestDate).format('YYYY-MM-DD');
   logName += '_ha_';
@@ -45,53 +46,64 @@ export async function createHarvestLog(
     .map((crop) => cropIdToNameMap.get(crop.id).attributes.name)
     .join('_');
 
-  console.log(logName);
-}
-
-/*
-  // Helper functions from the utilities module.
-  const locationsArray = await getPlantingLocationObjects([
-    locationName,
-    ...bedNames,
-  ]);
-  const logCategoriesArray = await getLogCategoryObjects(logCategories);
-  const quantitiesArray = getQuantityObjects(quantities);
-
-  const cropIdToNameMap = await getCropIdToTermMap();
-  let logName = dayjs(seedingDate).format('YYYY-MM-DD');
-  if (logCategories.includes('seeding_tray')) {
-    logName += '_ts_';
-  } else if (logCategories.includes('seeding_direct')) {
-    logName += '_ds_';
-  } else if (logCategories.includes('seeding_cover_crop')) {
-    logName += '_cs_';
-  }
-
-  logName += plantAsset.relationships.plant_type
-    .map((crop) => cropIdToNameMap.get(crop.id).attributes.name)
-    .join('_');
-
-  const seedingLogData = {
-    type: 'log--seeding',
+  const harvestLogData = {
+    type: 'log--harvest',
     attributes: {
       name: logName,
-      timestamp: dayjs(seedingDate).format(),
+      timestamp: dayjs(harvestDate).format(),
       status: 'done',
-      is_movement: true,
-      purchase_date: dayjs(seedingDate).format(),
     },
     relationships: {
       location: locationsArray,
       asset: [{ type: 'asset--plant', id: plantAsset.id }],
-      category: logCategoriesArray,
+      //category: logCategoriesArray,
       quantity: quantitiesArray,
     },
   };
 
   const farm = await getFarmOSInstance();
-  const seedingLog = farm.log.create(seedingLogData);
-  await farm.log.send(seedingLog);
+  const harvestLog = farm.log.create(harvestLogData);
+  await farm.log.send(harvestLog);
 
-  return seedingLog;
+  return harvestLog;
 }
-*/
+
+/**
+ * Get the harvest log with the specified id.
+ *
+ * @param {string} harvestLogId the id of the harvest log.
+ * @returns {Object} the harvest log with the specified id.
+ * @throws {Error} if unable to get the harvest log.
+ *
+ * @category Harvest
+ */
+export async function getHarvestLog(harvestLogId) {
+  const farm = await getFarmOSInstance();
+  const results = await farm.log.fetch({
+    filter: { type: 'log--harvest', id: harvestLogId },
+  });
+  return results.data[0];
+}
+
+/**
+ * Delete the harvest log with the specified id.
+ *
+ * @param {string} harvestLogId the id of the harvest log.
+ * @returns {Object} the deleted harvest log.
+ * @throws {Error} if unable to delete the harvest log.
+ *
+ * @category Harvest
+ */
+export async function deleteHarvestLog(harvestLogId) {
+  const farm = await getFarmOSInstance();
+  try {
+    const result = await farm.log.delete('harvest', harvestLogId);
+    return result;
+  } catch (error) {
+    console.error('deleteHarvestLog:');
+    console.error('Unable to delete harvest log with id: ' + harvestLogId);
+    console.error(error.message);
+    console.error(error);
+    throw error;
+  }
+}
