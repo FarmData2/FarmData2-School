@@ -4,7 +4,10 @@
 
 import dayjs from 'dayjs';
 import { getFarmOSInstance } from './farmosUtil.core.js';
-import { getCropIdToTermMap } from './farmosUtil.crops.js';
+import {
+  getCropIdToTermMap,
+  getCropNameToTermMap,
+} from './farmosUtil.crops.js';
 import {
   getPlantingLocationObjects,
   //getLogCategoryObjects,
@@ -106,4 +109,20 @@ export async function deleteHarvestLog(harvestLogId) {
     console.error(error);
     throw error;
   }
+}
+
+/**
+ *
+ * @param {string} cropName the name of the crop for which to get the harvest units.
+ * @returns {Array<Object>} an array of the unit objects for the crop.
+ */
+export async function getHarvestUnits(cropName) {
+  const cropMap = await getCropNameToTermMap();
+  const cropObj = cropMap.get(cropName);
+  const harvestUnits = [
+    cropObj.relationships.fd2_harvest_unit,
+    ...cropObj.relationships.fd2_unit_conversions,
+  ];
+
+  return harvestUnits;
 }

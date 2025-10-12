@@ -3,18 +3,35 @@ import * as farmosUtil from './farmosUtil';
 describe('Test the harvest log functions', () => {
   let fieldMap = null;
   let bedMap = null;
+  let unitMap = null;
 
   beforeEach(() => {
     cy.restoreLocalStorage();
     cy.restoreSessionStorage();
 
-    cy.wrap(farmosUtil.getFieldNameToAssetMap()).then((map) => {
-      fieldMap = map;
-    });
+    // cy.wrap(farmosUtil.getFieldNameToAssetMap()).then((map) => {
+    //   fieldMap = map;
+    // });
 
-    cy.wrap(farmosUtil.getBedNameToAssetMap()).then((map) => {
-      bedMap = map;
-    });
+    // cy.wrap(farmosUtil.getBedNameToAssetMap()).then((map) => {
+    //   bedMap = map;
+    // });
+
+    // cy.wrap(farmosUtil.getUnitIdToTermMap()).then((map) => {
+    //   unitMap = map;
+    // });
+
+    cy.wrap(farmosUtil.getFieldNameToAssetMap()).as('fieldMap');
+    cy.wrap(farmosUtil.getBedNameToAssetMap()).as('bedMap');
+    cy.wrap(farmosUtil.getUnitIdToTermMap()).as('unitMap');
+
+    cy.getAll(['@fieldMap', '@bedMap', '@unitMap']).then(
+      ([fields, beds, units]) => {
+        fieldMap = fields;
+        bedMap = beds;
+        unitMap = units;
+      }
+    );
   });
 
   afterEach(() => {
@@ -151,5 +168,38 @@ describe('Test the harvest log functions', () => {
           expect(error.message).to.equal('Request failed with status code 401');
         })
     );
+  });
+
+  it('Get the harvest units for a crop with no unit conversions', () => {
+    cy.wrap(farmosUtil.getHarvestUnits('ARUGULA')).as('harvestUnits');
+
+    cy.get('@harvestUnits').then((harvestUnits) => {
+      expect(harvestUnits.length).to.equal(1);
+      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('POUND');
+    });
+  });
+
+  it('Get the harvest units for a crop with one unit conversion', () => {
+    cy.wrap(farmosUtil.getHarvestUnits('CARROT')).as('harvestUnits');
+
+    cy.get('@harvestUnits').then((harvestUnits) => {
+      expect(harvestUnits.length).to.equal(2);
+      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('BUNCH');
+      expect(unitMap.get(harvestUnits[1].id).attributes.name).to.equal('POUND');
+      expect(harvestUnits[1].meta.factor).to.equal(1.75);
+    });
+  });
+
+  it('Get the harvest units for a crop with multiple unit conversions', () => {
+    cy.wrap(farmosUtil.getHarvestUnits('BROCCOLI')).as('harvestUnits');
+
+    cy.get('@harvestUnits').then((harvestUnits) => {
+      expect(harvestUnits.length).to.equal(3);
+      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('POUND');
+      expect(unitMap.get(harvestUnits[1].id).attributes.name).to.equal('HEAD');
+      expect(harvestUnits[1].meta.factor).to.equal(1);
+      expect(unitMap.get(harvestUnits[2].id).attributes.name).to.equal('EACH');
+      expect(harvestUnits[2].meta.factor).to.equal(1);
+    });
   });
 });
