@@ -5,7 +5,7 @@ docker exec fd2_farmos_school drush php-eval "\Drupal\field\Entity\FieldStorageC
 docker exec fd2_farmos_school drush php-eval "\Drupal\field\Entity\FieldStorageConfig::loadByName('taxonomy_term', 'fd2_harvest_unit')->delete();"
 echo "Deleted."
 echo "Running cron..."
-docker exec fd2_farmos_school drush cron > /dev/null
+docker exec fd2_farmos_school drush cron > /dev/null 2>&1
 echo "Done."
 
 echo "Uninstalling farm_fd2 module..."
