@@ -74,6 +74,9 @@ export * from './farmosUtil.fields.js';
 // Export functions related to greenhouse assets.
 export * from './farmosUtil.greenhouses.js';
 
+// Export functions related to harvest assets.
+export * from './farmosUtil.harvest.js';
+
 // Export functions related to log category taxonomy terms.
 export * from './farmosUtil.logCategories.js';
 
