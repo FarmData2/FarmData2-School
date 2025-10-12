@@ -112,9 +112,18 @@ export async function deleteHarvestLog(harvestLogId) {
 }
 
 /**
+ * Get an array of the harvest units for a given crop.
+ *
+ * All items in the array are `taxonomy_term--unit` objects.
+ * The first object is the `fd2_harvest_unit`,
+ * each subsequent object is one of the `fd2_unit_conversions` objects.
+ * The `fd2_unit_conversions` objects contain the conversion `factor`
+ * in the `meta.factor` property.
  *
  * @param {string} cropName the name of the crop for which to get the harvest units.
  * @returns {Array<Object>} an array of the unit objects for the crop.
+ *
+ * @category Harvest
  */
 export async function getHarvestUnits(cropName) {
   const cropMap = await getCropNameToTermMap();
