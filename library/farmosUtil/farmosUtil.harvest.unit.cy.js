@@ -4,32 +4,23 @@ describe('Test the harvest log functions', () => {
   let fieldMap = null;
   let bedMap = null;
   let unitMap = null;
+  let logCategoryMap = null;
 
   beforeEach(() => {
     cy.restoreLocalStorage();
     cy.restoreSessionStorage();
 
-    // cy.wrap(farmosUtil.getFieldNameToAssetMap()).then((map) => {
-    //   fieldMap = map;
-    // });
-
-    // cy.wrap(farmosUtil.getBedNameToAssetMap()).then((map) => {
-    //   bedMap = map;
-    // });
-
-    // cy.wrap(farmosUtil.getUnitIdToTermMap()).then((map) => {
-    //   unitMap = map;
-    // });
-
     cy.wrap(farmosUtil.getFieldNameToAssetMap()).as('fieldMap');
     cy.wrap(farmosUtil.getBedNameToAssetMap()).as('bedMap');
     cy.wrap(farmosUtil.getUnitIdToTermMap()).as('unitMap');
+    cy.wrap(farmosUtil.getLogCategoryToTermMap()).as(`categoryMap`);
 
-    cy.getAll(['@fieldMap', '@bedMap', '@unitMap']).then(
-      ([fields, beds, units]) => {
+    cy.getAll(['@fieldMap', '@bedMap', '@unitMap', `@categoryMap`]).then(
+      ([fields, beds, units, categories]) => {
         fieldMap = fields;
         bedMap = beds;
         unitMap = units;
+        logCategoryMap = categories;
       }
     );
   });
@@ -69,10 +60,10 @@ describe('Test the harvest log functions', () => {
 
           expect(result.attributes.status).to.equal('done');
 
-          // expect(result.relationships.category.length).to.equal(1);
-          // expect(result.relationships.category[0].id).to.equal(
-          //   categoryMap.get('harvest').id
-          // );
+          expect(result.relationships.category.length).to.equal(1);
+          expect(result.relationships.category[0].id).to.equal(
+            logCategoryMap.get('harvest').id
+          );
 
           expect(result.relationships.location.length).to.equal(3);
           expect(result.relationships.location[0].id).to.equal(
