@@ -68,9 +68,9 @@ FD1:
     component:
       style/style.css: {}
 
-FD2:
+FD2_Tutorials:
   js:
-    FD2/FD2.js:
+    FD2_Tutorials/FD2_Tutorials.js:
       preprocess: false
       minified: true
       attributes: { type: 'module' }
