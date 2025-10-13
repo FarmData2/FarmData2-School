@@ -102,6 +102,7 @@
     </div>
     <br />
     <input
+      v-bind:disabled="!fullCheck"
       type="button"
       id="harvest-submit"
       value="Submit"
@@ -138,6 +139,21 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  computed: {
+    fullCheck() {
+      if (
+        this.date != '2019-06-15' &&
+        this.crop != '' &&
+        this.pickedPlant != -1 &&
+        this.quantity > 0 &&
+        this.unit != ''
+      ) {
+        return true;
+      } else {
+        return false;
+      }
+    },
   },
   methods: {
     resetForm() {
