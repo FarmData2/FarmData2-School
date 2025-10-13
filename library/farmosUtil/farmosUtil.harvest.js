@@ -10,7 +10,7 @@ import {
 } from './farmosUtil.crops.js';
 import {
   getPlantingLocationObjects,
-  //getLogCategoryObjects,
+  getLogCategoryObjects,
   getQuantityObjects,
 } from './farmosUtil.utilities.js';
 
@@ -40,7 +40,7 @@ export async function createHarvestLog(
   ]);
 
   const quantitiesArray = getQuantityObjects([quantity]);
-  //const logCategoriesArray = await getLogCategoryObjects(['harvest']);
+  const logCategoriesArray = await getLogCategoryObjects(['harvest']);
 
   let logName = dayjs(harvestDate).format('YYYY-MM-DD');
   logName += '_ha_';
@@ -59,7 +59,7 @@ export async function createHarvestLog(
     relationships: {
       location: locationsArray,
       asset: [{ type: 'asset--plant', id: plantAsset.id }],
-      //category: logCategoriesArray,
+      category: logCategoriesArray,
       quantity: quantitiesArray,
     },
   };
