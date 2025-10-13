@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping List App</title>
+    <link
+      rel="stylesheet"
+      href="main.css"
+    />
+  </head>
+  <body>
+    <div id="shopping-list">
+      <h1>{{header || 'Welcome'}}</h1>
+      <table border="1">
+        <tr>
+          <th></th>
+          <th>Quantity</th>
+          <th>Item</th>
+        </tr>
+        <tr
+          v-for="(item,index) in items"
+          v-bind:key="item.id"
+        >
+          <td>{{index + 1}}</td>
+          <td>{{item.quantity}}</td>
+          <td>{{item.label}}</td>
+        </tr>
+      </table>
+
+      <br />
+
+      <select>
+        <option v-for="action in actions">{{action}}</option>
+      </select>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const shoppingListApp = Vue.createApp({
+        data() {
+          return {
+            header: 'Shopping List App',
+            items: [
+              { id: 1, quantity: 10, label: 'party hats' },
+              { id: 2, quantity: 2, label: 'board games' },
+              { id: 3, quantity: 20, label: 'cups' },
+            ],
+            actions: ['Increase', 'Decrease', 'Delete'],
+          };
+        },
+      }).mount('#shopping-list');
+    </script>
+  </body>
+</html>
