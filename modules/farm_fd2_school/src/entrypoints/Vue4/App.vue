@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortedPlantList"
           v-bind:key="plant.id"
         >
           <td>
@@ -56,7 +56,7 @@
               type="radio"
               name="harvest-plant"
               v-bind:value="plant.id"
-              v-model="pickedPlant"
+              v-model="sortedPlantList"
             />
           </td>
           <td>{{ plant.location }}</td>
@@ -132,10 +132,10 @@ export default {
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 1, date: '04/05/2019', location: 'D', bed: '' },
+        { id: 2, date: '07/02/2022', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 3, date: '09/15/2020', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 4, date: '06/21/2005', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
@@ -143,6 +143,11 @@ export default {
   computed: {
     validSubmit() {
       return this.crop != '' && this.unit != '' && this.pickedPlant != -1;
+    },
+    sortedPlantList() {
+      return [...this.plantList].sort(
+        (a, b) => new Date(a.date) - new Date(b.date)
+      );
     },
   },
   methods: {
