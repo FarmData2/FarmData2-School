@@ -67,3 +67,13 @@ FD1:
   css:
     component:
       style/style.css: {}
+
+FD2_Tutorials:
+  js:
+    FD2_Tutorials/FD2_Tutorials.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
