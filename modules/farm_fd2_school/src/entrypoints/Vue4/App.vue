@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortedPlantList"
           v-bind:key="plant.id"
         >
           <td>
@@ -149,6 +149,11 @@ export default {
         this.unit !== '' &&
         this.pickedPlant !== -1
       );
+    },
+    sortedPlantList() {
+      return [...this.plantList].sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
     },
   },
   methods: {
