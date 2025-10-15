@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortedPlantList"
           v-bind:key="plant.id"
         >
           <td>
@@ -138,13 +138,20 @@ export default {
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 1, date: '06/02/2019', location: 'D', bed: '' },
+        { id: 2, date: '04/05/2019', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 3, date: '07/14/2019', location: 'GHANA', bed: 'GHANA-4' },
         { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  computed: {
+    sortedPlantList() {
+      return [...this.plantList].sort((a, b) => {
+        return this.parseDate(b.date) - this.parseDate(a.date);
+      });
+    },
   },
   methods: {
     resetForm() {
@@ -155,9 +162,10 @@ export default {
       this.comment = '';
       this.pickedPlant = -1;
     },
-    checkSubmit(disabled) {
-      if (this.unit === '' && this.comment === '') {
-        this.disabled = disabled;
+    parseDate(dateString) {
+      if (/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
+        const [month, day, year] = dateString.split('/').map(Number);
+        return new Date(year, month - 1, day).getTime();
       }
     },
   },
