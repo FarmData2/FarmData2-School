@@ -38,6 +38,11 @@
             selectedUser: null,
           };
         },
+        watch: {
+          selectedUser() {
+            console.log('New user is ' + this.selectedUser.name);
+          },
+        },
         methods: {
           async fetchUsers() {
             const usersResponse = await fetch(
