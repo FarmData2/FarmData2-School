@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>07 FD1 Tutorial</title>
+  </head>
+  <body>
+    <div id="fd1-tutorial">
+      <h1>07 FD1 Tutorial</h1>
+
+      <label for="users">Users:</label>
+      <select
+        id="users"
+        v-model="selectedUser"
+      >
+        <option
+          v-for="user in userList"
+          v-bind:key="user.id"
+          v-bind:value="user"
+        >
+          {{user.name}}
+        </option>
+      </select>
+
+      <div
+        id="user-posts"
+        v-if="selectedUser"
+      >
+        <p>Posts by {{ selectedUser.name }}:</p>
+      </div>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const fd1Tutorial = Vue.createApp({
+        data() {
+          return {
+            userList: [],
+            selectedUser: null,
+          };
+        },
+        watch: {
+          selectedUser() {
+            console.log('New user is ' + this.selectedUser.name);
+          },
+        },
+        methods: {
+          async fetchUsers() {
+            const usersResponse = await fetch(
+              'https://jsonplaceholder.typicode.com/users'
+            );
+            const users = await usersResponse.json();
+            // console.log(users);
+            // const user = users[0];
+            // console.log('name: ' + user.name);
+            // console.log('username: ' + user.username);
+            // console.log('zip code: ' + user.address.zipcode);
+            // console.log('longitude: ' + user.address.geo.lng);
+            // console.log('user 8 name: ' + users[8].name);
+            this.userList = users;
+          },
+        },
+        created() {
+          this.fetchUsers();
+        },
+      }).mount('#fd1-tutorial');
+    </script>
+  </body>
+</html>
