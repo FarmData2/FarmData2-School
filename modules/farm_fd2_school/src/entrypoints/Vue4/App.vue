@@ -107,6 +107,7 @@
       value="Submit"
       class="label-margin"
       v-on:click="console.log('Submit button clicked.')"
+      v-bind:disabled="!isButtonDisabled"
     />
     <input
       type="button"
@@ -138,6 +139,17 @@ export default {
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
+  },
+  computed: {
+    isButtonDisabled() {
+      return (
+        this.crop !== '' &&
+        this.unit !== '' &&
+        this.pickedPlant !== -1 &&
+        this.date !== '' &&
+        this.quantity !== ''
+      );
+    },
   },
   methods: {
     resetForm() {
