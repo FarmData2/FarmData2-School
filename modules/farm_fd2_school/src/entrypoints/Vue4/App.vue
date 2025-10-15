@@ -107,6 +107,13 @@
       value="Submit"
       class="label-margin"
       v-on:click="console.log('Submit button clicked.')"
+      v-bind:disabled="
+        date === '' ||
+        crop === '' ||
+        pickedPlant === -1 ||
+        quantity === '' ||
+        unit === ''
+      "
     />
     <input
       type="button"
@@ -147,6 +154,11 @@ export default {
       this.unit = '';
       this.comment = '';
       this.pickedPlant = -1;
+    },
+    checkSubmit(disabled) {
+      if (this.unit === '' && this.comment === '') {
+        this.disabled = disabled;
+      }
     },
   },
 };
