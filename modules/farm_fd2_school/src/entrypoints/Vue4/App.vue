@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortPlants"
           v-bind:key="plant.id"
         >
           <td>
@@ -132,10 +132,10 @@ export default {
       pickedPlant: -1,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
-        { id: 1, date: '04/02/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 1, date: '08/19/2019', location: 'D', bed: '' },
+        { id: 2, date: '09/20/2007', location: 'GHANA', bed: 'GHANA-2' },
+        { id: 3, date: '06/05/2019', location: 'GHANA', bed: 'GHANA-4' },
+        { id: 4, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-4' },
       ],
       unitList: ['BUNCH', 'EACH', 'POUND'],
     };
@@ -149,6 +149,11 @@ export default {
         this.date !== '' &&
         this.quantity !== ''
       );
+    },
+    sortPlants() {
+      return [...this.plantList].sort((a, b) => {
+        return new Date(a.date) - new Date(b.date);
+      });
     },
   },
   methods: {
