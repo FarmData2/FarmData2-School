@@ -60,6 +60,7 @@
             );
             const users = await userResponse.json();
             const user = users[0];
+            this.userList = users;
             // console.log(users);
             // console.log(user.name)
             // console.log(user.username)
