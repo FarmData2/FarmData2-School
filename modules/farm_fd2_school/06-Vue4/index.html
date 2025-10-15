@@ -45,18 +45,16 @@
           High Priority
         </label>
         <button
-          v-bind:disabled="newItem.length < 5"
           v-on:click="saveItem"
           class="btn btn-primary"
         >
           Save Item
         </button>
       </div>
-      <a v-bind:href="newItem">Dynamic Link</a>
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in reversedItems"
+          v-for="item in items"
           v-bind:key="item.id"
         >
           {{item.label}}
@@ -78,11 +76,6 @@
               //{ id: 3, label: '20 cups' },
             ],
           };
-        },
-        computed: {
-          reversedItems() {
-            return [...this.items].reverse();
-          },
         },
         methods: {
           saveItem() {
