@@ -59,7 +59,10 @@
               'https://jsonplaceholder.typicode.com/users'
             );
             const users = await usersResponse.json();
-            console.log(users);
+            //console.log(users);
+            //const user = users[0];
+            //console.log(user["name"], user["username"], user["address"]["zipcode"], user["address"]["geo"]["lng"]);
+            //console.log(users[8]["name"]);
           },
           clearUsers() {
             this.userList = [];
