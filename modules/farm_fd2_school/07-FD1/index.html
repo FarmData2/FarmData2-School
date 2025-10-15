@@ -8,7 +8,7 @@
     <div id="fd1-tutorial">
       <h1>07 FD1 Tutorial</h1>
 
-      <button
+      <!-- <button
         id="fetch-button"
         v-on:click="fetchUsers"
       >
@@ -20,7 +20,7 @@
         v-on:click="clearUsers"
       >
         Clear Users
-      </button>
+      </button> -->
       <br /><br />
 
       <label for="users">Users:</label>
@@ -68,10 +68,10 @@
             // console.log(user.address.geo.lng)
             // console.log(users[8].name)
           },
-          clearUsers() {
-            this.userList = [];
-            this.selectedUser = null;
-          },
+          // clearUsers() {
+          //   this.userList = [];
+          //   this.selectedUser = null;
+          // },
         },
         async created() {
           this.fetchUsers();
