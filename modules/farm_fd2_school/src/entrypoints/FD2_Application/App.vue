@@ -115,7 +115,7 @@
       value="Submit"
       class="label-margin"
       v-bind:disabled="!formValid"
-      v-on:click="console.log('Submit button clicked.')"
+      v-on:click="submitForm"
     />
     <input
       type="button"
@@ -172,6 +172,16 @@ export default {
       this.quantity = 1;
       this.unit = null;
       this.comment = '';
+    },
+    async submitForm() {
+      console.log('Submitting form.');
+      const quantity = await farmosUtil.createStandardQuantity(
+        'weight',
+        7.5,
+        'harvest',
+        'POUND'
+      );
+      console.log(quantity);
     },
   },
   watch: {
