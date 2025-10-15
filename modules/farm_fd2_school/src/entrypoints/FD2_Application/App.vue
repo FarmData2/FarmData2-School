@@ -177,9 +177,9 @@ export default {
       console.log('Submitting form.');
       const quantity = await farmosUtil.createStandardQuantity(
         'weight',
-        7.5,
+        this.quantity,
         'harvest',
-        'POUND'
+        this.unit.attributes.name
       );
       console.log(quantity);
     },
