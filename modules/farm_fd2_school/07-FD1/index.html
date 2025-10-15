@@ -68,6 +68,9 @@
             //console.log(users[8].name);
             this.userList = users;
           },
+          async created() {
+            this.fetchUsers;
+          }
           clearUsers() {
             this.userList = [];
             this.selectedUser = null;
