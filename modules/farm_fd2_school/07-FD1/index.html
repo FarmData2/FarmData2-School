@@ -8,21 +8,6 @@
     <div id="fd1-tutorial">
       <h1>07 FD1 Tutorial</h1>
 
-      <button
-        id="fetch-button"
-        v-on:click="fetchUsers"
-      >
-        Fetch Users
-      </button>
-      <br />
-      <button
-        id="clear-button"
-        v-on:click="clearUsers"
-      >
-        Clear Users
-      </button>
-      <br /><br />
-
       <label for="users">Users:</label>
       <select
         id="users"
@@ -68,10 +53,6 @@
             // const user2 = users[8]
             // console.log("User at index 8's name is " + user2.name)
             this.userList = users;
-          },
-          clearUsers() {
-            this.userList = [];
-            this.selectedUser = null;
           },
         },
         created() {
