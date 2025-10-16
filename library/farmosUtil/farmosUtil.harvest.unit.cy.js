@@ -3,7 +3,6 @@ import * as farmosUtil from './farmosUtil';
 describe('Test the harvest log functions', () => {
   let fieldMap = null;
   let bedMap = null;
-  let unitMap = null;
   let logCategoryMap = null;
 
   beforeEach(() => {
@@ -12,14 +11,12 @@ describe('Test the harvest log functions', () => {
 
     cy.wrap(farmosUtil.getFieldNameToAssetMap()).as('fieldMap');
     cy.wrap(farmosUtil.getBedNameToAssetMap()).as('bedMap');
-    cy.wrap(farmosUtil.getUnitIdToTermMap()).as('unitMap');
     cy.wrap(farmosUtil.getLogCategoryToTermMap()).as(`categoryMap`);
 
-    cy.getAll(['@fieldMap', '@bedMap', '@unitMap', `@categoryMap`]).then(
-      ([fields, beds, units, categories]) => {
+    cy.getAll(['@fieldMap', '@bedMap', `@categoryMap`]).then(
+      ([fields, beds, categories]) => {
         fieldMap = fields;
         bedMap = beds;
-        unitMap = units;
         logCategoryMap = categories;
       }
     );
@@ -158,7 +155,9 @@ describe('Test the harvest log functions', () => {
         .catch((error) => {
           expect(error.message).to.equal('Request failed with status code 401');
         })
-    );
+    ).as('delete');
+
+    cy.get('@delete');
   });
 
   it('Get the harvest units for a crop with no unit conversions', () => {
@@ -166,7 +165,7 @@ describe('Test the harvest log functions', () => {
 
     cy.get('@harvestUnits').then((harvestUnits) => {
       expect(harvestUnits.length).to.equal(1);
-      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('POUND');
+      expect(harvestUnits[0].attributes.name).to.equal('POUND');
     });
   });
 
@@ -175,9 +174,9 @@ describe('Test the harvest log functions', () => {
 
     cy.get('@harvestUnits').then((harvestUnits) => {
       expect(harvestUnits.length).to.equal(2);
-      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('BUNCH');
-      expect(unitMap.get(harvestUnits[1].id).attributes.name).to.equal('POUND');
-      expect(harvestUnits[1].meta.factor).to.equal(1.75);
+      expect(harvestUnits[0].attributes.name).to.equal('BUNCH');
+      expect(harvestUnits[1].attributes.name).to.equal('POUND');
+      expect(harvestUnits[1].attributes.factor).to.equal(1.75);
     });
   });
 
@@ -186,11 +185,11 @@ describe('Test the harvest log functions', () => {
 
     cy.get('@harvestUnits').then((harvestUnits) => {
       expect(harvestUnits.length).to.equal(3);
-      expect(unitMap.get(harvestUnits[0].id).attributes.name).to.equal('POUND');
-      expect(unitMap.get(harvestUnits[1].id).attributes.name).to.equal('HEAD');
-      expect(harvestUnits[1].meta.factor).to.equal(1);
-      expect(unitMap.get(harvestUnits[2].id).attributes.name).to.equal('EACH');
-      expect(harvestUnits[2].meta.factor).to.equal(1);
+      expect(harvestUnits[0].attributes.name).to.equal('POUND');
+      expect(harvestUnits[1].attributes.name).to.equal('HEAD');
+      expect(harvestUnits[1].attributes.factor).to.equal(1);
+      expect(harvestUnits[2].attributes.name).to.equal('EACH');
+      expect(harvestUnits[2].attributes.factor).to.equal(1);
     });
   });
 });
