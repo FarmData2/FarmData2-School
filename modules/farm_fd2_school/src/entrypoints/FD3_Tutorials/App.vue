@@ -197,8 +197,15 @@ export default {
         } else {
           this.plantList = [];
         }
+
+        console.log('Getting units for: ' + this.crop.attributes.name);
+        const units = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        this.unitList = units;
       } else {
         this.plantList = [];
+        this.unitList = [];
       }
     },
   },
