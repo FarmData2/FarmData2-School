@@ -61,7 +61,7 @@
             />
           </td>
           <td>{{ plant.location }}</td>
-          <td>{{ plant.beds || '' }}</td>
+          <td>{{ plant.beds }}</td>
           <td>{{ plant.timestamp }}</td>
         </tr>
       </table>
@@ -187,18 +187,15 @@ export default {
   watch: {
     async crop() {
       if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
-        if (Array.isArray(plants)) {
-          this.plantList = plants;
-        } else {
-          this.plantList = [];
-        }
+        this.plantList = await farmosUtil.getPlantAssets(
+          null,
+          [],
+          this.crop.attributes.name
+        );
+        // this.plantList = await farmosUtil.getPlantAssets([
+        //   { cropName: 'RADISH' },
+        // ]);
 
-        console.log('Getting units for: ' + this.crop.attributes.name);
         const units = await farmosUtil.getHarvestUnits(
           this.crop.attributes.name
         );
