@@ -174,8 +174,15 @@ export default {
       this.comment = '';
     },
     async submitForm() {
+      let measure = '';
+      if (this.unit.relationships.parent.length > 0) {
+        const unitMap = await farmosUtil.getUnitIdToTermMap();
+        const measureObj = unitMap.get(this.unit.relationships.parent[0].id);
+        measure = measureObj.attributes.name;
+      }
+
       const quantity = await farmosUtil.createStandardQuantity(
-        'weight',
+        measure,
         this.quantity,
         'harvest',
         this.unit.attributes.name
