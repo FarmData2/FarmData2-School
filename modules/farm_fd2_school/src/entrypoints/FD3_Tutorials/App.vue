@@ -61,7 +61,7 @@
             />
           </td>
           <td>{{ plant.location }}</td>
-          <td>{{ plant.beds }}</td>
+          <td>{{ plant.beds.join(', ') }}</td>
           <td>{{ plant.timestamp }}</td>
         </tr>
       </table>
