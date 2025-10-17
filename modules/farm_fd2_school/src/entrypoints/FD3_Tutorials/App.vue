@@ -82,6 +82,7 @@
       <select
         id="harvest-units"
         v-model="unit"
+        v-if="this.unitList.length > 1"
       >
         <option
           v-for="unit in unitList"
@@ -91,7 +92,7 @@
           {{ unit.attributes.name }}
         </option>
       </select>
-
+      <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
 
       <textarea
@@ -209,14 +210,16 @@ export default {
           false,
           true
         );
-        // this.plantList = await farmosUtil.getPlantAssets([
-        //   { cropName: 'RADISH' },
-        // ]);
 
         const units = await farmosUtil.getHarvestUnits(
           this.crop.attributes.name
         );
         this.unitList = units;
+        if (this.unitList.length == 1) {
+          this.unit = this.unitList[0];
+        } else {
+          this.unit = null;
+        }
       } else {
         this.plantList = [];
         this.unitList = [];
