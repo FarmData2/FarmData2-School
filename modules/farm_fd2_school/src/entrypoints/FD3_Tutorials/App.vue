@@ -198,7 +198,9 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name
+          this.crop.attributes.name,
+          false,
+          true
         );
         // this.plantList = await farmosUtil.getPlantAssets([
         //   { cropName: 'RADISH' },
