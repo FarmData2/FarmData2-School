@@ -39,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop"
+      v-if="crop && plantList.length > 0"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
@@ -192,7 +192,6 @@ export default {
         'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name
       );
       const plants = await plantsResponse.json();
-      console.log(plants);
       if (Array.isArray(plants)) {
         this.plantList = plants;
       } else {
