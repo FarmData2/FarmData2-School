@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in cropList"
+        v-for="crop in sortedCropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -155,6 +155,11 @@ export default {
       return [...this.plantList].sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
+    },
+    sortedCropList() {
+      return [...this.cropList].sort((a, b) => {
+        return a.attributes.name.localeCompare(b.attributes.name);
+      });
     },
   },
   watch: {
