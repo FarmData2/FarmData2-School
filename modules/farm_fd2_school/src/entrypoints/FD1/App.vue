@@ -164,7 +164,11 @@ export default {
   },
   watch: {
     async crop() {
-      this.fetchPlants();
+      if (this.crop) {
+        this.fetchPlants();
+      } else {
+        return [];
+      }
     },
   },
   methods: {
