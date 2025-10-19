@@ -192,7 +192,12 @@ export default {
         'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name
       );
       const plants = await plantsResponse.json();
-      this.plantList = plants;
+      console.log(plants);
+      if (Array.isArray(plants)) {
+        this.plantList = plants;
+      } else {
+        this.plantList = [];
+      }
     },
   },
   async created() {
