@@ -132,23 +132,26 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [
-        { id: 1, attributes: { name: 'ARUGULA' } },
-        { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'BEAN' } },
-        { id: 4, attributes: { name: 'RADISH' } },
-      ],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
-      unitList: [
-        { id: 1, attributes: { name: 'BUNCH' } },
-        { id: 2, attributes: { name: 'EACH' } },
-        { id: 3, attributes: { name: 'POUND' } },
-      ],
+      cropList: [],
+      plantList: [],
+      unitList: [],
+      // cropList: [
+      //   { id: 1, attributes: { name: 'ARUGULA' } },
+      //   { id: 2, attributes: { name: 'ASPARAGUS' } },
+      //   { id: 3, attributes: { name: 'BEAN' } },
+      //   { id: 4, attributes: { name: 'RADISH' } },
+      // ],
+      // plantList: [
+      //   { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
+      //   { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
+      //   { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
+      //   { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
+      // ],
+      // unitList: [
+      //   { id: 1, attributes: { name: 'BUNCH' } },
+      //   { id: 2, attributes: { name: 'EACH' } },
+      //   { id: 3, attributes: { name: 'POUND' } },
+      // ],
     };
   },
   computed: {
@@ -176,6 +179,16 @@ export default {
       this.unit = null;
       this.comment = '';
     },
+  },
+  created() {
+    fetch('http://farmos/api/taxonomy_term/plant_type')
+      .then((response) => response.json())
+      .then((data) => {
+        this.cropList = data.data;
+      })
+      .catch((error) => {
+        console.error('error in fetching:', error);
+      });
   },
 };
 </script>
