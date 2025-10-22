@@ -132,12 +132,7 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [
-        { id: 1, attributes: { name: 'ARUGULA' } },
-        { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'BEAN' } },
-        { id: 4, attributes: { name: 'RADISH' } },
-      ],
+      cropList: [],
       plantList: [
         { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
         { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
@@ -176,6 +171,16 @@ export default {
       this.unit = null;
       this.comment = '';
     },
+    async fetchCrops() {
+      const cropsRaw = await fetch(
+        'http://farmos/api/taxonomy_term/plant_type'
+      );
+      const fetchedCrops = await cropsRaw.json();
+      this.cropList = fetchedCrops.data;
+    },
+  },
+  created() {
+    this.fetchCrops();
   },
 };
 </script>
