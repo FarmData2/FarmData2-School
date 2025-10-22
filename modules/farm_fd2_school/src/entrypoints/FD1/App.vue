@@ -190,6 +190,20 @@ export default {
         console.error('error in fetching:', error);
       });
   },
+  watch: {
+    crop(newCrop) {
+      const cropName = newCrop.attributes.name;
+      const url = 'http://farmos/api/fd2_plant_assets?crop=' + cropName;
+      console.log('fetching', url);
+
+      fetch(url)
+        .then((response) => response.json())
+        .then((plants) => {
+          console.log('fetched', plants);
+          this.plantList = plants;
+        });
+    },
+  },
 };
 </script>
 
