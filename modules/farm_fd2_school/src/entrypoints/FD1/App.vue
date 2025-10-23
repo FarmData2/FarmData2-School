@@ -180,8 +180,9 @@ export default {
     },
     async fetchPlantList(cropURL) {
       const cropListRaw = await fetch(cropURL);
-      const cropPlantList = await cropListRaw.json();
-      this.plantList = cropPlantList;
+      const cropListFetched = await cropListRaw.json();
+      if (!Array.isArray(cropListFetched)) this.plantList = [];
+      else this.plantList = cropListFetched;
     },
   },
   watch: {
