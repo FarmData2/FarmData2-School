@@ -39,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop"
+      v-if="crop && plantList.length"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
