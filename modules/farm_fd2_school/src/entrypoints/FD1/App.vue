@@ -186,7 +186,7 @@ export default {
   },
   watch: {
     crop() {
-      console.log(this.crop.attributes.name);
+      if (this.crop == null) return null;
       this.fetchPlantList(
         'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name
       );
