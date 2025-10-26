@@ -14,16 +14,16 @@
 <script>
 export default {
   name: 'DateInput',
-  props: ['initDate'],
-  emits: ['date-changed'],
+  props: ['date'],
+  emits: ['update:date'],
   data() {
     return {
-      pickedDate: this.initDate,
+      pickedDate: this.date,
     };
   },
   watch: {
     pickedDate() {
-      this.$emit('date-changed', this.pickedDate);
+      this.$emit('update:date', this.pickedDate);
     },
   },
 };
