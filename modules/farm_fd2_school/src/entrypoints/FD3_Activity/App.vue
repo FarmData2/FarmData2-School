@@ -5,17 +5,9 @@
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
-    <DateInput />
-
-    <label
-      for="harvest-date"
-      class="label-margin"
-      >Date:</label
-    >
-    <input
-      type="date"
-      id="harvest-date"
-      v-model="date"
+    <DateInput
+      v-bind:initDate="date"
+      v-on:date-changed="date = $event"
     />
     <br />
     <label

@@ -15,6 +15,7 @@
 export default {
   name: 'DateInput',
   props: ['initDate'],
+  emits: ['date-changed'],
   data() {
     return {
       pickedDate: this.initDate,
