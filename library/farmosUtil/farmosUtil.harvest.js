@@ -23,6 +23,7 @@ import {
  * @param {Array<string>} bedNames the names of the bed(s) where the harvest occurred.
  * @param {Object} plantAsset the plant asset affected by the harvest.
  * @param {Object} quantity the quantity associated with the harvest.
+ * @param {string} [comment = ""] comments about the harvest.
  * @returns {Object} the new harvest log.
  * @throws {Error} if unable to create the harvest log.
  *
@@ -33,7 +34,8 @@ export async function createHarvestLog(
   locationName,
   bedNames,
   plantAsset,
-  quantity
+  quantity,
+  comment = ''
 ) {
   const locationsArray = await getPlantingLocationObjects([
     locationName,
@@ -56,6 +58,7 @@ export async function createHarvestLog(
       name: logName,
       timestamp: dayjs(harvestDate).format(),
       status: 'done',
+      notes: comment,
     },
     relationships: {
       location: locationsArray,
