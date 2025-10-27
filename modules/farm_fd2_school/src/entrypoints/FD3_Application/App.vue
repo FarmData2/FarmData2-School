@@ -12,7 +12,9 @@
     />
 
     <br />
-    <label
+    <CropSelector v-model:selected="crop" />
+
+    <!-- <label
       for="harvest-crop"
       class="label-margin"
     >
@@ -29,7 +31,7 @@
       >
         {{ crop.attributes.name }}
       </option>
-    </select>
+    </select> -->
 
     <hr />
 
@@ -97,7 +99,7 @@
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop }} plants available for harvest.
     </div>
     <br />
     <input
@@ -121,11 +123,13 @@
 
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
+    CropSelector,
     CommentBox,
   },
   data() {
@@ -188,7 +192,8 @@ export default {
         this.pickedPlant.location,
         this.pickedPlant.beds,
         plantAsset,
-        quantity
+        quantity,
+        this.comment
       );
     },
   },
@@ -198,13 +203,13 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name,
+          this.crop, //this.crop.attributes.name,
           false,
           true
         );
 
         const units = await farmosUtil.getHarvestUnits(
-          this.crop.attributes.name
+          this.crop //this.crop.attributes.name
         );
         this.unitList = units;
         if (this.unitList.length == 1) {
