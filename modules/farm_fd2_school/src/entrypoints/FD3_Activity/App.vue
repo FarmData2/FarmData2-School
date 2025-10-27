@@ -187,7 +187,8 @@ export default {
         this.pickedPlant.location,
         this.pickedPlant.beds,
         plantAsset,
-        quantity
+        quantity,
+        this.comment
       );
     },
   },
