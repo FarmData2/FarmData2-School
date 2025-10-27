@@ -10,11 +10,8 @@
       v-bind:showValidityStyling="true"
       v-model:date="date"
     />
-
     <br />
-    <CropSelector v-model:selected="crop" />
-
-    <!-- <label
+    <label
       for="harvest-crop"
       class="label-margin"
     >
@@ -31,7 +28,7 @@
       >
         {{ crop.attributes.name }}
       </option>
-    </select> -->
+    </select>
 
     <hr />
 
@@ -93,13 +90,19 @@
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
 
-      <CommentBox v-model:comment="comment" />
+      <textarea
+        id="harvest-comment"
+        rows="5"
+        cols="35"
+        placeholder="Enter a comment..."
+        v-model.trim.lazy="comment"
+      />
     </div>
     <div
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop }} plants available for harvest.
+      There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
     <input
@@ -123,14 +126,10 @@
 
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
-import CropSelector from '@comps/CropSelector/CropSelector.vue';
-import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
-    CropSelector,
-    CommentBox,
   },
   data() {
     return {
@@ -203,13 +202,13 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop, //this.crop.attributes.name,
+          this.crop.attributes.name,
           false,
           true
         );
 
         const units = await farmosUtil.getHarvestUnits(
-          this.crop //this.crop.attributes.name
+          this.crop.attributes.name
         );
         this.unitList = units;
         if (this.unitList.length == 1) {
