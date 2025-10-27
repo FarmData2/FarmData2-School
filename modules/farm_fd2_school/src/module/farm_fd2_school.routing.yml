@@ -82,3 +82,10 @@ farm.fd2_school_FD3_Activity.content:
     _title: 'FD3 Activity'
   requirements:
     _permission: 'access content'
+farm.fd2_school_FD3_Application.content:
+  path: '/fd2_school/FD3_Application'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD3 Application'
+  requirements:
+    _permission: 'access content'
