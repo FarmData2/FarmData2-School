@@ -176,6 +176,16 @@ export default {
       this.unit = null;
       this.comment = '';
     },
+    async fetchCrops() {
+      const usersResponse = await fetch(
+        'http://farmos/api/taxonomy_term/plant_type'
+      );
+      const users = await usersResponse.json();
+      this.userlist = users;
+    },
+  },
+  async created() {
+    this.fetchCrops();
   },
 };
 </script>
