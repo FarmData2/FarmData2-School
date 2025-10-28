@@ -177,12 +177,16 @@ export default {
   watch: {
     async crop() {
       // console.log(this.crop.attributes.name);
-      const fetchedPlantData = await fetch(
-        `http://farmos/api/fd2_plant_assets?crop=${this.crop.attributes.name}`
-      );
-      const plantData = await fetchedPlantData.json();
-      this.plantList = plantData;
-      console.log(plantData[0].location);
+      if (this.crop) {
+        const fetchedPlantData = await fetch(
+          `http://farmos/api/fd2_plant_assets?crop=${this.crop.attributes.name}`
+        );
+        const plantData = await fetchedPlantData.json();
+        this.plantList = plantData;
+        console.log(plantData);
+      } else {
+        return [];
+      }
     },
   },
   methods: {
