@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in cropList"
+        v-for="crop in sortedCropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -39,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop"
+      v-if="crop && plantList.length"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
@@ -132,18 +132,8 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [
-        { id: 1, attributes: { name: 'ARUGULA' } },
-        { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'BEAN' } },
-        { id: 4, attributes: { name: 'RADISH' } },
-      ],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      cropList: [],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -166,6 +156,11 @@ export default {
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
+    sortedCropList() {
+      return [...this.cropList].sort(
+        (a, b) => a.attributes.name > b.attributes.name
+      );
+    },
   },
   methods: {
     resetForm() {
@@ -176,6 +171,30 @@ export default {
       this.unit = null;
       this.comment = '';
     },
+    async fetchCrops() {
+      const cropsRaw = await fetch(
+        'https://farmos/api/taxonomy_term/plant_type'
+      );
+      const fetchedCrops = await cropsRaw.json();
+      this.cropList = fetchedCrops.data;
+    },
+    async fetchPlantList(cropURL) {
+      const cropListRaw = await fetch(cropURL);
+      const cropListFetched = await cropListRaw.json();
+      if (!Array.isArray(cropListFetched)) this.plantList = [];
+      else this.plantList = cropListFetched;
+    },
+  },
+  watch: {
+    crop() {
+      if (this.crop == null) return null;
+      this.fetchPlantList(
+        'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name
+      );
+    },
+  },
+  created() {
+    this.fetchCrops();
   },
 };
 </script>
