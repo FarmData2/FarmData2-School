@@ -133,12 +133,7 @@ export default {
       unit: null,
       comment: '',
       cropList: [],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -162,6 +157,24 @@ export default {
       );
     },
   },
+  watch: {
+    crop(newCrop) {
+      if (newCrop && newCrop.attributes && newCrop.attributes.name) {
+        const cropName = newCrop.attributes.name;
+
+        const url = 'http://farmos/api/fd2_plant_assets?crop=' + cropName;
+
+        fetch(url)
+          .then((response) => response.json())
+          .then((plants) => {
+            this.plantList = Array.isArray(plants) ? plants : [];
+          });
+      } else {
+        this.plantList = [];
+      }
+    },
+  },
+
   methods: {
     resetForm() {
       this.date = '2019-06-15';
