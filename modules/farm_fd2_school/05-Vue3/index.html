@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping List App</title>
+    <link
+      rel="stylesheet"
+      href="main.css"
+    />
+  </head>
+  <body>
+    <div id="shopping-list">
+      <div class="header">
+        <h1>{{header || 'Welcome'}}</h1>
+        <button
+          v-if="editing"
+          @click="doEdit(false)"
+          class="btn btn-cancel"
+        >
+          Cancel
+        </button>
+        <button
+          v-else
+          @click="doEdit(true)"
+          class="btn btn-primary"
+        >
+          Add Item
+        </button>
+        <button
+          @click="populateList"
+          class="button"
+        >
+          Populate
+        </button>
+      </div>
+      <div
+        v-if="editing"
+        class="add-item-form"
+      >
+        <input
+          @keyup.enter="saveItem"
+          v-model="newItem"
+          type="text"
+          placeholder="Add an item"
+        />
+        <label>
+          <input
+            type="checkbox"
+            v-model="newItemHighPriority"
+          />
+          High Priority
+        </label>
+        <button
+          @click="saveItem"
+          class="btn btn-primary"
+        >
+          Save Item
+        </button>
+      </div>
+      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
+      <ul>
+        <li
+          v-for="(item, index) in items"
+          v-bind:key="item.id"
+        >
+          {{item.label}}
+          <button
+            @click="removeItem(index)"
+            class="btn-danger"
+          >
+            X
+          </button>
+        </li>
+      </ul>
+    </div>
+    <script src="https://unpkg.com/vue@3"></script>
+    <script>
+      const shoppingListApp = Vue.createApp({
+        data() {
+          return {
+            header: 'Shopping List App',
+            editing: false,
+            newItem: '',
+            newItemHighPriority: false,
+            nextItemID: 1,
+            items: [
+              //  { id: 1, label: '10 party hats' },
+              //  { id: 2, label: '2 board games' },
+              //  { id: 3, label: '20 cups' },
+            ],
+          };
+        },
+        methods: {
+          saveItem() {
+            this.items.push({ id: this.nextItemID++, label: this.newItem });
+            this.newItem = '';
+            this.editing = false;
+          },
+          doEdit(editing) {
+            this.editing = editing;
+            this.newItem = '';
+          },
+          populateList() {
+            this.items.push(
+              { id: this.nextItemID++, label: '10 party hats' },
+              { id: this.nextItemID++, label: '2 board games' },
+              { id: this.nextItemID++, label: '20 cups' }
+            );
+          },
+          removeItem(index) {
+            this.items.splice(index, 1);
+          },
+        },
+      }).mount('#shopping-list');
+    </script>
+  </body>
+</html>
