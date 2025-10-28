@@ -131,6 +131,7 @@ export default {
       pickedPlant: null,
       quantity: 1,
       unit: null,
+      selectedType: null,
       comment: '',
       cropList: [
         { id: 1, attributes: { name: 'ARUGULA' } },
@@ -139,10 +140,10 @@ export default {
         { id: 4, attributes: { name: 'RADISH' } },
       ],
       plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
+        // { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
+        // { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
+        // { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
+        // { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
       ],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
@@ -167,25 +168,36 @@ export default {
       );
     },
   },
-  methods: {
-    resetForm() {
-      this.date = '2019-06-15';
-      this.crop = null;
-      this.pickedPlant = null;
-      this.quantity = 1;
-      this.unit = null;
-      this.comment = '';
-    },
-    async fetchCrops() {
-      const usersResponse = await fetch(
-        'http://farmos/api/taxonomy_term/plant_type'
+  watch: {
+    async selectedType() {
+      console.log('New crop is ' + this.selectedType.name);
+      const selectedPlant = await fetch(
+        'http://farmos/api/fd2_plant_assets?crop=' + this.selectedType.name
       );
-      const users = await usersResponse.json();
-      this.userlist = users;
+      const plant = selectedPlant.json();
+      this.plantList = plant;
+      console.log('plantList: ', this.plantList);
     },
-  },
-  async created() {
-    this.fetchCrops();
+    methods: {
+      resetForm() {
+        this.date = '2019-06-15';
+        this.crop = null;
+        this.pickedPlant = null;
+        this.quantity = 1;
+        this.unit = null;
+        this.comment = '';
+      },
+      async fetchCrops() {
+        const usersResponse = await fetch(
+          'http://farmos/api/taxonomy_term/plant_type'
+        );
+        const users = await usersResponse.json();
+        this.userlist = users;
+      },
+    },
+    async created() {
+      this.fetchCrops();
+    },
   },
 };
 </script>
