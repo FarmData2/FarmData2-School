@@ -135,7 +135,7 @@ export default {
       cropList: [
         { id: 1, attributes: { name: 'ARUGULA' } },
         { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'BEAN' } },
+        { id: 3, attributes: { name: 'LEAN' } },
         { id: 4, attributes: { name: 'RADISH' } },
       ],
       plantList: [
@@ -176,6 +176,18 @@ export default {
       this.unit = null;
       this.comment = '';
     },
+    async fetchCrops() {
+      const fetchedCrops = await fetch(
+        'http://farmos/api/taxonomy_term/plant_type'
+      );
+      const crops = await fetchedCrops.json();
+      // const crop = crops.data[16];
+      // console.log(crop.attributes.name);
+      this.cropList = crops.data;
+    },
+  },
+  async created() {
+    this.fetchCrops();
   },
 };
 </script>
