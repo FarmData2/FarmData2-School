@@ -133,10 +133,10 @@ export default {
       unit: null,
       comment: '',
       cropList: [
-        { id: 1, attributes: { name: 'ARUGULA' } },
-        { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'LEAN' } },
-        { id: 4, attributes: { name: 'RADISH' } },
+        // { id: 1, attributes: { name: 'ARUGULA' } },
+        // { id: 2, attributes: { name: 'ASPARAGUS' } },
+        // { id: 3, attributes: { name: 'LEAN' } },
+        // { id: 4, attributes: { name: 'RADISH' } },
       ],
       plantList: [
         { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
@@ -165,6 +165,17 @@ export default {
       return [...this.plantList].sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
+    },
+  },
+  watch: {
+    async crop() {
+      // console.log(this.crop.attributes.name);
+      const fetchedPlantData = await fetch(
+        `http://farmos/api/fd2_plant_assets?crop=${this.crop.attributes.name}`
+      );
+      const plantData = await fetchedPlantData.json();
+      this.plantList = plantData;
+      console.log(plantData[0].location);
     },
   },
   methods: {
