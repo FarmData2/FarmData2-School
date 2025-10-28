@@ -182,8 +182,12 @@ export default {
           `http://farmos/api/fd2_plant_assets?crop=${this.crop.attributes.name}`
         );
         const plantData = await fetchedPlantData.json();
-        this.plantList = plantData;
-        console.log(plantData[0].location);
+        if (Array.isArray(plantData)) {
+          this.plantList = plantData;
+          // console.log(plantData[0].location);
+        } else {
+          this.plantList = [];
+        }
       } else {
         return [];
       }
@@ -203,13 +207,9 @@ export default {
         'http://farmos/api/taxonomy_term/plant_type'
       );
       const crops = await fetchedCrops.json();
-      if (Array.isArray(crops.data)) {
-        // const crop = crops.data[16];
-        // console.log(crop.attributes.name);
-        this.cropList = crops.data;
-      } else {
-        this.cropList = [];
-      }
+      // const crop = crops.data[16];
+      // console.log(crop.attributes.name);
+      this.cropList = crops.data;
     },
   },
   async created() {
