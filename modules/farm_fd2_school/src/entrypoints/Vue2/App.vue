@@ -13,7 +13,7 @@
     <input
       type="date"
       id="harvest-date"
-      value="2019-06-15"
+      v-model="date"
     />
     <br />
     <label
@@ -22,7 +22,10 @@
     >
       Crop:
     </label>
-    <select id="harvest-crop">
+    <select
+      id="harvest-crop"
+      v-model="selectedCrop"
+    >
       <option
         v-for="crop in cropList"
         v-bind:key="crop"
@@ -41,13 +44,15 @@
         <th>Planted Date</th>
       </tr>
       <tr
-        v-for="plant in plantList"
+        v-for="(plant, index) in plantList"
         v-bind:key="plant.id"
       >
         <td>
           <input
             type="radio"
             name="harvest-plant"
+            v-model="selectedPlantIndex"
+            v-bind:value="index"
           />
         </td>
         <td>{{ plant.location }}</td>
@@ -64,15 +69,18 @@
     <input
       type="number"
       id="harvest-quantity"
-      value="1"
+      v-model="quantity"
       min="1"
       size="7"
       class="label-margin"
     />
-    <select id="harvest-units">
+    <select
+      id="harvest-units"
+      v-model="selectedUnit"
+    >
       <option
         v-for="unit in unitList"
-        v-bind:key="unit.id"
+        v-bind:key="unit"
       >
         {{ unit }}
       </option>
@@ -85,6 +93,7 @@
       rows="5"
       cols="35"
       placeholder="Enter a comment..."
+      v-model="comment"
     />
     <br />
     <input
@@ -92,6 +101,7 @@
       id="harvest-submit"
       value="Submit"
       class="label-margin"
+      v-on:click="console.log('Submit was clicked.')"
     />
     <input
       type="button"
@@ -107,6 +117,12 @@
 export default {
   data() {
     return {
+      date: '2019-06-15',
+      selectedCrop: 'RADISH',
+      quantity: 1,
+      selectedUnit: 'BUNCH',
+      comment: '',
+      selectedPlantIndex: null,
       cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
       plantList: [
         { id: 1, date: '04/02/2019', location: 'D', bed: '' },
