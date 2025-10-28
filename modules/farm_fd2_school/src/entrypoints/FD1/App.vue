@@ -183,7 +183,7 @@ export default {
         );
         const plantData = await fetchedPlantData.json();
         this.plantList = plantData;
-        console.log(plantData);
+        console.log(plantData[0].location);
       } else {
         return [];
       }
@@ -203,9 +203,13 @@ export default {
         'http://farmos/api/taxonomy_term/plant_type'
       );
       const crops = await fetchedCrops.json();
-      // const crop = crops.data[16];
-      // console.log(crop.attributes.name);
-      this.cropList = crops.data;
+      if (Array.isArray(crops.data)) {
+        // const crop = crops.data[16];
+        // console.log(crop.attributes.name);
+        this.cropList = crops.data;
+      } else {
+        this.cropList = [];
+      }
     },
   },
   async created() {
