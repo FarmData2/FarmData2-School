@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   data() {
     return {
@@ -197,11 +198,14 @@ export default {
     },
   },
   async created() {
-    const cropsResponse = await fetch(
-      'http://farmos/api/taxonomy_term/plant_type'
-    );
-    const crops = await cropsResponse.json();
-    this.cropList = crops.data;
+    //  const cropsResponse = await fetch(
+    //    'http://farmos/api/taxonomy_term/plant_type'
+    //  );
+    //  const crops = await cropsResponse.json();
+    //  this.cropList = crops.data;
+    const cropsArray = await farmosUtil.getCrops();
+    console.log(cropsArray);
+    this.cropList = cropsArray;
   },
 };
 </script>
