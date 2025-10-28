@@ -11,27 +11,36 @@
   <body>
     <div id="shopping-list">
       <h1>{{header || 'Welcome'}}</h1>
-      <input
-        v-model="newItem"
-        type="text"
-        placeholder="ADD AN ITEM"
-      />
-      <label>
-        <input
-          type="checkbox"
-          v-model="newItemHighPriority"
-        />
-        High Priority
-      </label>
-      <br />
-      <ul>
-        <li
-          v-for="item in items"
-          v-bind:key="item.id"
+      <div class="add-item-form">
+        <form
+          class="add-item-form"
+          @submit.prevent="items.push({id: items.length + 1,label: newItem})"
         >
-          {{item.label}}
-        </li>
-      </ul>
+          <input
+            v-model.trim="newItem"
+            type="text"
+            placeholder="ADD AN ITEM"
+          />
+          <label>
+            <input
+              type="checkbox"
+              v-model="newItemHighPriority"
+            />
+
+            High Priority
+          </label>
+          <button class="btn btn-primary">Save Item</button>
+        </form>
+        <br />
+        <ul>
+          <li
+            v-for="item in items"
+            v-bind:key="item.id"
+          >
+            {{item.label}}
+          </li>
+        </ul>
+      </div>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
