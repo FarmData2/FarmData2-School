@@ -35,8 +35,16 @@
           v-bind:key="item.id"
         >
           {{item.label}}
+          <input
+            type="radio"
+            name="items"
+            v-bind:value="item.id"
+            v-model="pickedItemId"
+          />
         </li>
       </ul>
+      <p>The picked item has id: {{pickedItemId}}</p>
+      <button v-on:click="pickedItemId = null">Clear</button>
     </div>
     <script src="https://unpkg.com/vue@3"></script>
     <script>
@@ -51,6 +59,7 @@
               { id: 2, label: '2 board games' },
               { id: 3, label: '20 cups' },
             ],
+            pickedItemId: null,
           };
         },
       }).mount('#shopping-list');
