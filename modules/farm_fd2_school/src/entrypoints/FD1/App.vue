@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in cropList"
+        v-for="crop in sortedCropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -139,10 +139,10 @@ export default {
         // { id: 4, attributes: { name: 'RADISH' } },
       ],
       plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
+        // { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
+        // { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
+        // { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
+        // { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
       ],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
@@ -165,6 +165,13 @@ export default {
       return [...this.plantList].sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
+    },
+    sortedCropList() {
+      return [...this.cropList].sort(function (a, b) {
+        var nameA = a.attributes.name.toLowerCase();
+        var nameB = b.attributes.name.toLowerCase();
+        return nameA.localeCompare(nameB);
+      });
     },
   },
   watch: {
