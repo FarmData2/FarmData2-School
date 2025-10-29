@@ -55,8 +55,11 @@
       <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
-          v-for="item in items"
-          v-bind:key="item.id"
+          v-for="item in reversedItems"
+          @click="togglePurchased(item)"
+          :key="item.id"
+          class="static-class"
+          :class="{strikeout: item.purchased, priority: item.highPriority}"
         >
           {{item.label}}
         </li>
@@ -78,9 +81,18 @@
             ],
           };
         },
+        computed: {
+          reversedItems() {
+            return [...this.items].reverse();
+          },
+        },
         methods: {
           saveItem() {
-            this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.items.push({
+              id: this.items.length + 1,
+              label: this.newItem,
+              highPriority: this.newItemHighPriority,
+            });
             this.newItem = '';
           },
           doEdit(editing) {
