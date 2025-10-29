@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in sortedCrops"
+        v-for="crop in cropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -129,6 +129,7 @@
 </template>
 
 <script>
+import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   data() {
     return {
@@ -162,11 +163,6 @@ export default {
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
-    sortedCrops() {
-      return [...this.cropList].sort((a, b) =>
-        a.attributes.name.localeCompare(b.attributes.name)
-      );
-    },
   },
   methods: {
     resetForm() {
@@ -197,11 +193,8 @@ export default {
     },
   },
   async created() {
-    const cropsResponse = await fetch(
-      'http://farmos/api/taxonomy_term/plant_type'
-    );
-    const crops = await cropsResponse.json();
-    this.cropList = crops.data;
+    const cropsArray = await farmosUtil.getCrops();
+    this.cropList = cropsArray;
   },
 };
 </script>
