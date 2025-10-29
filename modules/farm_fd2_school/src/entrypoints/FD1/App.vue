@@ -133,12 +133,7 @@ export default {
       unit: null,
       comment: '',
       cropList: [],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -176,6 +171,18 @@ export default {
     const response = await fetch('/api/taxonomy_term/plant_type');
     const jsonApiResponse = await response.json();
     this.cropList = jsonApiResponse.data;
+  },
+  watch: {
+    async crop(newCrop) {
+      if (newCrop) {
+        const url = `/api/fd2_plant_assets?crop=${newCrop.attributes.name}`;
+        const response = await fetch(url);
+        const plantData = await response.json();
+        this.plantList = plantData;
+      } else {
+        this.plantList = [];
+      }
+    },
   },
 };
 </script>
