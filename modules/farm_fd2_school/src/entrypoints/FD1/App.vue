@@ -170,21 +170,16 @@ export default {
   async created() {
     const response = await fetch('/api/taxonomy_term/plant_type');
     const jsonApiResponse = await response.json();
-    console.log(jsonApiResponse);
     this.cropList = jsonApiResponse.data;
   },
   watch: {
     async crop(newCrop) {
       if (newCrop) {
-        console.log('Crop changed to:', newCrop.attributes.name);
         const url = `/api/fd2_plant_assets?crop=${newCrop.attributes.name}`;
-        console.log('Fetching from URL:', url);
         const response = await fetch(url);
         const plantData = await response.json();
-        console.log('Plant data:'.plantData);
         this.plantList = plantData;
       } else {
-        console.log('Crop cleared');
         this.plantList = [];
       }
     },
