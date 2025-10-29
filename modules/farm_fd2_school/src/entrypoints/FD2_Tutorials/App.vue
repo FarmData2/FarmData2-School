@@ -203,6 +203,7 @@ export default {
     // );
     // const crops = await cropsResponse.json();
     // this.cropList = crops.data;
+
     const cropsArray = await farmosUtil.getCrops();
     this.cropList = cropsArray;
   },
