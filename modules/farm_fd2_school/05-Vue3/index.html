@@ -10,8 +10,25 @@
   </head>
   <body>
     <div id="shopping-list">
-      <h1>{{header || 'Welcome'}}</h1>
-      <div class="add-item-form">
+      <div class="">
+        <h1>{{header || 'Welcome'}}</h1>
+        <button
+          v-if="editing"
+          class="btn btn-cancel"
+        >
+          Cancel
+        </button>
+        <button
+          v-else
+          class="btn btn-primary"
+        >
+          Add Item
+        </button>
+      </div>
+      <div
+        v-if="editing"
+        class="add-item-form"
+      >
         <input
           v-on:keyup.enter="items.push({id: items.length + 1, label: newItem})"
           v-model="newItem"
@@ -32,6 +49,7 @@
           Save Item
         </button>
       </div>
+      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
       <ul>
         <li
           v-for="item in items"
@@ -55,6 +73,16 @@
               { id: 3, label: '20 cups' },
             ],
           };
+        },
+        methods: {
+          saveItem() {
+            this.items.push({ id: this.items.length + 1, label: this.newItem });
+            this.newItem = '';
+          },
+          doEdit(editing) {
+            this.editing = editing;
+            this.newItem = '';
+          },
         },
       }).mount('#shopping-list');
     </script>
