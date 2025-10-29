@@ -73,6 +73,9 @@
             this.selectedUser = null;
           },
         },
+        async created() {
+          await this.fetchUsers();
+        },
       }).mount('#fd1-tutorial');
     </script>
   </body>
