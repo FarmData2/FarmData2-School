@@ -132,18 +132,8 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [
-        { id: 1, attributes: { name: 'ARUGULA' } },
-        { id: 2, attributes: { name: 'ASPARAGUS' } },
-        { id: 3, attributes: { name: 'BEAN' } },
-        { id: 4, attributes: { name: 'RADISH' } },
-      ],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      cropList: [],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -184,9 +174,25 @@ export default {
       console.log(crops);
       this.cropList = crops.data;
     },
+    async fetchPlantsByCrop(cropName) {
+      const url = `http://farmos/api/fd2_plant_assets?crop=${cropName}`;
+      console.log('Fetching from URL:', url);
+      const response = await fetch(url);
+      const plants = await response.json();
+      console.log('API response:', plants);
+      this.plantList = plants;
+    },
   },
   async created() {
     await this.fetchCrops();
+  },
+  watch: {
+    crop(newCrop) {
+      if (newCrop && newCrop.attributes && newCrop.attributes.name) {
+        console.log('Selected crop:', newCrop.attributes.name);
+        this.fetchPlantsByCrop(newCrop.attributes.name);
+      }
+    },
   },
 };
 </script>
