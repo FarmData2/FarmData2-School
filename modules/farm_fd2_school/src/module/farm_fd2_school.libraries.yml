@@ -87,3 +87,13 @@ FD2_Activity:
   css:
     component:
       style/style.css: {}
+
+FD2_Application:
+  js:
+    FD2_Application/FD2_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
