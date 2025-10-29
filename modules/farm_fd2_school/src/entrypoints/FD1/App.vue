@@ -133,12 +133,7 @@ export default {
       unit: null,
       comment: '',
       cropList: [],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -177,6 +172,22 @@ export default {
     const jsonApiResponse = await response.json();
     console.log(jsonApiResponse);
     this.cropList = jsonApiResponse.data;
+  },
+  watch: {
+    async crop(newCrop) {
+      if (newCrop) {
+        console.log('Crop changed to:', newCrop.attributes.name);
+        const url = `/api/fd2_plant_assets?crop=${newCrop.attributes.name}`;
+        console.log('Fetching from URL:', url);
+        const response = await fetch(url);
+        const plantData = await response.json();
+        console.log('Plant data:'.plantData);
+        this.plantList = plantData;
+      } else {
+        console.log('Crop cleared');
+        this.plantList = [];
+      }
+    },
   },
 };
 </script>
