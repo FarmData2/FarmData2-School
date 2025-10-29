@@ -48,7 +48,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in plantList"
+          v-for="plant in sortedPlantList"
           v-bind:key="plant.id"
         >
           <td>
@@ -107,6 +107,7 @@
       value="Submit"
       class="label-margin"
       v-on:click="console.log('Submit button clicked.')"
+      v-bind:disabled="isSubmitDisabled"
     />
     <input
       type="button"
@@ -148,6 +149,13 @@ export default {
         !this.quantity ||
         !this.unit
       );
+    },
+    sortedPlantList() {
+      const plantsCopy = this.plantList.slice();
+      plantsCopy.sort((plantA, plantB) => {
+        return new Date(plantA.date) - new Date(plantB.date);
+      });
+      return plantsCopy;
     },
   },
   methods: {
