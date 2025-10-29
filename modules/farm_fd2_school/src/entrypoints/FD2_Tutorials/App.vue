@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in sortedCrops"
+        v-for="crop in cropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -163,11 +163,6 @@ export default {
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
-    sortedCrops() {
-      return [...this.cropList].sort((a, b) =>
-        a.attributes.name.localeCompare(b.attributes.name)
-      );
-    },
   },
   methods: {
     resetForm() {
@@ -204,7 +199,6 @@ export default {
     // const crops = await cropsResponse.json();
     // this.cropList = crops.data;
     const cropsArray = await farmosUtil.getCrops();
-    console.log(cropsArray);
     this.cropList = cropsArray;
   },
 };
