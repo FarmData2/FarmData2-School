@@ -34,21 +34,42 @@ import * as farmosUtil from '@libs/farmosUtil/farmosUtil.js';
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <CropSelector
- *   id="crop-selector"
- *   data-cy="crop-selector"
- *   v-bind:required="required"
+ *   v-bind:required="true"
  *   v-bind:showValidityStyling="validity.showStyling"
- *   v-model:selected="form.selected"
- *   v-on:valid="
- *     (valid) => {
- *       validity.selected = valid;
- *     }
- *   "
+ *   v-model:selected="form.crop"
+ *   v-on:valid="(valid) => { validity.crop = valid; }"
  *   v-on:ready="createdCount++"
  *   v-on:error="(msg) => showErrorToast('Network Error', msg)"
  * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import CropSelector from '@comps/CropSelector/CropSelector.vue';
+ *
+ * export default {
+ *   components: {
+ *     CropSelector,
+ *   },
+ *   data() {
+ *     return {
+ *       form: {
+ *         crop: null,
+ *         ...
+ *       },
+ *       validity: {
+ *         showStyling: false,
+ *         crop: false,
+ *         ...
+ *       },
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes

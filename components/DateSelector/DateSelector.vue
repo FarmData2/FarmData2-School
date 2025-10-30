@@ -50,16 +50,41 @@ import dayjs from 'dayjs';
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <DateSelector
- *   id="date-selector"
- *   data-cy="date-selector"
- *   v-bind:required="required"
+ *   v-bind:required="true"
  *   v-model:date="form.date"
  *   v-bind:showValidityStyling="validity.showStyling"
  *   v-on:valid="(valid) => { validity.date = valid }"
  *   v-on:ready="createdCount++"
  * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import DateSelector from '@comps/DateSelector/DateSelector.vue';
+ *
+ * export default {
+ *   components: {
+ *     DateSelector,
+ *   },
+ *   data() {
+ *     return {
+ *       form: {
+ *         date: '2019-06-15',
+ *         ...
+ *       },
+ *       validity: {
+ *         showStyling: false,
+ *         date: false,
+ *         ...
+ *       },
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes
