@@ -28,18 +28,38 @@
  * Source: <a href="../../modules/farm_fd2_examples/src/entrypoints/comment_box/App.vue">App.vue</a>
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <CommentBox
  *   id="comment-box"
  *   data-cy="comment-box"
  *   v-model:comment="form.comment"
- *   v-on:valid="
- *     (valid) => {
- *       validity.comment = valid;
- *     }
- *   "
+ *   v-on:valid="(valid) => { validity.comment = valid; }"
  *   v-on:ready="createdCount++"
  * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import CommentBox from '@comps/CommentBox/CommentBox.vue';
+ *
+ * export default {
+ *   components: {
+ *     CommentBox,
+ *   },
+ *   data() {
+ *     return {
+ *       createdCount: 0,
+ *       form: {
+ *         comment: null,
+ *       },
+ *       validity: {
+ *         comment: true,
+ *       },
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes

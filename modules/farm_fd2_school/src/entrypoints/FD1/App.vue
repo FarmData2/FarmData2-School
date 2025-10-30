@@ -28,9 +28,10 @@
     >
       <option
         v-for="crop in cropList"
-        v-bind:key="crop"
+        v-bind:key="crop.id"
+        v-bind:value="crop"
       >
-        {{ crop }}
+        {{ crop.attributes.name }}
       </option>
     </select>
 
@@ -38,7 +39,7 @@
 
     <div
       id="harvest-table-quantity-unit"
-      v-if="crop != ''"
+      v-if="crop"
     >
       <table id="harvest-table">
         <tr id="harvest-table-header">
@@ -55,13 +56,13 @@
             <input
               type="radio"
               name="harvest-plant"
-              v-bind:value="plant.id"
+              v-bind:value="plant"
               v-model="pickedPlant"
             />
           </td>
           <td>{{ plant.location }}</td>
-          <td>{{ plant.bed || '' }}</td>
-          <td>{{ plant.date }}</td>
+          <td>{{ plant.beds || '' }}</td>
+          <td>{{ plant.timestamp }}</td>
         </tr>
       </table>
 
@@ -85,8 +86,9 @@
         <option
           v-for="unit in unitList"
           v-bind:key="unit.id"
+          v-bind:value="unit"
         >
-          {{ unit }}
+          {{ unit.attributes.name }}
         </option>
       </select>
 
@@ -125,44 +127,53 @@ export default {
   data() {
     return {
       date: '2019-06-15',
-      crop: '',
-      pickedPlant: -1,
+      crop: null,
+      pickedPlant: null,
       quantity: 1,
-      unit: '',
+      unit: null,
       comment: '',
-      cropList: ['ARUGULA', 'ASPARAGUS', 'BEAN', 'RADISH'],
-      plantList: [
-        { id: 1, date: '04/12/2019', location: 'D', bed: '' },
-        { id: 2, date: '04/02/2019', location: 'GHANA', bed: 'GHANA-2' },
-        { id: 3, date: '06/22/2019', location: 'GHANA', bed: 'GHANA-4' },
-        { id: 4, date: '05/15/2019', location: 'GHANA', bed: 'GHANA-4' },
+      cropList: [
+        { id: 1, attributes: { name: 'ARUGULA' } },
+        { id: 2, attributes: { name: 'ASPARAGUS' } },
+        { id: 3, attributes: { name: 'BEAN' } },
+        { id: 4, attributes: { name: 'RADISH' } },
       ],
-      unitList: ['BUNCH', 'EACH', 'POUND'],
+      plantList: [
+        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
+        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
+        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
+        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
+      ],
+      unitList: [
+        { id: 1, attributes: { name: 'BUNCH' } },
+        { id: 2, attributes: { name: 'EACH' } },
+        { id: 3, attributes: { name: 'POUND' } },
+      ],
     };
   },
   computed: {
     formValid() {
       return (
         this.date != '' &&
-        this.crop != '' &&
-        this.pickedPlant >= 0 &&
+        this.crop != null &&
+        this.pickedPlant != null &&
         this.quantity > 0 &&
-        this.unit != ''
+        this.unit != null
       );
     },
     sortedPlantList() {
       return [...this.plantList].sort(
-        (a, b) => new Date(a.date) - new Date(b.date)
+        (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
   },
   methods: {
     resetForm() {
       this.date = '2019-06-15';
-      this.crop = '';
-      this.pickedPlant = -1;
+      this.crop = null;
+      this.pickedPlant = null;
       this.quantity = 1;
-      this.unit = '';
+      this.unit = null;
       this.comment = '';
     },
   },
