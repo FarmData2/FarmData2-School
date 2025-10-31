@@ -10,25 +10,13 @@
       v-bind:showValidityStyling="true"
       v-model:date="date"
     />
-    <br />
-    <label
-      for="harvest-crop"
-      class="label-margin"
-    >
-      Crop:
-    </label>
-    <select
-      id="harvest-crop"
-      v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select>
+
+    <CropSelector
+      v-bind:required="true"
+      v-bind:showValidityStyling="true"
+      v-model:selected="crop"
+      v-on:error="(msg) => showErrorToast('Network Error', msg)"
+    />
 
     <hr />
 
@@ -94,7 +82,7 @@
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop }} plants available for harvest.
     </div>
     <br />
 
@@ -111,6 +99,7 @@
 
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
@@ -119,6 +108,7 @@ import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
+    CropSelector,
     NumericInput,
     CommentBox,
     SubmitResetButtons,
@@ -131,7 +121,6 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [],
       plantList: [],
       unitList: [],
     };
@@ -194,14 +183,12 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name,
+          this.crop,
           false,
           true
         );
 
-        const units = await farmosUtil.getHarvestUnits(
-          this.crop.attributes.name
-        );
+        const units = await farmosUtil.getHarvestUnits(this.crop);
         this.unitList = units;
         if (this.unitList.length == 1) {
           this.unit = this.unitList[0];
@@ -213,10 +200,6 @@ export default {
         this.unitList = [];
       }
     },
-  },
-  async created() {
-    const cropsArray = await farmosUtil.getCrops();
-    this.cropList = cropsArray;
   },
 };
 </script>
