@@ -132,6 +132,7 @@ import { BButton } from 'bootstrap-vue-next';
  * ```html
  * <NumericInput
  *   label="Count"
+ *   invalidFeedbackText="A positive integer is required."
  *   v-bind:required="true"
  *   v-bind:incDecValues="[1, 10, 100]"
  *   v-bind:minValue="1"
