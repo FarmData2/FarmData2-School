@@ -149,21 +149,42 @@
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <SelectorBase
- *   id="crop-selector"
- *   data-cy="crop-selector"
- *   label="Crop"
- *   invalidFeedbackText="A crop is required"
- *   v-bind:options="cropList"
- *   v-bind:required="required"
- *   v-bind:selected="selected"
- *   v-bind:showValidityStyling="showValidityStyling"
- *   v-on:update:selected="handleUpdateSelected($event)"
- *   v-on:valid="handleValid($event)"
- *   v-on:add-clicked="handleAddClicked"
- *   v-bind:popupUrl = "popupUrl"
- *   />
+ *   label="Options"
+ *   v-bind:options="optionList"
+ *   v-bind:required="true"
+ *   v-bind:showValidityStyling="true"
+ *   v-model:selected="option"
+ * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import SelectorBase from '@comps/SelectorBase/SelectorBase.vue';
+ *
+ * export default {
+ *   components: {
+ *     SelectorBase,
+ *   },
+ *   data() {
+ *     return {
+ *       optionList: ['Option 1', 'Option 2', 'Option 3'],
+ *       form: {
+ *         option: null,
+ *         ...
+ *       },
+ *       validity: {
+ *         showStyling: false,
+ *         option: false,
+ *         ...
+ *       },
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes
