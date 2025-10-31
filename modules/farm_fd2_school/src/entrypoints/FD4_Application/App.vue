@@ -6,12 +6,14 @@
     <div id="harvest-header"><h1>Harvest</h1></div>
 
     <DateSelector
+      id="harvest-date"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:date="date"
     />
 
     <CropSelector
+      id="harvest-crop"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
@@ -73,8 +75,7 @@
       <hr />
 
       <CommentBox
-        id="comment-box"
-        data-cy="comment-box"
+        id="harvest-comment"
         v-model:comment="comment"
       />
     </div>
@@ -84,7 +85,6 @@
     >
       There are no {{ crop }} plants available for harvest.
     </div>
-    <br />
 
     <SubmitResetButtons
       v-bind:enableSubmit="formValid"
@@ -212,13 +212,13 @@ export default {
   text-align: center;
 }
 
-.label-margin {
-  margin-right: 10px;
-}
-
 #harvest-date,
 #harvest-comment {
   margin-bottom: 10px;
+}
+
+.label-margin {
+  margin-right: 10px;
 }
 
 #harvest-table,
@@ -227,22 +227,6 @@ export default {
   width: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#harvest-submit {
-  width: 250px;
-  background: blue;
-  border: 10px blue;
-  color: white;
-  font-weight: bold;
-}
-
-#harvest-reset {
-  width: 120px;
-  background: orange;
-  border: 10px orange;
-  color: black;
-  font-weight: bold;
 }
 
 tr th {
