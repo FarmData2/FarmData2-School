@@ -50,9 +50,9 @@
  * <SubmitResetButtons
  *   v-bind:enableSubmit="enableSubmit"
  *   v-bind:enableReset="enableReset"
- *   v-on:ready="createdCount++"
  *   v-on:submit="submit()"
  *   v-on:reset="reset()"
+ *   v-on:ready="createdCount++"
  * />
  * ```
  *
