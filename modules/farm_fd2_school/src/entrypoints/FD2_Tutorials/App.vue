@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in sortedCrops"
+        v-for="crop in cropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
