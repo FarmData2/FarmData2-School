@@ -76,3 +76,9 @@ farm.fd2_school_FD3_Application:
   parent: farm.fd2_school_main
   route_name: farm.fd2_school_FD3_Application.content
   weight: 155
+farm.fd2_school_FD4_Application:
+  title: 'FD4 Application'
+  description: 'Harvest form End-to-End Testing.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD4_Application.content
+  weight: 160
