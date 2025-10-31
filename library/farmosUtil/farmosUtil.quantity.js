@@ -33,7 +33,7 @@ export async function createStandardQuantity(
   const traysQuantity = farm.quantity.create({
     type: 'quantity--standard',
     attributes: {
-      measure: measure,
+      measure: measure.toLowerCase(),
       value: {
         decimal: value,
       },

@@ -232,25 +232,69 @@ import SortOrderButton from '@comps/SortOrderButton/SortOrderButton.vue';
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <PicklistBase
- *  id="picklist"
- *  data-cy="picklist"
- *  v-bind:required="required"
- *  invalidFeedbackText="At least one row must be selected."
- *  v-bind:showValidityStyling="validity.showStyling"
- *  v-bind:columns="columns"
- *  v-bind:labels="labels"
- *  v-bind:units="units"
- *  v-bind:quantityAttribute="quantityAttribute"
- *  v-bind:rows="rows"
- *  v-bind:showAllButton="showAllButton"
- *  v-bind:showInfoIcons="showInfoIcons"
- *  v-bind:picked="form.picked"
- *  v-on:valid="(valid) => (validity.picked = valid)"
- *  v-on:update:picked="form.picked = $event"
- *  v-on:ready="createdCount++"
+ *   invalidFeedbackText="At least one row must be selected."
+ *   v-bind:required="true"
+ *   v-bind:showValidityStyling="validity.showStyling"
+ *   v-bind:columns="columns"
+ *   v-bind:labels="labels"
+ *   v-bind:rows="rows"
+ *   v-bind:showAllButton="false"
+ *   v-bind:showInfoIcons="true"
+ *   v-model:picked="form.picked"
+ *   v-on:valid="(valid) => { validity.option = valid; }"
+ *   v-on:ready="createdCount++"
  * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import SelectorBase from '@comps/PicklistBase/PicklistBase.vue';
+ *
+ * export default {
+ *   components: {
+ *     PicklistBase,
+ *   },
+ *   data() {
+ *     return {
+ *       columns: ['color', 'size', 'price`],
+ *       labels: ['Color', 'Size', 'Price'],
+ *       rows: [
+ *         {
+ *           color: 'Red',
+ *           size: 'Small',
+ *           price: '$10'
+ *           note: 'Size runs larger than normal',
+ *         },
+ *         {
+ *           color: 'Green',
+ *           size: 'Medium',
+ *           price: '$20'
+ *           note: 'Size runs smaller than normal',
+ *         },
+ *         {
+ *           color: 'Blue',
+ *           size: 'Large',
+ *           price: '$30'
+ *           note: 'Color is darer than appears',
+ *         },
+ *       ],
+ *       form: {
+ *         picked: null,
+ *         ...
+ *       },
+ *       validity: {
+ *         showStyling: false,
+ *         picked: false,
+ *         ...
+ *       },
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes

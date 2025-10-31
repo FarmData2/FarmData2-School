@@ -54,3 +54,24 @@ farm.fd2_school_FD2_Tutorials.content:
     _title: 'FD2 Tutorials'
   requirements:
     _permission: 'access content'
+farm.fd2_school_FD2_Activity.content:
+  path: '/fd2_school/FD2_Activity'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD2 Activity'
+  requirements:
+    _permission: 'access content'
+farm.fd2_school_FD2_Application.content:
+  path: '/fd2_school/FD2_Application'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD2 Application'
+  requirements:
+    _permission: 'access content'
+farm.fd2_school_FD3_Tutorials.content:
+  path: '/fd2_school/FD3_Tutorials'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD3 Tutorials'
+  requirements:
+    _permission: 'access content'

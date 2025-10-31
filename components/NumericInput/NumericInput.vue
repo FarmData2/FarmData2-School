@@ -128,27 +128,45 @@ import { BButton } from 'bootstrap-vue-next';
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <NumericInput
- *   id="numeric-input"
- *   v-bind:key="componentKey"
- *   data-cy="numeric-input"
- *   invalidFeedbackText="Invalid Number."
- *   label="Numeric Input"
- *   v-bind:required="this.required"
- *   v-bind:decimalPlaces="this.decimalPlaces"
- *   v-bind:incDecValues="this.incDecValues"
- *   v-bind:maxValue="this.maxValue"
- *   v-bind:minValue="this.minValue"
- *   v-model:value="form.value"
+ *   label="Count"
+ *   invalidFeedbackText="A positive integer is required."
+ *   v-bind:required="true"
+ *   v-bind:incDecValues="[1, 10, 100]"
+ *   v-bind:minValue="1"
+ *   v-model:value="form.count"
  *   v-bind:showValidityStyling="validity.showStyling"
- *   v-on:valid="
- *     (valid) => {
- *       validity.value = valid;
- *     }
- *   "
+ *   v-on:valid="(valid) => { validity.count = valid; }"
  *   v-on:ready="createdCount++"
  * />
+ * ```
+ *
+ * In `<script>`
+ * ```js
+ * import NumericInput from '@comps/NumericInput/NumericInput.vue';
+ *
+ * export default {
+ *   components: {
+ *     NumericInput,
+ *   },
+ *   data() {
+ *     return {
+ *       form: {
+ *         count: 1,
+ *         ...
+ *       },
+ *       validity: {
+ *         showStyling: false,
+ *         count: true,
+ *         ...
+ *       },
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes
