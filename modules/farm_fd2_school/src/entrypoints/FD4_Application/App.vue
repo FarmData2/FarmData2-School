@@ -64,7 +64,6 @@
       <NumericInput
         label="Quantity"
         v-bind:required="true"
-        v-bind:decimalPlaces="0"
         v-bind:incDecValues="[1, 5]"
         v-bind:minValue="1"
         v-model:value="quantity"
