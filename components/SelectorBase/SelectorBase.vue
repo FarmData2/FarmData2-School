@@ -153,10 +153,13 @@
  * ```html
  * <SelectorBase
  *   label="Options"
+ *   invalidFeedbackText="An option must be selected."
  *   v-bind:options="optionList"
  *   v-bind:required="true"
- *   v-bind:showValidityStyling="true"
- *   v-model:selected="option"
+ *   v-bind:showValidityStyling="validity.showStyling"
+ *   v-model:selected="form.option"
+ *   v-on:valid="(valid) => { validity.option = valid; }"
+ *   v-on:ready="createdCount++"
  * />
  * ```
  *
