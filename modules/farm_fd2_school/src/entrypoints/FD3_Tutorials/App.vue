@@ -142,11 +142,7 @@ export default {
       comment: '',
       cropList: [],
       plantList: [],
-      unitList: [
-        { id: 1, attributes: { name: 'BUNCH' } },
-        { id: 2, attributes: { name: 'EACH' } },
-        { id: 3, attributes: { name: 'POUND' } },
-      ],
+      unitList: [],
     };
   },
   computed: {
