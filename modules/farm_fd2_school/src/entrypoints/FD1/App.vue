@@ -133,12 +133,7 @@ export default {
       unit: null,
       comment: '',
       cropList: [],
-      plantList: [
-        { id: 1, timestamp: '04/12/2019', location: 'D', beds: '' },
-        { id: 2, timestamp: '04/02/2019', location: 'GHANA', beds: 'GHANA-2' },
-        { id: 3, timestamp: '06/22/2019', location: 'GHANA', beds: 'GHANA-4' },
-        { id: 4, timestamp: '05/15/2019', location: 'GHANA', beds: 'GHANA-4' },
-      ],
+      plantList: [],
       unitList: [
         { id: 1, attributes: { name: 'BUNCH' } },
         { id: 2, attributes: { name: 'EACH' } },
@@ -177,6 +172,19 @@ export default {
       );
       const crops = await cropsResponse.json();
       this.cropList = crops.data;
+    },
+    async fetchPlantList(cropURL) {
+      const plantResponse = await fetch(cropURL);
+      const plants = await plantResponse.json();
+      this.plantList = plants;
+    },
+  },
+  watch: {
+    crop() {
+      console.log(this.crop.attributes.name);
+      this.fetchPlantList(
+        'http://farmos/api/fd2_plant_assets?crop=' + this.crop.attributes.name
+      );
     },
   },
   async created() {
