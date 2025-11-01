@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in sortedCrops"
+        v-for="crop in cropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -106,7 +106,7 @@
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop.name }} plants available for harvest.
     </div>
     <br />
     <input
@@ -164,11 +164,6 @@ export default {
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
-    sortedCrops() {
-      return [...this.cropList].sort((a, b) =>
-        a.attributes.name.localeCompare(b.attributes.name)
-      );
-    },
   },
   methods: {
     resetForm() {
@@ -204,10 +199,13 @@ export default {
     // );
     // const crops = await cropsResponse.json();
     // this.cropList = crops.data;
-
-    const cropsArray = await farmosUtil.getCrops();
-    console.log(cropsArray);
-    this.cropList = cropsArray;
+    try {
+      const cropsArray = await farmosUtil.getCrops();
+      this.cropList = cropsArray.sort((a, b) => a.name.localeCompare(b.name));
+    } catch (e) {
+      console.error(e);
+      this.cropList = [];
+    }
   },
 };
 </script>
