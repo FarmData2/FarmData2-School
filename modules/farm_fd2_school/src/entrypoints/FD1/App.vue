@@ -27,7 +27,7 @@
       v-model="crop"
     >
       <option
-        v-for="crop in cropList"
+        v-for="crop in sortedCropList"
         v-bind:key="crop.id"
         v-bind:value="crop"
       >
@@ -161,6 +161,11 @@ export default {
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
       );
     },
+    sortedCropList() {
+      return [...this.cropList].sort((a, b) =>
+        a.attributes.name.localeCompare(b.attributes.name)
+      );
+    },
   },
   methods: {
     resetForm() {
@@ -181,14 +186,16 @@ export default {
   },
   watch: {
     async crop(newCrop) {
-      if (newCrop) {
-        const url = `/api/fd2_plant_assets?crop=${newCrop.attributes.name}`;
-        const response = await fetch(url);
-        const plantData = await response.json();
-        this.plantList = plantData;
-      } else {
+      if (!newCrop) {
         this.plantList = [];
+        return;
       }
+
+      const url = `http://farmos/api/fd2_plant_assets?crop=${newCrop.attributes.name}`;
+      const res = await fetch(url);
+      const data = await res.json();
+
+      this.plantList = Array.isArray(data) ? data : [];
     },
   },
 };
