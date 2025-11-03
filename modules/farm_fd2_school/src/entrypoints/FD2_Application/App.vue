@@ -182,6 +182,26 @@ export default {
         this.unit.attributes.name
       );
       console.log(quantity);
+
+      const plantAsset = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
+      console.log('Plant asset:', plantAsset);
+
+      const locationName = this.pickedPlant.location || '';
+      const bedNames = Array.isArray(this.pickedPlant.beds)
+        ? this.pickedPlant.beds
+        : this.pickedPlant.beds
+        ? [this.pickedPlant.beds]
+        : [];
+
+      const harvestLog = await farmosUtil.createdHarvestLog(
+        this.date,
+        locationName,
+        bedNames,
+        plantAsset,
+        quantity,
+        this.comment
+      );
+      console.log(harvestLog);
     },
   },
   watch: {
