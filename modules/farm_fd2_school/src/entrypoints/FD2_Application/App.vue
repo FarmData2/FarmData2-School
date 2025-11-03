@@ -142,6 +142,7 @@ export default {
       cropList: [],
       plantList: [],
       unitList: [],
+      greenhouseList: [],
     };
   },
   computed: {
@@ -157,6 +158,11 @@ export default {
     sortedPlantList() {
       return [...this.plantList].sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
+      );
+    },
+    greenhouseNameList() {
+      return this.greenhouseList.map(
+        (greenhouse) => greenhouse.attributes.name
       );
     },
   },
@@ -191,13 +197,23 @@ export default {
   },
   watch: {
     async crop() {
-      const cropName = this.crop.attributes.name;
       if (this.crop) {
-        const plantsArray = await farmosUtil.getPlantAssets(null, [], cropName);
-        const unitsArray = await farmosUtil.getHarvestUnits(cropName);
-        console.log(unitsArray);
+        const plantsArray = await farmosUtil.getPlantAssets(
+          null,
+          [],
+          this.crop.attributes.name
+        );
+        const unitsArray = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
         if (Array.isArray(plantsArray)) {
-          this.plantList = plantsArray;
+          const filteredPlantList = plantsArray.filter((plant) => {
+            return (
+              !this.greenhouseNameList.includes(plant.location) ||
+              plant.beds.length > 0
+            );
+          });
+          this.plantList = filteredPlantList;
         } else {
           this.plantList = [];
         }
@@ -214,7 +230,9 @@ export default {
   },
   async created() {
     const cropsArray = await farmosUtil.getCrops();
+    const greenhouseArray = await farmosUtil.getGreenhouses();
     this.cropList = cropsArray;
+    this.greenhouseList = greenhouseArray;
   },
 };
 </script>
