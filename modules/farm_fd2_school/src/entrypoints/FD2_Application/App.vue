@@ -142,7 +142,6 @@ export default {
       cropList: [],
       plantList: [],
       unitList: [],
-      greenhouseList: [],
     };
   },
   computed: {
@@ -158,11 +157,6 @@ export default {
     sortedPlantList() {
       return [...this.plantList].sort(
         (a, b) => new Date(a.timestamp) - new Date(b.timestamp)
-      );
-    },
-    greenhouseNameList() {
-      return this.greenhouseList.map(
-        (greenhouse) => greenhouse.attributes.name
       );
     },
   },
@@ -183,16 +177,14 @@ export default {
         'harvest',
         this.unit.attributes.name
       );
-      console.log(quantity);
       const plantAsset = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
-      const harvestLog = await farmosUtil.createHarvestLog(
+      await farmosUtil.createHarvestLog(
         this.date,
         this.pickedPlant.location,
         this.pickedPlant.beds,
         plantAsset,
         quantity
       );
-      console.log(harvestLog);
     },
   },
   watch: {
@@ -201,19 +193,15 @@ export default {
         const plantsArray = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name
+          this.crop.attributes.name,
+          false,
+          true
         );
         const unitsArray = await farmosUtil.getHarvestUnits(
           this.crop.attributes.name
         );
         if (Array.isArray(plantsArray)) {
-          const filteredPlantList = plantsArray.filter((plant) => {
-            return (
-              !this.greenhouseNameList.includes(plant.location) ||
-              plant.beds.length > 0
-            );
-          });
-          this.plantList = filteredPlantList;
+          this.plantList = plantsArray;
         } else {
           this.plantList = [];
         }
@@ -230,9 +218,7 @@ export default {
   },
   async created() {
     const cropsArray = await farmosUtil.getCrops();
-    const greenhouseArray = await farmosUtil.getGreenhouses();
     this.cropList = cropsArray;
-    this.greenhouseList = greenhouseArray;
   },
 };
 </script>
