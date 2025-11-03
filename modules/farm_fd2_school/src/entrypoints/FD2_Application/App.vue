@@ -185,21 +185,16 @@ export default {
     },
   },
   watch: {
-    async crop() {
-      if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
-        if (Array.isArray(plants)) {
-          this.plantList = plants;
-        } else {
-          this.plantList = [];
-        }
-      } else {
-        this.plantList = [];
-      }
+    async crop(newCrop) {
+      this.plantList = [];
+      if (!newCrop) return;
+
+      const plants = await farmosUtil.getPlantAssets(
+        '',
+        [],
+        newCrop.attributes.name
+      );
+      this.plantList = Array.isArray(plants) ? plants : [];
     },
   },
   async created() {
