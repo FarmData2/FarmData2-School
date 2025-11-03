@@ -96,3 +96,10 @@ farm.fd2_school_FD4_Application.content:
     _title: 'FD4 Application'
   requirements:
     _permission: 'access content'
+farm.fd2_school_FD4_Application_Soln.content:
+  path: '/fd2_school/FD4_Application_Soln'
+  defaults:
+    _controller: '\Drupal\farm_fd2_school\Controller\FD2_Controller::content'
+    _title: 'FD4 Application_Soln'
+  requirements:
+    _permission: 'access content'
