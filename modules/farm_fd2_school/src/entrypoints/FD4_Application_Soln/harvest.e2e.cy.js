@@ -14,7 +14,7 @@ describe('Tests for the Harvest form', () => {
     cy.saveSessionStorage();
   });
 
-  it('Placeholder test', () => {
+  it('Check initial state of the Harvest form', () => {
     cy.get('[data-cy="harvest-header"]')
       .should('be.visible')
       .should('have.text', 'Harvest');
@@ -37,5 +37,25 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should(`not.exist`);
     cy.get('[data-cy="single-harvest-unit"]').should(`not.exist`);
     cy.get('[data-cy="harvest-comment"]').should(`not.exist`);
+  });
+
+  it('Selecting crop with plants shows full form', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+    cy.get('[data-cy="harvest-table"]').should('be.visible');
+    cy.get('[data-cy="harvest-quantity"]')
+      .find('[data-cy="numeric-input"]')
+      .should('be.visible')
+      .should('have.value', '1');
+    cy.get('[data-cy="harvest-units"]')
+      .should('be.visible')
+      .should('have.value', null);
+    cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]')
+      .find('[data-cy="comment-input"]')
+      .should('be.visible')
+      .should('have.value', '');
   });
 });
