@@ -39,11 +39,12 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-comment"]').should(`not.exist`);
   });
 
-  it('Selecting crop with plants shows full form', () => {
+  it('Selecting crop with harvestable plants', () => {
     cy.get('[data-cy="harvest-crop"]')
       .find('[data-cy="crop-selector"]')
       .find('[data-cy="selector-input"]')
       .select('RADISH');
+
     cy.get('[data-cy="harvest-table"]').should('be.visible');
     cy.get('[data-cy="harvest-quantity"]')
       .find('[data-cy="numeric-input"]')
@@ -57,5 +58,25 @@ describe('Tests for the Harvest form', () => {
       .find('[data-cy="comment-input"]')
       .should('be.visible')
       .should('have.value', '');
+  });
+
+  it('Selecting crop without harvestable plants', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('CARROT');
+
+    cy.get('[data-cy="harvest-no-plants-message"]')
+      .should('be.visible')
+      .should(
+        'contain.text',
+        'There are no CARROT plants available for harvest.'
+      );
+
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
 });
