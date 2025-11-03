@@ -63,4 +63,16 @@ describe('FD2-Tutorial - A First Test', () => {
     cy.get('[data-cy="add-item-button"]').should('be.visible');
     cy.get('[data-cy="cancel-button"]').should('not.exist');
   });
+
+  it('Save item requires item name > 5 characters', () => {
+    cy.visit('./index.html');
+
+    cy.get('[data-cy="add-item-button"]').click();
+    cy.get('[data-cy="new-item-input"]').type('Party');
+    cy.get('[data-cy="save-item-button"]').should('not.be.enabled');
+
+    cy.get('[data-cy="new-item-input"]').clear();
+    cy.get('[data-cy="new-item-input"]').type('Party Hats');
+    cy.get('[data-cy="save-item-button"]').should('be.enabled');
+  });
 });
