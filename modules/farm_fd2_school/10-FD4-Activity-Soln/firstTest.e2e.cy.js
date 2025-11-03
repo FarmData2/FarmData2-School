@@ -53,4 +53,14 @@ describe('FD2-Tutorial - A First Test', () => {
     cy.get('[data-cy="new-item-input"]').should('be.empty');
     cy.get('[data-cy="nice-job-message"]').should('not.exist');
   });
+
+  it('Cancel button returns to main page', () => {
+    cy.visit('./index.html');
+
+    cy.get('[data-cy="add-item-button"]').click();
+    cy.get('[data-cy="cancel-button"]').click();
+
+    cy.get('[data-cy="add-item-button"]').should('be.visible');
+    cy.get('[data-cy="cancel-button"]').should('not.exist');
+  });
 });
