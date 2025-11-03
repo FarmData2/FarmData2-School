@@ -4,7 +4,10 @@
     data-cy="FD3"
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
-    <DateInput v-bind:initDate="date" />
+    <DateInput
+      v-bind:initDate="date"
+      v-on:date-changed="date = $event"
+    />
     <br />
     <label
       for="harvest-crop"
