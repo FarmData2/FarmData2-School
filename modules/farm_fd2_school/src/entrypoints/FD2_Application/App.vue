@@ -178,6 +178,15 @@ export default {
         this.unit.attributes.name
       );
       console.log(quantity);
+      const plantAsset = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
+      const harvestLog = await farmosUtil.createHarvestLog(
+        this.date,
+        this.pickedPlant.location,
+        this.pickedPlant.beds,
+        plantAsset,
+        quantity
+      );
+      console.log(harvestLog);
     },
   },
   watch: {
