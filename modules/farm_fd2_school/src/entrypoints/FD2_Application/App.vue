@@ -195,6 +195,13 @@ export default {
         newCrop.attributes.name
       );
       this.plantList = Array.isArray(plants) ? plants : [];
+
+      const units = await farmosUtil.getHarvestUnits(newCrop.attributes.name);
+      TouchList.unitList = (units || []).map((u, i) => {
+        const name = typeof u === 'string' ? u : u?.attributes?.name;
+        return { id: i + 1, attributes: { name } };
+      });
+      if (this.unitList.length > 0) this.unit = this.unitList[0];
     },
   },
   async created() {
