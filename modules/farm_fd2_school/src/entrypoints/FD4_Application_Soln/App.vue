@@ -3,10 +3,16 @@
     id="FD4"
     data-cy="FD4"
   >
-    <div id="harvest-header"><h1>Harvest</h1></div>
+    <div
+      id="harvest-header"
+      data-cy="harvest-header"
+    >
+      <h1>Harvest</h1>
+    </div>
 
     <DateSelector
       id="harvest-date"
+      data-cy="harvest-date"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:date="date"
@@ -14,6 +20,7 @@
 
     <CropSelector
       id="harvest-crop"
+      data-cy="harvest-crop"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
@@ -26,7 +33,10 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <table id="harvest-table">
+      <table
+        id="harvest-table"
+        data-cy="harvest-table"
+      >
         <tr id="harvest-table-header">
           <th></th>
           <th>Location</th>
@@ -52,6 +62,8 @@
       </table>
 
       <NumericInput
+        id="harvest-quantity"
+        data-cy="harvest-quantity"
         label="Quantity"
         v-bind:required="true"
         v-bind:incDecValues="[1, 5]"
@@ -60,6 +72,7 @@
       />
       <select
         id="harvest-units"
+        data-cy="harvest-units"
         v-model="unit"
         v-if="this.unitList.length > 1"
       >
@@ -71,11 +84,16 @@
           {{ unit.attributes.name }}
         </option>
       </select>
-      <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
+      <span
+        data-cy="single-harvest-unit"
+        v-if="this.unitList.length === 1"
+        >{{ unit.attributes.name }}</span
+      >
       <hr />
 
       <CommentBox
         id="harvest-comment"
+        data-cy="harvest-comment"
         v-model:comment="comment"
       />
     </div>
@@ -87,6 +105,8 @@
     </div>
 
     <SubmitResetButtons
+      id="harvest-submit-reset"
+      data-cy="harvest-submit-reset"
       v-bind:enableSubmit="formValid"
       v-bind:enableReset="true"
       v-on:submit="submitForm"
