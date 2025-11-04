@@ -199,6 +199,10 @@ export default {
         }
         console.log(this.crop.attributes.name);
         console.log(plantsResponse);
+        const unitsResponse = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        this.unitList = unitsResponse;
       } else {
         this.plantList = [];
       }
