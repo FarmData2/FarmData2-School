@@ -177,7 +177,14 @@ export default {
         'harvest',
         this.unit.attributes.name
       );
-      console.log(quantity);
+      const plantAsset = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
+      await farmosUtil.createHarvestLog(
+        this.date,
+        this.pickedPlant.location,
+        this.pickedPlant.beds,
+        plantAsset,
+        quantity
+      );
     },
   },
   watch: {
