@@ -130,6 +130,7 @@
 
 <script>
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
+
 export default {
   data() {
     return {
@@ -187,17 +188,11 @@ export default {
   watch: {
     async crop() {
       if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
-        if (Array.isArray(plants)) {
-          this.plantList = plants;
-        } else {
-          this.plantList = [];
-        }
+        const cropName = this.crop.attributes.name;
+        this.plantList = await farmosUtil.getPlantAssets(null, [], cropName);
+        this.unitList = await farmosUtil.getHarvestUnits(cropName);
       } else {
+        this.plantList = [];
         this.plantList = [];
       }
     },
