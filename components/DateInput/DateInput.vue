@@ -23,6 +23,11 @@ export default {
       pickedDate: this.initDate,
     };
   },
+  watch: {
+    selectedDate() {
+      this.$emit('date-changed', this.selectedDate);
+    },
+  },
 };
 </script>
 
