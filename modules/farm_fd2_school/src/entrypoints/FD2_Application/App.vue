@@ -182,21 +182,30 @@ export default {
         this.unit.attributes.name
       );
       console.log(quantity);
+      const plantAssets = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
+      await farmosUtil.createHarvestLog(
+        this.date,
+        this.pickedPlant.location,
+        this.pickedPlant.bed,
+        plantAssets,
+        quantity
+      );
     },
   },
   watch: {
     async crop() {
+      this.unit = null;
       if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
-        if (Array.isArray(plants)) {
-          this.plantList = plants;
-        } else {
-          this.plantList = [];
-        }
+        const plantValues = await farmosUtil.getPlantAssets(
+          null,
+          [],
+          this.crop.attributes.name
+        );
+        this.plantList = plantValues;
+        this.unitList = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        if (this.unitList.length == 1) this.unit = this.unitList[0];
       } else {
         this.plantList = [];
       }
