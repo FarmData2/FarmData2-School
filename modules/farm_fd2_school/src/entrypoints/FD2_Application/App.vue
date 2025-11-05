@@ -189,6 +189,7 @@ export default {
   },
   watch: {
     async crop() {
+      this.unit = null;
       if (this.crop) {
         const plantsResponse = await farmosUtil.getPlantAssets(
           null,
@@ -199,6 +200,7 @@ export default {
         this.unitList = await farmosUtil.getHarvestUnits(
           this.crop.attributes.name
         );
+        if (this.unitList.length == 1) this.unit = this.unitList[0];
       } else {
         this.plantList = [];
         this.unitList = [];
