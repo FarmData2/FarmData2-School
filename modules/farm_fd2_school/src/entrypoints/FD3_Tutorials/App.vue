@@ -4,6 +4,7 @@
     data-cy="FD3"
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
+    <DateInput />
 
     <label
       for="harvest-date"
@@ -131,7 +132,10 @@
 
 <script>
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
+import DateInput from '@comps/DateInput/DateInput.vue';
+
 export default {
+  components: { DateInput },
   data() {
     return {
       date: '2019-06-15',
