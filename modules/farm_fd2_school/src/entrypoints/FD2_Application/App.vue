@@ -183,6 +183,7 @@ export default {
   watch: {
     async crop() {
       this.pickedPlant = null;
+      this.unit = null;
       if (this.crop) {
         const plants = await farmosUtil.getPlantAssets(
           null,
@@ -194,8 +195,17 @@ export default {
         } else {
           this.plantList = [];
         }
+        const units = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        if (Array.isArray(units)) {
+          this.unitList = units;
+        } else {
+          this.unitList = [];
+        }
       } else {
         this.plantList = [];
+        this.unitList = [];
       }
     },
   },
