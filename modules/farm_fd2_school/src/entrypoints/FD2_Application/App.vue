@@ -141,11 +141,7 @@ export default {
       comment: '',
       cropList: [],
       plantList: [],
-      unitList: [
-        { id: 1, attributes: { name: 'BUNCH' } },
-        { id: 2, attributes: { name: 'EACH' } },
-        { id: 3, attributes: { name: 'POUND' } },
-      ],
+      unitList: [],
     };
   },
   computed: {
@@ -187,6 +183,8 @@ export default {
   watch: {
     async crop() {
       this.pickedPlant = null;
+      this.unit = null;
+
       if (this.crop) {
         const plants = await farmosUtil.getPlantAssets(
           null,
@@ -198,8 +196,17 @@ export default {
         } else {
           this.plantList = [];
         }
+        const units = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        if (Array.isArray(units)) {
+          this.unitList = units;
+        } else {
+          this.unitList = [];
+        }
       } else {
         this.plantList = [];
+        this.unitList = [];
       }
     },
   },
