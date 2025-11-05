@@ -4,7 +4,7 @@
     data-cy="FD3"
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
-    <DateInput />
+    <DateInput v-bind:initDate="date" />
 
     <br />
     <label
