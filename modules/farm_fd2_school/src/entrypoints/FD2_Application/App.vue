@@ -200,6 +200,7 @@ export default {
           this.crop.attributes.name
         );
         const unitsArray = await farmosUtil.getHarvestUnits(cropName);
+        console.log(unitsArray);
         if (Array.isArray(plantsArray)) {
           this.plantList = plantsArray;
         } else {
@@ -207,6 +208,12 @@ export default {
         }
         if (Array.isArray(unitsArray)) {
           this.unitList = unitsArray;
+
+          if (unitsArray.length === 1) {
+            this.unit = unitsArray[0];
+          } else {
+            this.unit = null;
+          }
         } else {
           this.plantList = [];
         }
