@@ -16,10 +16,16 @@
 export default {
   name: 'DateInput',
   props: ['initDate'],
+  emits: ['date-changed'],
   data() {
     return {
       pickedDate: this.initDate,
     };
+  },
+  watch: {
+    pickedDate() {
+      this.$emit('date-changed', this.pickedDate);
+    },
   },
 };
 </script>
