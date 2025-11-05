@@ -11,5 +11,15 @@
     v-model="date"
   />
 </template>
-<script></script>
+<script>
+export default {
+  name: 'DateInput',
+  props: ['initDate'],
+  data() {
+    return {
+      pickedDate: this.initDate,
+    };
+  },
+};
+</script>
 <style scoped></style>
