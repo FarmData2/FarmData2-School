@@ -171,13 +171,34 @@ export default {
     },
     async submitForm() {
       console.log('Submitting form.');
-      const quantity = await farmosUtil.createStandardQuantity(
-        'weight',
-        this.quantity,
-        'harvest',
-        this.unit.attributes.name
-      );
-      console.log(quantity);
+      try {
+        const quantity = await farmosUtil.createStandardQuantity(
+          'weight',
+          this.quantity,
+          'harvest',
+          this.unit.attributes.name
+        );
+        console.log(quantity);
+        console.log('Fetching plant asset:', this.pickedPlant.uuid);
+        const plantAsset = await farmosUtil.getPlantAsset(
+          this.pickedPlant.uuid
+        );
+        console.log('Fetched plant asset:', plantAsset);
+
+        console.log('Creating harvest log..');
+        const harvestLog = await farmosUtil.createHarvestLog(
+          plantAsset,
+          quantity,
+          this.date,
+          this.comment
+        );
+
+        console.log('Harvest log created:', harvestLog);
+
+        this.resetForm();
+      } catch (error) {
+        console.error('Error:', error);
+      }
     },
   },
   watch: {
