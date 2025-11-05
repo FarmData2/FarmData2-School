@@ -141,11 +141,7 @@ export default {
       comment: '',
       cropList: [],
       plantList: [],
-      unitList: [
-        { id: 1, attributes: { name: 'BUNCH' } },
-        { id: 2, attributes: { name: 'EACH' } },
-        { id: 3, attributes: { name: 'POUND' } },
-      ],
+      unitList: [],
     };
   },
   computed: {
@@ -186,12 +182,13 @@ export default {
   },
   watch: {
     async crop() {
+      this.pickedPlant = null;
       if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
+        const plants = await farmosUtil.getPlantAssets(
+          null,
+          [],
+          this.crop.attributes.name
+        );
         if (Array.isArray(plants)) {
           this.plantList = plants;
         } else {
