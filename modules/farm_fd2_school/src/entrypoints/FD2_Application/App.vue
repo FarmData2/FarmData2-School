@@ -187,11 +187,19 @@ export default {
   watch: {
     async crop() {
       if (this.crop) {
-        const URL =
-          'http://farmos/api/fd2_plant_assets?crop=' +
-          this.crop.attributes.name;
-        const plantsResponse = await fetch(URL);
-        const plants = await plantsResponse.json();
+        const plants = await farmosUtil.getPlantAssets(
+          null,
+          [],
+          this.crop.attributes.name,
+          true,
+          false
+        );
+
+        const units = await farmosUtil.getHarvestUnits(
+          this.crop.attributes.name
+        );
+        this.unitList = units;
+
         if (Array.isArray(plants)) {
           this.plantList = plants;
         } else {
