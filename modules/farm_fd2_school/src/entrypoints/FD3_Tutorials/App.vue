@@ -5,7 +5,10 @@
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
-    <DateInput2 v-bind:initDate="date" />
+    <DateInput2
+      v-bind:initDate="date"
+      v-on:date-changed="date = $event"
+    />
     <br />
     <label
       for="harvest-crop"
