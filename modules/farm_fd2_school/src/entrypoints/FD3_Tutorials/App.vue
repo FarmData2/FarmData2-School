@@ -5,7 +5,7 @@
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
-    <DateInput2 />
+    <DateInput2 v-bind:initDate="date" />
     <br />
     <label
       for="harvest-crop"
