@@ -5,6 +5,8 @@
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
+    <DateInput2 />
+
     <label
       for="harvest-date"
       class="label-margin"
@@ -130,8 +132,12 @@
 </template>
 
 <script>
+import DateInput2 from '@comps/DateInput2/DateInput2.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
+  components: {
+    DateInput2,
+  },
   data() {
     return {
       date: '2019-06-15',
