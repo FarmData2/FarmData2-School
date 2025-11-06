@@ -6,17 +6,6 @@
     <div id="harvest-header"><h1>Harvest</h1></div>
 
     <DateInput2 />
-
-    <label
-      for="harvest-date"
-      class="label-margin"
-      >Date:</label
-    >
-    <input
-      type="date"
-      id="harvest-date"
-      v-model="date"
-    />
     <br />
     <label
       for="harvest-crop"
