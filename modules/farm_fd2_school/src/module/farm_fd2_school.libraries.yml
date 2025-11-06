@@ -107,3 +107,23 @@ FD3_Tutorials:
   css:
     component:
       style/style.css: {}
+
+FD3_Activity:
+  js:
+    FD3_Activity/FD3_Activity.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD3_Application:
+  js:
+    FD3_Application/FD3_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
