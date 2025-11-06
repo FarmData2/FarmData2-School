@@ -181,7 +181,10 @@ export default {
         'harvest',
         this.unit.attributes.name
       );
+      const pickedPlant = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
+
       console.log(quantity);
+      console.log(pickedPlant);
     },
   },
   watch: {
