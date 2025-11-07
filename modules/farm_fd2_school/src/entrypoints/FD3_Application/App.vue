@@ -72,10 +72,7 @@
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
 
-      <CommentBox
-        data-cy="harvest-comment"
-        v-model:comment="comment"
-      />
+      <CommentBox v-model:comment="comment" />
     </div>
     <div
       id="harvest-no-plants"
@@ -213,33 +210,12 @@ export default {
   margin-right: 10px;
 }
 
-#harvest-date,
-#harvest-comment {
-  margin-bottom: 10px;
-}
-
 #harvest-table,
 #harvest-table-header {
   border: 2px solid black;
   width: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#harvest-submit {
-  width: 250px;
-  background: blue;
-  border: 10px blue;
-  color: white;
-  font-weight: bold;
-}
-
-#harvest-reset {
-  width: 120px;
-  background: orange;
-  border: 10px orange;
-  color: black;
-  font-weight: bold;
 }
 
 tr th {
