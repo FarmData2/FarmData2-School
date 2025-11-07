@@ -9,5 +9,9 @@ describe('FD2-Tutorial - A First Test', () => {
     cy.get('[data-cy="nice-job-message"]')
       .should('be.visible')
       .should('contain.text', 'Nice job!');
+    cy.get('[data-cy="cancel-button"]').should('not.exist');
+    cy.get('[data-cy="new-item-input"]').should('not.exist');
+    cy.get('[data-cy="high-priority-checkbox"]').should('not.exist');
+    cy.get('[data-cy="save-item-button"]').should('not.exist');
   });
 });
