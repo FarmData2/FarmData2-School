@@ -20,6 +20,13 @@ if [ "$local_head" != "$upstream_head" ]; then
   exit 255
 fi
 
+git_status=$(git status --short)
+if [ "$git_status" != "" ]; then
+  echo "Please be sure you are running from the latest development branch."
+  echo "Stash any changes you have made, confirm the bug still exits and try again."
+  exit 255
+fi
+
 echo ""
 echo "Copy the following information into the bug report under \"bugInfo.bash output\":"
 
@@ -35,11 +42,6 @@ echo ""
 echo "git log -1 | head -3"
 echo "--------------------"
 git log -1 | head -3
-
-echo ""
-echo "git status"
-echo "----------"
-git status
 
 echo ""
 echo "cat ~/FarmData2/.fd2dev/db.conf"
