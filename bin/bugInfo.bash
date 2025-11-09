@@ -23,7 +23,7 @@ fi
 git_status=$(git status --short)
 if [ "$git_status" != "" ]; then
   echo "Please be sure you are running from the latest development branch."
-  echo "Stash any changes you have made, confirm the bug still exits and try again."
+  echo "Stash or restore any local changes you have made, confirm the bug still exits and try again."
   exit 255
 fi
 
