@@ -11,7 +11,7 @@
       v-model:date="date"
     />
     <br />
-    <label
+    <!-- <label
       for="harvest-crop"
       class="label-margin"
     >
@@ -28,7 +28,20 @@
       >
         {{ crop.attributes.name }}
       </option>
-    </select>
+    </select> -->
+
+    <CropSelector
+      v-bind:required="true"
+      v-bind:showValidityStyling="validity.showStyling"
+      v-model:selected="form.crop"
+      v-on:valid="
+        (valid) => {
+          validity.crop = valid;
+        }
+      "
+      v-on:ready="createdCount++"
+      v-on:error="(msg) => showErrorToast('Network Error', msg)"
+    />
 
     <hr />
 
@@ -160,6 +173,7 @@
 </template>
 
 <script>
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
@@ -171,11 +185,12 @@ export default {
     CommentBox,
     SubmitResetButtons,
     NumericInput,
+    CropSelector,
   },
   data() {
     return {
       date: '2019-06-15',
-      crop: null,
+      crop: '',
       pickedPlant: null,
       quantity: 1,
       unit: null,
@@ -187,11 +202,13 @@ export default {
       form: {
         comment: null,
         count: 1,
+        crop: null,
       },
       validity: {
         comment: true,
         showStyling: false,
         count: true,
+        crop: false,
       },
     };
   },
