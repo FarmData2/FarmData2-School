@@ -11,24 +11,6 @@
       v-model:date="date"
     />
     <br />
-    <!-- <label
-      for="harvest-crop"
-      class="label-margin"
-    >
-      Crop:
-    </label>
-    <select
-      id="harvest-crop"
-      v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select> -->
 
     <CropSelector
       v-bind:required="true"
@@ -74,19 +56,6 @@
         </tr>
       </table>
 
-      <!-- <label
-        for="harvest-quantity"
-        class="label-margin"
-        >Quantity:</label
-      >
-      <input
-        type="number"
-        id="harvest-quantity"
-        min="1"
-        size="7"
-        class="label-margin"
-        v-model="quantity"
-      /> -->
       <select
         id="harvest-units"
         v-model="unit"
@@ -119,13 +88,6 @@
         v-on:ready="createdCount++"
       />
 
-      <!-- <textarea
-        id="harvest-comment"
-        rows="5"
-        cols="35"
-        placeholder="Enter a comment..."
-        v-model.trim.lazy="comment"
-      /> -->
       <CommentBox
         id="comment-box"
         data-cy="comment-box"
@@ -145,20 +107,6 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <!-- <input
-      type="button"
-      id="harvest-submit"
-      value="Submit"
-      class="label-margin"
-      v-bind:disabled="!formValid"
-      v-on:click="submitForm"
-    />
-    <input
-      type="button"
-      id="harvest-reset"
-      value="Reset"
-      v-on:click="resetForm"
-    /> -->
 
     <SubmitResetButtons
       v-bind:enableSubmit="enableSubmit"
