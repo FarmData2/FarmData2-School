@@ -89,14 +89,6 @@
       </select>
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
-
-      <!-- <textarea
-        id="harvest-comment"
-        rows="5"
-        cols="35"
-        placeholder="Enter a comment..."
-        v-model.trim.lazy="comment"
-      /> -->
       <CommentBox v-model="comment" />
     </div>
     <div
@@ -106,7 +98,7 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <input
+    <!-- <input
       type="button"
       id="harvest-submit"
       value="Submit"
@@ -114,11 +106,21 @@
       v-bind:disabled="!formValid"
       v-on:click="submitForm"
     />
+
+
+    
     <input
       type="button"
       id="harvest-reset"
       value="Reset"
       v-on:click="resetForm"
+    /> -->
+
+    <SubmitResetButtons
+      v-bind:enableSubmit="formValid"
+      v-on:submit="submitForm"
+      v-bind:enableReset="true"
+      v-on:reset="resetForm"
     />
 
     <hr />
@@ -128,11 +130,13 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
     CommentBox,
+    SubmitResetButtons,
   },
   data() {
     return {
@@ -145,6 +149,7 @@ export default {
       cropList: [],
       plantList: [],
       unitList: [],
+      createdCount: 0,
     };
   },
   computed: {
@@ -164,14 +169,6 @@ export default {
     },
   },
   methods: {
-    resetForm() {
-      this.date = '2019-06-15';
-      this.crop = null;
-      this.pickedPlant = null;
-      this.quantity = 1;
-      this.unit = null;
-      this.comment = '';
-    },
     async submitForm() {
       let measure = '';
       if (this.unit.relationships.parent.length > 0) {
