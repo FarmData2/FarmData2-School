@@ -118,9 +118,9 @@
 
     <SubmitResetButtons
       v-bind:enableSubmit="formValid"
-      v-on:submit="submitForm"
+      v-on:submit="submitForm()"
       v-bind:enableReset="true"
-      v-on:reset="resetForm"
+      v-on:reset="resetForm()"
     />
 
     <hr />
@@ -169,7 +169,16 @@ export default {
     },
   },
   methods: {
+    resetForm() {
+      this.date = '2019-06-15';
+      this.crop = null;
+      this.pickedPlant = null;
+      this.quantity = 1;
+      this.unit = null;
+      this.comment = '';
+    },
     async submitForm() {
+      console.log('App: submitForm() called');
       let measure = '';
       if (this.unit.relationships.parent.length > 0) {
         const unitMap = await farmosUtil.getUnitIdToTermMap();

@@ -118,12 +118,15 @@ export default {
       /**
        * The submit button has been clicked.
        */
+      console.log('Component: submit() called');
       this.$emit('submit', this.submitEnabled);
     },
     reset() {
       /**
        * The reset button has been clicked.
        */
+      console.log('Component: reset() called');
+
       this.$emit('reset', this.resetEnabled);
     },
   },
