@@ -61,7 +61,7 @@
         </tr>
       </table>
 
-      <label
+      <!-- <label
         for="harvest-quantity"
         class="label-margin"
         >Quantity:</label
@@ -73,7 +73,7 @@
         size="7"
         class="label-margin"
         v-model="quantity"
-      />
+      /> -->
       <select
         id="harvest-units"
         v-model="unit"
@@ -89,6 +89,22 @@
       </select>
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
+
+      <NumericInput
+        label="Count"
+        invalidFeedbackText="A positive integer is required."
+        v-bind:required="true"
+        v-bind:incDecValues="[1, 10, 100]"
+        v-bind:minValue="1"
+        v-model:value="form.count"
+        v-bind:showValidityStyling="validity.showStyling"
+        v-on:valid="
+          (valid) => {
+            validity.count = valid;
+          }
+        "
+        v-on:ready="createdCount++"
+      />
 
       <!-- <textarea
         id="harvest-comment"
@@ -144,6 +160,7 @@
 </template>
 
 <script>
+import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
@@ -153,6 +170,7 @@ export default {
     DateSelector,
     CommentBox,
     SubmitResetButtons,
+    NumericInput,
   },
   data() {
     return {
@@ -168,9 +186,12 @@ export default {
       createdCount: 0,
       form: {
         comment: null,
+        count: 1,
       },
       validity: {
         comment: true,
+        showStyling: false,
+        count: true,
       },
     };
   },
