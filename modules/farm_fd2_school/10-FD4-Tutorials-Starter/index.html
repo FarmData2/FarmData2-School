@@ -16,6 +16,7 @@
           v-if="editing"
           v-on:click="doEdit(false)"
           class="btn btn-cancel"
+          data-cy="cancel-button"
         >
           Cancel
         </button>
@@ -37,12 +38,14 @@
           v-model="newItem"
           type="text"
           placeholder="Add an item"
+          data-cy="new-item-input"
         />
         <label>
           <input
             type="checkbox"
             v-bind:disabled="!newItemValid"
             v-model="newItemHighPriority"
+            data-cy="high-priority-checkbox"
           />
           High Priority
         </label>
@@ -50,6 +53,7 @@
           v-bind:disabled="!newItemValid"
           v-on:click="saveItem"
           class="btn btn-primary"
+          data-cy="save-item-button"
         >
           Save Item
         </button>
