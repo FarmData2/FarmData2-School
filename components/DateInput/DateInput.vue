@@ -1,4 +1,4 @@
-<!-- <template>
+<template>
   <label
     for="harvest-date"
     class="label-margin"
@@ -29,4 +29,4 @@ export default {
 };
 </script>
 
-<style scoped></style> -->
+<style scoped></style>

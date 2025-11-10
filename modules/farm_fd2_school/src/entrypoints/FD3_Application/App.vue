@@ -116,7 +116,7 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <input
+    <!-- <input
       type="button"
       id="harvest-submit"
       value="Submit"
@@ -129,6 +129,14 @@
       id="harvest-reset"
       value="Reset"
       v-on:click="resetForm"
+    /> -->
+
+    <SubmitResetButtons
+      v-bind:enableSubmit="enableSubmit"
+      v-bind:enableReset="enableReset"
+      v-on:submit="submit()"
+      v-on:reset="reset()"
+      v-on:ready="createdCount++"
     />
 
     <hr />
@@ -137,12 +145,14 @@
 
 <script>
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
     CommentBox,
+    SubmitResetButtons,
   },
   data() {
     return {
