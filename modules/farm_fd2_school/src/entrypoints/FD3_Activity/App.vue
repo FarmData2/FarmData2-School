@@ -5,14 +5,25 @@
   >
     <div id="harvest-header"><h1>Harvest</h1></div>
 
-    <DateInput v-model:date="date" />
+    <!-- <DateInput v-model:date="date" />
     <br />
     <label
       for="harvest-crop"
       class="label-margin"
     >
       Crop:
-    </label>
+    </label> -->
+    <DateSelector
+      v-bind:required="true"
+      v-model:date="form.date"
+      v-bind:showValidityStyling="validity.showStyling"
+      v-on:valid="
+        (valid) => {
+          validity.date = valid;
+        }
+      "
+      v-on:ready="createdCount++"
+    />
     <select
       id="harvest-crop"
       v-model="crop"
@@ -125,6 +136,7 @@ import DateInput from '@comps/DateInput/DateInput.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
+    // eslint-disable-next-line vue/no-unused-components
     DateInput,
   },
   data() {
