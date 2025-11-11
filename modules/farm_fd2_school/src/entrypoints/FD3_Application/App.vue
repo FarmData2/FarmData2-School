@@ -61,19 +61,22 @@
         </tr>
       </table>
 
-      <label
-        for="harvest-quantity"
-        class="label-margin"
-        >Quantity:</label
-      >
-      <input
-        type="number"
-        id="harvest-quantity"
-        min="1"
-        size="7"
-        class="label-margin"
-        v-model="quantity"
+      <NumericInput
+        label="Quantity"
+        invalidFeedbackText="A positive integer is required."
+        v-bind:required="true"
+        v-bind:incDecValues="[1, 5]"
+        v-bind:minValue="1"
+        v-model:value="quantity"
+        v-bind:showValidityStyling="true"
+        v-on:valid="
+          (valid) => {
+            validity.quantity = valid;
+          }
+        "
+        v-on:ready="createdCount++"
       />
+
       <select
         id="harvest-units"
         v-model="unit"
@@ -126,11 +129,13 @@ import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+import NumericInput from '@comps/NumericInput/NumericInput.vue';
 export default {
   components: {
     DateSelector,
     CommentBox,
     SubmitResetButtons,
+    NumericInput,
   },
   data() {
     return {
@@ -146,6 +151,7 @@ export default {
       createdCount: 0,
       validity: {
         comment: true,
+        quantity: true,
       },
     };
   },
