@@ -90,12 +90,16 @@
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
 
-      <textarea
+      <CommentBox
         id="harvest-comment"
-        rows="5"
-        cols="35"
-        placeholder="Enter a comment..."
-        v-model.trim.lazy="comment"
+        data-cy="comment-box"
+        v-model:comment="comment"
+        v-on:valid="
+          (valid) => {
+            validity.comment = valid;
+          }
+        "
+        v-on:ready="createdCount++"
       />
     </div>
     <div
@@ -127,9 +131,11 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
+import CommentBox from '@comps/CommentBox/CommentBox.vue';
 export default {
   components: {
     DateSelector,
+    CommentBox,
   },
   data() {
     return {
@@ -142,6 +148,10 @@ export default {
       cropList: [],
       plantList: [],
       unitList: [],
+      createdCount: 0,
+      validity: {
+        comment: true,
+      },
     };
   },
   computed: {
