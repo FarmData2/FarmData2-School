@@ -66,13 +66,20 @@
         class="label-margin"
         >Quantity:</label
       >
-      <input
-        type="number"
-        id="harvest-quantity"
-        min="1"
-        size="7"
-        class="label-margin"
-        v-model="quantity"
+      <NumericInput
+        label="Count"
+        invalidFeedbackText="A positive integer is required."
+        v-bind:required="true"
+        v-bind:incDecValues="[1, 10, 100]"
+        v-bind:minValue="1"
+        v-model:value="form.count"
+        v-bind:showValidityStyling="validity.showStyling"
+        v-on:valid="
+          (valid) => {
+            validity.count = valid;
+          }
+        "
+        v-on:ready="createdCount++"
       />
       <select
         id="harvest-units"
@@ -109,19 +116,12 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <input
-      type="button"
-      id="harvest-submit"
-      value="Submit"
-      class="label-margin"
-      v-bind:disabled="!formValid"
-      v-on:click="submitForm"
-    />
-    <input
-      type="button"
-      id="harvest-reset"
-      value="Reset"
-      v-on:click="resetForm"
+    <SubmitResetButtons
+      v-bind:enableSubmit="enableSubmit"
+      v-bind:enableReset="enableReset"
+      v-on:submit="submit()"
+      v-on:reset="reset()"
+      v-on:ready="createdCount++"
     />
 
     <hr />
@@ -131,11 +131,15 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
     CommentBox,
+    SubmitResetButtons,
+    NumericInput,
   },
   data() {
     return {
@@ -156,6 +160,8 @@ export default {
       validity: {
         comment: true,
       },
+      enableSubmit: true, // Submit/Reset buttons
+      enableReset: true,
     };
   },
   computed: {
@@ -175,7 +181,7 @@ export default {
     },
   },
   methods: {
-    resetForm() {
+    reset() {
       this.date = '2019-06-15';
       this.crop = null;
       this.pickedPlant = null;
@@ -183,7 +189,7 @@ export default {
       this.unit = null;
       this.comment = '';
     },
-    async submitForm() {
+    async submit() {
       let measure = '';
       if (this.unit.relationships.parent.length > 0) {
         const unitMap = await farmosUtil.getUnitIdToTermMap();
