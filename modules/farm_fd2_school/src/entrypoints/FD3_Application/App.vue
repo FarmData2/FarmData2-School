@@ -103,19 +103,11 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <input
-      type="button"
-      id="harvest-submit"
-      value="Submit"
-      class="label-margin"
-      v-bind:disabled="!formValid"
-      v-on:click="submitForm"
-    />
-    <input
-      type="button"
-      id="harvest-reset"
-      value="Reset"
-      v-on:click="resetForm"
+    <SubmitResetButtons
+      v-bind:enableSubmit="formValid"
+      v-bind:enableReset="true"
+      v-on:submit="submitForm"
+      v-on:reset="resetForm"
     />
 
     <hr />
@@ -125,12 +117,14 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 
 export default {
   components: {
     DateSelector,
     CommentBox,
+    SubmitResetButtons,
   },
   data() {
     return {
@@ -252,22 +246,6 @@ export default {
   width: auto;
   margin-top: 10px;
   margin-bottom: 10px;
-}
-
-#harvest-submit {
-  width: 250px;
-  background: blue;
-  border: 10px blue;
-  color: white;
-  font-weight: bold;
-}
-
-#harvest-reset {
-  width: 120px;
-  background: orange;
-  border: 10px orange;
-  color: black;
-  font-weight: bold;
 }
 
 tr th {
