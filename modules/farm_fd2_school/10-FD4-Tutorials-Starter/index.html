@@ -20,6 +20,7 @@
           Cancel
         </button>
         <button
+          data-cy="add-item-button"
           v-else
           v-on:click="doEdit(true)"
           class="btn btn-primary"
@@ -53,7 +54,12 @@
           Save Item
         </button>
       </div>
-      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
+      <p
+        v-if="items.length === 0"
+        data-cy="nice-job-message"
+      >
+        Nice job! You've bought all your items!
+      </p>
       <ul>
         <li
           v-for="item in sortedItems"
