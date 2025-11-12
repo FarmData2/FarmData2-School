@@ -11,7 +11,7 @@
   <body>
     <div id="shopping-list">
       <div class="header">
-        <h1>{{header || 'Welcome'}}</h1>
+        <h1 data-cy="app-heading">{{header || 'Welcome'}}</h1>
         <button
           v-if="editing"
           v-on:click="doEdit(false)"
