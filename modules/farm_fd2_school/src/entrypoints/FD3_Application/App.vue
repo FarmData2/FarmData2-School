@@ -89,15 +89,13 @@
       </select>
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
-
-      <textarea
+      <CommentBox
         id="harvest-comment"
-        rows="5"
-        cols="35"
-        placeholder="Enter a comment..."
-        v-model.trim.lazy="comment"
+        data-cy="harvest-comment"
+        v-model:comment="comment"
       />
     </div>
+
     <div
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
@@ -126,10 +124,13 @@
 
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
+import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
+
 export default {
   components: {
     DateSelector,
+    CommentBox,
   },
   data() {
     return {
@@ -230,7 +231,6 @@ export default {
 </script>
 
 <style>
-/* import some styling that applies to all FD2 entry points */
 @import url('@css/fd2-mobile.css');
 
 #harvest-header {
