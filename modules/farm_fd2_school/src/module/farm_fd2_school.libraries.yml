@@ -140,7 +140,7 @@ FD4_Application:
 
 OSS1:
   js:
-    OSS1_Application/OSS1_Application.js:
+    OSS1/OSS1.js:
       preprocess: false
       minified: true
       attributes: { type: 'module' }
