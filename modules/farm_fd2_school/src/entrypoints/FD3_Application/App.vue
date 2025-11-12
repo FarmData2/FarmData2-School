@@ -11,25 +11,18 @@
       v-model:date="date"
     />
     <br />
-    <label
-      for="harvest-crop"
-      class="label-margin"
-    >
-      Crop:
-    </label>
-    <select
-      id="harvest-crop"
-      v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select>
-
+    <CropSelector
+      v-bind:required="true"
+      v-bind:showValidityStyling="validity.showStyling"
+      v-model:selected="crop"
+      v-on:valid="
+        (valid) => {
+          validity.count = valid;
+        }
+      "
+      v-on:ready="count++"
+      v-on:error="(msg) => showErrorToast('Network Error', msg)"
+    />
     <hr />
 
     <div
@@ -61,18 +54,20 @@
         </tr>
       </table>
 
-      <label
-        for="harvest-quantity"
-        class="label-margin"
-        >Quantity:</label
-      >
-      <input
-        type="number"
-        id="harvest-quantity"
-        min="1"
-        size="7"
-        class="label-margin"
-        v-model="quantity"
+      <NumericInput
+        label="Quantity"
+        invalidFeedbackText="Positive number required."
+        v-bind:required="true"
+        v-bind:inDecValues="[1, 5]"
+        v-bind:minValue="1"
+        v-model:value="Quantity"
+        v-bind:showValidityStyling="validity.showValidityStyling"
+        v-on:ready="count++"
+        v-on:valid="
+          (valid) => {
+            validity.count = valid;
+          }
+        "
       />
       <select
         id="harvest-units"
@@ -90,34 +85,26 @@
       <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
 
-      <textarea
+      <CommentBox
         id="harvest-comment"
-        rows="5"
-        cols="35"
-        placeholder="Enter a comment..."
-        v-model.trim.lazy="comment"
+        data-cy="comment-box"
+        v-model:comment="comment"
+        v-on:ready="count++"
       />
     </div>
     <div
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop }} plants available for harvest.
     </div>
     <br />
-    <input
-      type="button"
-      id="harvest-submit"
-      value="Submit"
-      class="label-margin"
-      v-bind:disabled="!formValid"
-      v-on:click="submitForm"
-    />
-    <input
-      type="button"
-      id="harvest-reset"
-      value="Reset"
-      v-on:click="resetForm"
+    <SubmitResetButtons
+      v-bind:enableSubmit="formValid"
+      v-bind:enableReset="true"
+      v-on:submit="submitForm()"
+      v-on:reset="resetForm()"
+      v-on:ready="count++"
     />
 
     <hr />
@@ -126,10 +113,18 @@
 
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
+import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+import NumericInput from '@comps/NumericInput/NumericInput.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateSelector,
+    CommentBox,
+    SubmitResetButtons,
+    NumericInput,
+    CropSelector,
   },
   data() {
     return {
@@ -142,6 +137,12 @@ export default {
       cropList: [],
       plantList: [],
       unitList: [],
+      count: 0,
+      validity: {
+        comment: true,
+        quantity: true,
+        crop: true,
+      },
     };
   },
   computed: {
@@ -202,14 +203,12 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name,
+          this.crop,
           false,
           true
         );
 
-        const units = await farmosUtil.getHarvestUnits(
-          this.crop.attributes.name
-        );
+        const units = await farmosUtil.getHarvestUnits(this.crop);
         this.unitList = units;
         if (this.unitList.length == 1) {
           this.unit = this.unitList[0];

@@ -6,6 +6,10 @@
     <div id="harvest-header"><h1>Harvest</h1></div>
 
     <DateInput v-model:date="date" />
+    <DateSelector
+      v-model:date="date"
+      v-bind:required="true"
+    />
     <br />
     <label
       for="harvest-crop"
@@ -122,10 +126,12 @@
 
 <script>
 import DateInput from '@comps/DateInput/DateInput.vue';
+import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
     DateInput,
+    DateSelector,
   },
   data() {
     return {
