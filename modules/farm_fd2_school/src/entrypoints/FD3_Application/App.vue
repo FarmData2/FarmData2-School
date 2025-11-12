@@ -14,21 +14,12 @@
     <label
       for="harvest-crop"
       class="label-margin"
-    >
-      Crop:
-    </label>
-    <select
-      id="harvest-crop"
-      v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select>
+    ></label>
+    <CropSelector
+      v-bind:required="true"
+      v-bind:showValidityStyling="true"
+      v-model:selected="crop"
+    />
 
     <hr />
 
@@ -77,7 +68,7 @@
       <select
         id="harvest-units"
         v-model="unit"
-        v-if="this.unitList.length > 1"
+        v-if="unitList.length > 1"
       >
         <option
           v-for="unit in unitList"
@@ -87,7 +78,7 @@
           {{ unit.attributes.name }}
         </option>
       </select>
-      <span v-if="this.unitList.length === 1">{{ unit.attributes.name }}</span>
+      <span v-if="unitList.length === 1">{{ unit.attributes.name }}</span>
       <hr />
       <CommentBox
         id="harvest-comment"
@@ -100,7 +91,7 @@
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop }} plants available for harvest.
     </div>
     <br />
     <SubmitResetButtons
@@ -118,6 +109,7 @@
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 
 export default {
@@ -125,6 +117,7 @@ export default {
     DateSelector,
     CommentBox,
     SubmitResetButtons,
+    CropSelector,
   },
   data() {
     return {
@@ -134,7 +127,6 @@ export default {
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [],
       plantList: [],
       unitList: [],
     };
@@ -142,11 +134,11 @@ export default {
   computed: {
     formValid() {
       return (
-        this.date != '' &&
-        this.crop != null &&
-        this.pickedPlant != null &&
+        this.date !== '' &&
+        this.crop !== null &&
+        this.pickedPlant !== null &&
         this.quantity > 0 &&
-        this.unit != null
+        this.unit !== null
       );
     },
     sortedPlantList() {
@@ -163,6 +155,8 @@ export default {
       this.quantity = 1;
       this.unit = null;
       this.comment = '';
+      this.plantList = [];
+      this.unitList = [];
     },
     async submitForm() {
       let measure = '';
@@ -197,16 +191,14 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name,
+          this.crop,
           false,
           true
         );
 
-        const units = await farmosUtil.getHarvestUnits(
-          this.crop.attributes.name
-        );
+        const units = await farmosUtil.getHarvestUnits(this.crop);
         this.unitList = units;
-        if (this.unitList.length == 1) {
+        if (this.unitList.length === 1) {
           this.unit = this.unitList[0];
         } else {
           this.unit = null;
@@ -216,10 +208,6 @@ export default {
         this.unitList = [];
       }
     },
-  },
-  async created() {
-    const cropsArray = await farmosUtil.getCrops();
-    this.cropList = cropsArray;
   },
 };
 </script>
