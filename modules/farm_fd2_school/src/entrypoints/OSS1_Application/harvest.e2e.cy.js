@@ -4,9 +4,7 @@ describe('Tests for the Harvest form', () => {
     cy.restoreSessionStorage();
 
     cy.login('manager1', 'farmdata2');
-    // Note: The URL has changed from the starter code to visit
-    //       the solution page rather than the starter page.
-    cy.visit('fd2_school/FD4_Application_Soln');
+    cy.visit('fd2_school/OSS1');
   });
 
   afterEach(() => {
