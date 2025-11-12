@@ -13,6 +13,7 @@
       <div class="header">
         <h1 data-cy="app-heading">{{header || 'Welcome'}}</h1>
         <button
+          data-cy="cancel-button"
           v-if="editing"
           v-on:click="doEdit(false)"
           class="btn btn-cancel"
@@ -33,6 +34,7 @@
         class="add-item-form"
       >
         <input
+          data-cy="new-item-input"
           v-on:keyup.enter="saveItem"
           v-model="newItem"
           type="text"
@@ -40,6 +42,7 @@
         />
         <label>
           <input
+            data-cy="high-priority-checkbox"
             type="checkbox"
             v-bind:disabled="!newItemValid"
             v-model="newItemHighPriority"
@@ -47,6 +50,7 @@
           High Priority
         </label>
         <button
+          data-cy="save-item-button"
           v-bind:disabled="!newItemValid"
           v-on:click="saveItem"
           class="btn btn-primary"
