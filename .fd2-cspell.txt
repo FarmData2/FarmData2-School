@@ -71,6 +71,7 @@ shellcheck
 shfmt
 shinepukur
 Siddiqui
+Soln
 Steiman
 timonwong
 toplevel

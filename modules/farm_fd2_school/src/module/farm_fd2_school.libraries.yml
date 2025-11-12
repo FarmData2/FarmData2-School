@@ -127,3 +127,13 @@ FD3_Application:
   css:
     component:
       style/style.css: {}
+
+FD4_Application:
+  js:
+    FD4_Application/FD4_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
