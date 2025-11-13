@@ -6,8 +6,7 @@
   "mounts": [
     "type=bind,source=/var/run/docker.sock,target=/var/run/docker.sock"
   ],
-  "privileged": true,
-  //"onCreateCommand": ".devcontainer/setup.bash",
+  "onCreateCommand": ".devcontainer/setup.bash",
   "forwardPorts": [80, 5901, 6901, 8888],
   "portsAttributes": {
     "80": {
@@ -25,12 +24,11 @@
   },
   "customizations": {
     "vscode": {
-      //"extensions": ["sirmspencer.vscode-autohide"],
+      "extensions": ["sirmspencer.vscode-autohide"],
       "settings": {
         // Hide most of the VSCode UI via settings.
         // Here instead of .vscode/settings.json so that
         // they apply only in the dev container.
-        /*
         "workbench.startupEditor": "none",
         "workbench.activityBar.location": "hidden",
         "workbench.statusBar.visible": false,
@@ -49,7 +47,6 @@
         "terminal.integrated.hideOnStartup": "always",
         "github.codespaces.devcontainerChangedNotificationStyle": "none",
         "autoHide.hideOnOpen": true,
-        */
         "tasks": {
           "version": "2.0.0",
           "tasks": [
@@ -69,64 +66,45 @@
                 "runOn": "folderOpen"
               },
               "presentation": {
-                "reveal": "never"
+                "reveal": "always",
+                "panel": "shared"
               }
             },
             {
               "label": "Open Loading Page",
               "type": "shell",
-              "command": "code -r .devcontainer/fd2_loading.md",
-              "presentation": {
-                "reveal": "never"
-              }
+              "command": "code -r .devcontainer/fd2_loading.md"
             },
             {
               "label": "Customize Welcome Page",
               "type": "shell",
-              "command": "./.devcontainer/homepage.bash",
-              "presentation": {
-                "reveal": "never"
-              }
+              "command": "./.devcontainer/homepage.bash"
             },
             {
               "label": "Run fd2-up.bash Script",
               "type": "shell",
-              "command": "bin/fd2-up.bash",
-              "presentation": {
-                "reveal": "never"
-              }
+              "command": "bin/fd2-up.bash"
             },
             {
               "label": "Open Welcome Page",
               "type": "shell",
-              "command": "code -r .devcontainer/fd2_welcome.md",
-              "presentation": {
-                "reveal": "never"
-              }
+              "command": "code -r .devcontainer/fd2_welcome.md"
             },
             {
               "label": "Start Heartbeat Server",
               "type": "shell",
-              "command": ".devcontainer/startHeartbeat.bash",
-              "presentation": {
-                "reveal": "never"
-              }
+              "command": ".devcontainer/startHeartbeat.bash"
             },
             {
               "label": "Open Running Page",
               "type": "shell",
-              "command": "sleep 300; code -r .devcontainer/fd2_running.md",
-              "presentation": {
-                "reveal": "never",
-                "panel": "new"
-              }
+              "command": "sleep 300; code -r .devcontainer/fd2_running.md"
             },
             {
               "label": "Start Heartbeat Listener",
               "type": "shell",
               "command": "fuser -k 8888/tcp; ncat -lk 8888",
               "presentation": {
-                "reveal": "always",
                 "panel": "new"
               }
             }
