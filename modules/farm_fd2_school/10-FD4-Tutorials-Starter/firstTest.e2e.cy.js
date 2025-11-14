@@ -14,4 +14,16 @@ describe('FD2-Tutorial - A First Test', () => {
     cy.get('[data-cy="high-priority-checkbox"]').should('not.exist');
     cy.get('[data-cy="save-item-button"]').should('not.exist');
   });
+  it('Add Item button shows form', () => {
+    cy.visit('./index.html');
+
+    cy.get('[data-cy="add-item-button"]').click();
+    cy.get('[data-cy="cancel-button"]').should('be.visible');
+    cy.get('[data-cy="new-item-input"]').should('be.visible');
+    cy.get('[data-cy="high-priority-checkbox"]').should('be.visible');
+    cy.get('[data-cy="save-item-button"]')
+      .should('be.visible')
+      .should('not.be.enabled');
+    cy.get('[data-cy="add-item-button"]').should('not.exist');
+  });
 });
