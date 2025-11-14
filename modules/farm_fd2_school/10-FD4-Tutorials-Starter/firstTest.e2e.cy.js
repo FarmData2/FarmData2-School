@@ -5,5 +5,9 @@ describe('FD2-Tutorial - A First Test', () => {
       'have.text',
       'Shopping List Application'
     );
+    cy.get('[data-cy="add-item-button"]').should('be.visible');
+    cy.get('[data-cy="nice-job-message"]')
+      .should('be.visible')
+      .should('contain.text', 'Nice job!');
   });
 });
