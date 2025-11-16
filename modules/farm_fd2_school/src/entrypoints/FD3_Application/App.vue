@@ -120,7 +120,12 @@
       value="Reset"
       v-on:click="resetForm"
     />
-
+    <SubmitResetButtons
+      v-bind:enableSubmit="formValid"
+      v-bind:enableReset="true"
+      v-on:submit="submitForm"
+      v-on:reset="resetForm"
+    />
     <hr />
   </div>
 </template>
@@ -129,11 +134,13 @@
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 import CommentBox from '../../../../../components/CommentBox/CommentBox.vue';
+import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 
 export default {
   components: {
     DateSelector,
     CommentBox,
+    SubmitResetButtons,
   },
   data() {
     return {
