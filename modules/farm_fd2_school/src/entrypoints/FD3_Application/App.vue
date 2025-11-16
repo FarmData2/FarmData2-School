@@ -106,20 +106,6 @@
       There are no {{ crop.attributes.name }} plants available for harvest.
     </div>
     <br />
-    <input
-      type="button"
-      id="harvest-submit"
-      value="Submit"
-      class="label-margin"
-      v-bind:disabled="!formValid"
-      v-on:click="submitForm"
-    />
-    <input
-      type="button"
-      id="harvest-reset"
-      value="Reset"
-      v-on:click="resetForm"
-    />
     <SubmitResetButtons
       v-bind:enableSubmit="formValid"
       v-bind:enableReset="true"
