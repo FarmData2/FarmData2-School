@@ -7,6 +7,7 @@
 
     <DateSelector
       id="harvest-date"
+      data-cy="harvest-date"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:date="date"
@@ -14,6 +15,7 @@
 
     <CropSelector
       id="harvest-crop"
+      data-cy="harvest-crop"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
@@ -26,7 +28,10 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <table id="harvest-table">
+      <table
+        id="harvest-table"
+        data-cy="harvest-table"
+      >
         <tr id="harvest-table-header">
           <th></th>
           <th>Location</th>
@@ -52,6 +57,7 @@
       </table>
 
       <NumericInput
+        data-cy="harvest-quantity"
         label="Quantity"
         v-bind:required="true"
         v-bind:incDecValues="[1, 5]"
@@ -60,6 +66,7 @@
       />
       <select
         id="harvest-units"
+        data-cy="harvest-units"
         v-model="unit"
         v-if="this.unitList.length > 1"
       >
@@ -75,6 +82,7 @@
       <hr />
 
       <CommentBox
+        data-cy="harvest-comment"
         id="harvest-comment"
         v-model:comment="comment"
       />
@@ -87,6 +95,7 @@
     </div>
 
     <SubmitResetButtons
+      data-cy="harvest-buttons"
       v-bind:enableSubmit="formValid"
       v-bind:enableReset="true"
       v-on:submit="submitForm"
