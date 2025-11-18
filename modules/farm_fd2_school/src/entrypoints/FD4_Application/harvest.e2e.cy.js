@@ -38,4 +38,21 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+
+  it('crop with harvestable plant', () => {
+    cy.get('[data-cy="harvest-crop"] select').select('BROCCOLI');
+    cy.get('[data-cy="harvest-table"]').should('exist').and('be.visible');
+
+    cy.get('[data-cy="harvest-quantity"] input')
+      .should('be.visible')
+      .and('have.value', 1);
+
+    cy.get('[data-cy="harvest-units"]').should('be.visible');
+
+    cy.get('[data-cy="harvest-comment"] textarea')
+      .should('be.visible')
+      .and('have.value', '');
+
+    cy.get('[data-cy="harvest-buttons"] button').first().should('be.disabled');
+  });
 });
