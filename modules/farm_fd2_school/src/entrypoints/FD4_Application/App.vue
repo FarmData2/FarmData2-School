@@ -88,6 +88,7 @@
       />
     </div>
     <div
+      data-cy="harvest-no-plants"
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
