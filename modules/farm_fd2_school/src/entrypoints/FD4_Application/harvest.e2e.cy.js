@@ -55,4 +55,15 @@ describe('Tests for the Harvest form', () => {
 
     cy.get('[data-cy="harvest-buttons"] button').first().should('be.disabled');
   });
+
+  it('crop with no harvestable plant', () => {
+    cy.get('[data-cy="harvest-crop"] select').select('ASPARAGUS');
+    cy.get('#harvest-no-plants').should('be.visible').and('contain', 'no');
+
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
+    cy.get('[data-cy="harvest-buttons"] button').first().should('be.disabled');
+  });
 });
