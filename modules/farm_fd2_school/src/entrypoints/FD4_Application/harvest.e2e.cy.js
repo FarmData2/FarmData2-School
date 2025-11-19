@@ -64,4 +64,35 @@ describe('Tests for the Harvest form', () => {
       .find('textarea')
       .should('have.value', '');
   });
+
+  it('State Test After Crop Selected With No Harvestable Plants', () => {
+    cy.get('[data-cy="harvest-crop"] select').select('GRASS');
+    cy.get('[data-cy="harvest-header"]')
+      .should('be.visible')
+      .should('have.text', 'Harvest');
+    cy.get('[data-cy="harvest-date"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', '2019-06-15');
+    cy.get('[data-cy="harvest-crop"]')
+      .should('be.visible')
+      .find('select')
+      .should('have.value', 'GRASS');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .should('be.visible')
+      .find('button')
+      .first()
+      .should('be.disabled');
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
+    cy.get('[data-cy="harvest-no-plants"]')
+      .should('be.visible')
+      .should(
+        'contain.text',
+        'There are no GRASS plants available for harvest.'
+      );
+    //.should('contain.text', 'plants available for harvest.');
+  });
 });
