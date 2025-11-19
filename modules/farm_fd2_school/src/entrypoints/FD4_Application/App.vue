@@ -3,9 +3,12 @@
     id="FD3"
     data-cy="FD3"
   >
-    <div id="harvest-header"><h1>Harvest</h1></div>
+    <div id="harvest-header">
+      <h1 data-cy="harvest-header">Harvest</h1>
+    </div>
 
     <DateSelector
+      data-cy="date-selector"
       id="harvest-date"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
@@ -13,6 +16,7 @@
     />
 
     <CropSelector
+      data-cy="crop-selector"
       id="harvest-crop"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
@@ -26,7 +30,10 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <table id="harvest-table">
+      <table
+        data-cy="harvest-table"
+        id="harvest-table"
+      >
         <tr id="harvest-table-header">
           <th></th>
           <th>Location</th>
@@ -52,6 +59,7 @@
       </table>
 
       <NumericInput
+        data-cy="harvest-quantity"
         label="Quantity"
         v-bind:required="true"
         v-bind:incDecValues="[1, 5]"
@@ -59,6 +67,7 @@
         v-model:value="quantity"
       />
       <select
+        data-cy="harvest-unit"
         id="harvest-units"
         v-model="unit"
         v-if="this.unitList.length > 1"
@@ -75,6 +84,7 @@
       <hr />
 
       <CommentBox
+        data-cy="comment-box"
         id="harvest-comment"
         v-model:comment="comment"
       />
@@ -87,6 +97,7 @@
     </div>
 
     <SubmitResetButtons
+      data-cy="submit-reset-buttons"
       v-bind:enableSubmit="formValid"
       v-bind:enableReset="true"
       v-on:submit="submitForm"
