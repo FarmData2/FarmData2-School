@@ -3,13 +3,19 @@
     id="FD3"
     data-cy="FD3"
   >
-    <div id="harvest-header"><h1>Harvest</h1></div>
+    <div
+      id="harvest-header"
+      data-cy="harvest-header"
+    >
+      <h1>Harvest</h1>
+    </div>
 
     <DateSelector
       id="harvest-date"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:date="date"
+      data-cy="harvest-date"
     />
 
     <CropSelector
@@ -18,6 +24,7 @@
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
       v-on:error="(msg) => showErrorToast('Network Error', msg)"
+      data-cy="harvest-crop"
     />
 
     <hr />
@@ -26,7 +33,10 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <table id="harvest-table">
+      <table
+        id="harvest-table"
+        data-cy="harvest-table"
+      >
         <tr id="harvest-table-header">
           <th></th>
           <th>Location</th>
@@ -57,11 +67,13 @@
         v-bind:incDecValues="[1, 5]"
         v-bind:minValue="1"
         v-model:value="quantity"
+        data-cy="harvest-quantity"
       />
       <select
         id="harvest-units"
         v-model="unit"
         v-if="this.unitList.length > 1"
+        data-cy="harvest-units"
       >
         <option
           v-for="unit in unitList"
@@ -77,6 +89,7 @@
       <CommentBox
         id="harvest-comment"
         v-model:comment="comment"
+        data-cy="harvest-comment"
       />
     </div>
     <div
@@ -91,6 +104,7 @@
       v-bind:enableReset="true"
       v-on:submit="submitForm"
       v-on:reset="resetForm"
+      data-cy="harvest-submit-reset"
     />
 
     <hr />

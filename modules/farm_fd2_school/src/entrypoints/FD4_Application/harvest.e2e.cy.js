@@ -12,7 +12,26 @@ describe('Tests for the Harvest form', () => {
     cy.saveSessionStorage();
   });
 
-  it('Placeholder test', () => {
-    cy.get('[data-cy="does-not-exist"]');
+  it('Initial State Test for Harvest Form', () => {
+    cy.get('[data-cy="harvest-header"]')
+      .should('be.visible')
+      .should('have.text', 'Harvest');
+    cy.get('[data-cy="harvest-date"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', '2019-06-15');
+    cy.get('[data-cy="harvest-crop"]')
+      .should('be.visible')
+      .find('select')
+      .should('have.value', null);
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .should('be.visible')
+      .find('button')
+      .first()
+      .should('be.disabled');
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
 });
