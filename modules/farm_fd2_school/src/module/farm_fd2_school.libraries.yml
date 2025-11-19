@@ -77,3 +77,73 @@ FD2_Tutorials:
   css:
     component:
       style/style.css: {}
+
+FD2_Activity:
+  js:
+    FD2_Activity/FD2_Activity.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD2_Application:
+  js:
+    FD2_Application/FD2_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD3_Tutorials:
+  js:
+    FD3_Tutorials/FD3_Tutorials.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD3_Activity:
+  js:
+    FD3_Activity/FD3_Activity.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD3_Application:
+  js:
+    FD3_Application/FD3_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+FD4_Application:
+  js:
+    FD4_Application/FD4_Application.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+
+OSS1:
+  js:
+    OSS1/OSS1.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}

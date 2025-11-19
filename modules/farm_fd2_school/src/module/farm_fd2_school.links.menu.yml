@@ -46,3 +46,45 @@ farm.fd2_school_FD2_Tutorials:
   parent: farm.fd2_school_main
   route_name: farm.fd2_school_FD2_Tutorials.content
   weight: 130
+farm.fd2_school_FD2_Activity:
+  title: 'FD2 Activity'
+  description: 'Harvest form prototype with FD2 Data - part 2.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD2_Activity.content
+  weight: 135
+farm.fd2_school_FD2_Application:
+  title: 'FD2 Application'
+  description: 'Harvest form prototype with FD2 Data - part 2.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD2_Application.content
+  weight: 140
+farm.fd2_school_FD3_Tutorials:
+  title: 'FD3 Tutorials'
+  description: 'Harvest form prototype with FD2 Components'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD3_Tutorials.content
+  weight: 145
+farm.fd2_school_FD3_Activity:
+  title: 'FD3 Activity'
+  description: 'Harvest form prototype with FD2 Components'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD3_Activity.content
+  weight: 150
+farm.fd2_school_FD3_Application:
+  title: 'FD3 Application'
+  description: 'Harvest form prototype with FD2 Components.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD3_Application.content
+  weight: 155
+farm.fd2_school_FD4_Application:
+  title: 'FD4 Application'
+  description: 'Harvest form End-to-End Testing.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_FD4_Application.content
+  weight: 160
+farm.fd2_school_OSS1:
+  title: 'OSS1'
+  description: 'Bug Fix in FarmData2 Harvest form.'
+  parent: farm.fd2_school_main
+  route_name: farm.fd2_school_OSS1.content
+  weight: 165

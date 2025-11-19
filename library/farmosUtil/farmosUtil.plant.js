@@ -100,8 +100,8 @@ export async function getPlantAsset(plantAssetId) {
  * @param {string} [locationName=null] the location of the plant assets.
  * @param {string[]} [checkedBeds=[]] the beds of the plant assets.
  * @param {string} [cropName=null] the name of the crop for the plant assets.
- * @param {boolean} [isInGround=true] include plants that are in the ground (direct seeded or transplanted).
  * @param {boolean} [isInTrays=true] include plants that are in trays (tray seeded but not transplanted).
+ * @param {boolean} [isInGround=true] include plants that are in the ground (direct seeded or transplanted).
  * @return {Object[]} array of objects with information about the matching plant assets.
  * @throws {Error} if unable to fetch the plant assets.
  *

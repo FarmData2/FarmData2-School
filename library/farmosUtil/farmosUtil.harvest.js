@@ -8,6 +8,7 @@ import {
   getCropIdToTermMap,
   getCropNameToTermMap,
 } from './farmosUtil.crops.js';
+import { getUnitIdToTermMap } from './farmosUtil.units.js';
 import {
   getPlantingLocationObjects,
   getLogCategoryObjects,
@@ -22,6 +23,7 @@ import {
  * @param {Array<string>} bedNames the names of the bed(s) where the harvest occurred.
  * @param {Object} plantAsset the plant asset affected by the harvest.
  * @param {Object} quantity the quantity associated with the harvest.
+ * @param {string} [comment = ""] comments about the harvest.
  * @returns {Object} the new harvest log.
  * @throws {Error} if unable to create the harvest log.
  *
@@ -32,7 +34,8 @@ export async function createHarvestLog(
   locationName,
   bedNames,
   plantAsset,
-  quantity
+  quantity,
+  comment = ''
 ) {
   const locationsArray = await getPlantingLocationObjects([
     locationName,
@@ -55,6 +58,7 @@ export async function createHarvestLog(
       name: logName,
       timestamp: dayjs(harvestDate).format(),
       status: 'done',
+      notes: comment,
     },
     relationships: {
       location: locationsArray,
@@ -118,20 +122,26 @@ export async function deleteHarvestLog(harvestLogId) {
  * The first object is the `fd2_harvest_unit`,
  * each subsequent object is one of the `fd2_unit_conversions` objects.
  * The `fd2_unit_conversions` objects contain the conversion `factor`
- * in the `meta.factor` property.
+ * in the `attributes.factor` property.
  *
  * @param {string} cropName the name of the crop for which to get the harvest units.
- * @returns {Array<Object>} an array of the unit objects for the crop.
+ * @returns {Array<Object>} an array of the harvest unit objects for the crop.
  *
  * @category Harvest
  */
 export async function getHarvestUnits(cropName) {
   const cropMap = await getCropNameToTermMap();
+  const unitMap = await getUnitIdToTermMap();
+
   const cropObj = cropMap.get(cropName);
-  const harvestUnits = [
-    cropObj.relationships.fd2_harvest_unit,
-    ...cropObj.relationships.fd2_unit_conversions,
-  ];
+  const harvestUnits = [];
+
+  harvestUnits.push(unitMap.get(cropObj.relationships.fd2_harvest_unit.id));
+  cropObj.relationships.fd2_unit_conversions.map((unit) => {
+    const unitObject = unitMap.get(unit.id);
+    unitObject.attributes.factor = unit.meta.factor;
+    harvestUnits.push(unitObject);
+  });
 
   return harvestUnits;
 }

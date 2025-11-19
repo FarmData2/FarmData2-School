@@ -45,14 +45,36 @@
  *
  * ## Usage Example
  *
+ * In `<template>`:
  * ```html
  * <SubmitResetButtons
- *   v-model:enableSubmit="enableSubmit"
- *   v-model:enableReset="enableReset"
- *   v-on:ready="createdCount++"
+ *   v-bind:enableSubmit="enableSubmit"
+ *   v-bind:enableReset="enableReset"
  *   v-on:submit="submit()"
  *   v-on:reset="reset()"
+ *   v-on:ready="createdCount++"
  * />
+ * ```
+ *
+ * In `<script>`:
+ * ```js
+ * import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+ *
+ * export default {
+ *   components: {
+ *     SubmitResetButtons,
+ *   },
+ *   data() {
+ *     return {
+ *       createdCount: 0,
+ *     }
+ *   },
+ *   methods: {
+ *     submit() { ... },
+ *     reset() { ... },
+ *   },
+ *   ...
+ * }
  * ```
  *
  * ## `data-cy` Attributes
