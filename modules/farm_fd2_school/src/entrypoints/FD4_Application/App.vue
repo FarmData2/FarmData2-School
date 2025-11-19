@@ -92,6 +92,7 @@
     <div
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
+      data-cy="no-plants-message"
     >
       There are no {{ crop }} plants available for harvest.
     </div>
