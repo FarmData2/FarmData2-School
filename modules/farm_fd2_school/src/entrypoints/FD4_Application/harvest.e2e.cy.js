@@ -34,4 +34,35 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-quantity"]').should('not.exist');
     cy.get('[data-cy="harvest-table"]').should('not.exist');
   });
+  it('Test state of form after crop is selected', () => {
+    cy.get('[data-cy="crop-selector"] select').select('RADISH');
+
+    cy.get('[data-cy="harvest-header"]')
+      .should('be.visible')
+      .should('have.text', 'Harvest');
+
+    cy.get('[data-cy="date-selector"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', '2019-06-15');
+
+    cy.get('[data-cy="crop-selector"]')
+      .should('be.visible')
+      .find('select')
+      .should('have.value', 'RADISH');
+
+    cy.get('[data-cy="harvest-table"]').should('be.visible');
+
+    cy.get('[data-cy="harvest-quantity"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', 1);
+
+    cy.get('[data-cy="harvest-unit"]').should('be.visible');
+
+    cy.get('[data-cy="comment-box"]')
+      .should('be.visible')
+      .find('textarea')
+      .should('have.value', '');
+  });
 });
