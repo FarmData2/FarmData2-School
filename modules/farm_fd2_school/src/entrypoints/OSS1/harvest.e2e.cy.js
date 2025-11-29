@@ -77,4 +77,74 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+
+  it('Checking whether the submit disappears after switching from a harvestable plant to an unharvestable plant', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-table"]').find('[type="radio"]').first().check();
+    cy.get('[data-cy="harvest-units"]').select('BUNCH');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('PEPPERS');
+
+    cy.get('[data-cy="harvest-no-plants-message"]')
+      .should('be.visible')
+      .should(
+        'contain.text',
+        'There are no PEPPERS plants available for harvest.'
+      );
+
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+  });
+
+  it('Consistency in submit button and data save fix', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-table"]').find('[type="radio"]').first().check();
+    cy.get('[data-cy="harvest-units"]').select('BUNCH');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('CARROT');
+
+    cy.get('[data-cy="harvest-no-plants-message"]')
+      .should('be.visible')
+      .should(
+        'contain.text',
+        'There are no CARROT plants available for harvest.'
+      );
+
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+    cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+  });
 });

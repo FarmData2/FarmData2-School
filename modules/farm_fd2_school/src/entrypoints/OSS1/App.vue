@@ -24,6 +24,7 @@
       v-bind:required="true"
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
+      v-on:click="resetForm(false)"
       v-on:error="(msg) => showErrorToast('Network Error', msg)"
     />
 
@@ -111,7 +112,7 @@
       v-bind:enableSubmit="formValid"
       v-bind:enableReset="true"
       v-on:submit="submitForm"
-      v-on:reset="resetForm"
+      v-on:reset="resetForm(true)"
     />
 
     <hr />
@@ -163,9 +164,11 @@ export default {
     },
   },
   methods: {
-    resetForm() {
-      this.date = '2019-06-15';
-      this.crop = null;
+    resetForm(formReset) {
+      if (formReset == true) {
+        this.date = '2019-06-15';
+        this.crop = null;
+      }
       this.pickedPlant = null;
       this.quantity = 1;
       this.unit = null;
