@@ -23,7 +23,8 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-crop"]')
       .should('be.visible')
       .find('[data-cy="crop-selector"]')
-      .should('have.value', '');
+      .find('[data-cy="selector-input"]')
+      .should('have.value', null);
     cy.get('[data-cy="submit-reset-button"]')
       .should('be.visible')
       .find('[data-cy="submit-button"]')
@@ -32,5 +33,23 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-quantity"]').should('not.exist');
     cy.get('[data-cy="harvest-units"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
+  });
+
+  it('Test for crop selection with harvestable plants', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .should('be.visible')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('BROCCOLI');
+    cy.get('[data-cy="harvest-table"]').should('be.visible');
+    cy.get('[data-cy="harvest-quantity"]')
+      .should('be.visible')
+      .find('[data-cy="numeric-input"]')
+      .should('have.value', 1);
+    cy.get('[data-cy="harvest-units"]').should('be.visible');
+    cy.get('[data-cy="harvest-comment"]')
+      .should('be.visible')
+      .find('[data-cy="comment-input"]')
+      .should('have.value', '');
   });
 });
