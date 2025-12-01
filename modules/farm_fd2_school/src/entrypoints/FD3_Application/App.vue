@@ -66,14 +66,17 @@
         class="label-margin"
         >Quantity:</label
       >
-      <input
-        type="number"
+
+      <NumericInput
         id="harvest-quantity"
-        min="1"
+        v-model:value="quantity"
+        v-bind:min="1"
+        v-bind:smallIncrement="1"
+        v-bind:mediumIncrement="5"
         size="7"
         class="label-margin"
-        v-model="quantity"
       />
+
       <select
         id="harvest-units"
         v-model="unit"
@@ -114,6 +117,7 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 export default {
@@ -121,6 +125,7 @@ export default {
     DateSelector,
     CommentBox,
     SubmitResetButtons,
+    NumericInput,
   },
   data() {
     return {
