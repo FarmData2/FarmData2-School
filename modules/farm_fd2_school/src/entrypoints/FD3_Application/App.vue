@@ -3,7 +3,9 @@
     id="FD3"
     data-cy="FD3"
   >
-    <div id="harvest-header"><h1>Harvest</h1></div>
+    <div id="harvest-header">
+      <h1>Harvest</h1>
+    </div>
 
     <DateSelector
       v-bind:required="true"
@@ -17,19 +19,11 @@
     >
       Crop:
     </label>
-    <select
+
+    <CropSelector
       id="harvest-crop"
       v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select>
-
+    />
     <hr />
 
     <div
@@ -102,7 +96,7 @@
       id="harvest-no-plants"
       v-if="plantList.length === 0 && crop"
     >
-      There are no {{ crop.attributes.name }} plants available for harvest.
+      There are no {{ crop }} plants available for harvest.
     </div>
     <br />
     <SubmitResetButtons
@@ -117,6 +111,7 @@
 <script>
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
@@ -126,16 +121,17 @@ export default {
     CommentBox,
     SubmitResetButtons,
     NumericInput,
+    CropSelector,
   },
   data() {
     return {
       date: '2019-06-15',
-      crop: null,
+      crop: null, // Correct: expects string
       pickedPlant: null,
       quantity: 1,
       unit: null,
       comment: '',
-      cropList: [],
+      cropList: [], // Correct: unused
       plantList: [],
       unitList: [],
     };
@@ -198,14 +194,12 @@ export default {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
-          this.crop.attributes.name,
+          this.crop, // Correct: using crop string
           false,
           true
         );
 
-        const units = await farmosUtil.getHarvestUnits(
-          this.crop.attributes.name
-        );
+        const units = await farmosUtil.getHarvestUnits(this.crop); // Correct: using crop string
         this.unitList = units;
         if (this.unitList.length == 1) {
           this.unit = this.unitList[0];
@@ -218,13 +212,8 @@ export default {
       }
     },
   },
-  async created() {
-    const cropsArray = await farmosUtil.getCrops();
-    this.cropList = cropsArray;
-  },
 };
 </script>
-
 <style>
 /* import some styling that applies to all FD2 entry points */
 @import url('@css/fd2-mobile.css');
