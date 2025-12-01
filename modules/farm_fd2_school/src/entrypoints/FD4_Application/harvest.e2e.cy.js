@@ -11,8 +11,4 @@ describe('Tests for the Harvest form', () => {
     cy.saveLocalStorage();
     cy.saveSessionStorage();
   });
-
-  it('Placeholder test', () => {
-    cy.get('[data-cy="does-not-exist"]');
-  });
 });

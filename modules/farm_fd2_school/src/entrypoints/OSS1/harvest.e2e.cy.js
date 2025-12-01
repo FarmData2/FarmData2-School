@@ -77,4 +77,36 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+
+  it('disables submit button when changed to crop with no plants ', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ARUGULA');
+
+    cy.get('[data-cy="harvest-table"]').should('be.visible');
+
+    cy.get('[data-cy="harvest-table"]')
+      .find('input[type="radio"]')
+      .first()
+      .check();
+
+    cy.get('[data-cy="harvest-quantity"]')
+      .find('[data-cy="numeric-input"]')
+      .should('be.visible')
+      .should('have.value', '1');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ASPARAGUS');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.not.enabled');
+  });
 });
