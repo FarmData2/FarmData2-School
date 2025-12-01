@@ -91,6 +91,8 @@ describe('Tests for the Harvest form', () => {
       .first()
       .check();
 
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+
     cy.get('[data-cy="harvest-quantity"]')
       .find('[data-cy="numeric-input"]')
       .should('be.visible')
