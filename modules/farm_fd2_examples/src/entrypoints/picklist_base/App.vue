@@ -15,7 +15,7 @@
     v-bind:showValidityStyling="validity.showStyling"
     v-bind:columns="columns"
     v-bind:labels="labels"
-    v-bind:units="units"
+    v-bind:units="unitsProp"
     v-bind:quantityAttribute="quantityAttribute"
     v-bind:rows="rows"
     v-bind:showAllButton="showAllButton"
@@ -82,14 +82,29 @@
       </tr>
 
       <tr>
-        <td>useUnits</td>
+        <td>units</td>
         <td>
-          <BFormCheckbox
-            id="use-units-checkbox"
-            data-cy="use-units-checkbox"
-            switch
-            v-model="useUnits"
-          />
+          <BFormRadio
+            id="no-units-checkbox"
+            data-cy="no-units-checkbox"
+            v-model="units"
+            value="null"
+            >null
+          </BFormRadio>
+          <BFormRadio
+            id="one-units-checkbox"
+            data-cy="one-units-checkbox"
+            v-model="units"
+            value="one"
+            >one
+          </BFormRadio>
+          <BFormRadio
+            id="trays-units-checkbox"
+            data-cy="trays-units-checkbox"
+            v-model="units"
+            value="Trays"
+            >Trays
+          </BFormRadio>
         </td>
       </tr>
       <tr>
@@ -241,8 +256,8 @@ export default {
       ],
       required: true,
       useUnits: true,
-      units: 'Trays',
-      quantityAttribute: 'quantity', // Added quantityAttribute variable to be used directly
+      units: 'null',
+      quantityAttribute: 'quantity',
       showAllButton: true,
       showInfoIcons: true,
       form: {
@@ -258,6 +273,13 @@ export default {
   computed: {
     pageDoneLoading() {
       return this.createdCount == 2;
+    },
+    unitsProp() {
+      if (this.units === 'null') {
+        return null;
+      } else {
+        return this.units;
+      }
     },
   },
   methods: {
