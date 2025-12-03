@@ -35,4 +35,26 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="units-select"]').should('not.exist');
     cy.get('[data-cy="comment-box"]').should('not.exist');
   });
+  it('Test Crop Selection with Harvestable Plants', () => {
+    cy.get('[data-cy="crop-selector"]').find('select').select('ARUGULA');
+    cy.get('[data-cy="plant-table"]')
+      .should('be.visible')
+      .find('tr')
+      .its('length')
+      .should('be.gt', 1);
+    cy.get('[data-cy="plant-table"]')
+      .find('input[type="radio"]')
+      .should('not.be.checked');
+    cy.get('[data-cy="quantity-input"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', '1');
+
+    cy.get('[data-cy="units-select"], span').should('be.visible');
+    cy.get('[data-cy="comment-box"]').should('be.visible');
+
+    cy.get('[data-cy="submit"]').find('button').should('be.disabled');
+
+    cy.get('#harvest-no-plants').should('not.exist');
+  });
 });
