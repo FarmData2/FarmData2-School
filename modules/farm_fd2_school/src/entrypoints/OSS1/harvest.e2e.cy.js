@@ -77,4 +77,10 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+  it('Steps to produce', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('CARROT');
+  });
 });
