@@ -108,7 +108,7 @@
     <SubmitResetButtons
       id="harvest-submit-reset"
       data-cy="harvest-submit-reset"
-      v-bind:enableSubmit="formValid"
+      v-bind:enableSubmit="validity"
       v-bind:enableReset="true"
       v-on:submit="submitForm"
       v-on:reset="resetForm"
@@ -144,6 +144,7 @@ export default {
       comment: '',
       plantList: [],
       unitList: [],
+      validity: false,
     };
   },
   computed: {
@@ -170,6 +171,19 @@ export default {
       this.quantity = 1;
       this.unit = null;
       this.comment = '';
+    },
+    checkValidity() {
+      if (
+        this.date != '' &&
+        this.crop != null &&
+        this.pickedPlant != null &&
+        this.quantity > 0 &&
+        this.unit != null
+      ) {
+        this.validity = true;
+      } else {
+        this.validity = true;
+      }
     },
     async submitForm() {
       let measure = '';
