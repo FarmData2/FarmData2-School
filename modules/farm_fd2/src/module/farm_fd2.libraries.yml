@@ -82,3 +82,14 @@ soil_disturbance:
   css:
     component:
       style/style.css: {}
+
+harvest:
+  js:
+    harvest/harvest.js:
+      preprocess: false
+      minified: true
+      attributes: { type: 'module' }
+  css:
+    component:
+      style/style.css: {}
+    
