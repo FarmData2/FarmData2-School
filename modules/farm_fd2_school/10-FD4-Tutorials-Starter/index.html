@@ -11,7 +11,7 @@
   <body>
     <div id="shopping-list">
       <div class="header">
-        <h1>{{header || 'Welcome'}}</h1>
+        <h1 data-cy="app-heading">{{header || 'Welcome'}}</h1>
         <button
           v-if="editing"
           v-on:click="doEdit(false)"
@@ -23,6 +23,7 @@
           v-else
           v-on:click="doEdit(true)"
           class="btn btn-primary"
+          data-cy="add-item-button"
         >
           Add Item
         </button>
@@ -53,7 +54,12 @@
           Save Item
         </button>
       </div>
-      <p v-if="items.length === 0">Nice job! You've bought all your items!</p>
+      <p
+        v-if="items.length === 0"
+        data-cy="nice-job-message"
+      >
+        Nice job! You've bought all your items!
+      </p>
       <ul>
         <li
           v-for="item in sortedItems"
