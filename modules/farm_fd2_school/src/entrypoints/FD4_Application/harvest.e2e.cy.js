@@ -2,7 +2,7 @@ describe('Tests for the Harvest form', () => {
   beforeEach(() => {
     cy.restoreLocalStorage();
     cy.restoreSessionStorage();
-
+    cy.intercept('GET', '**/api/taxonomy_term/plant_type*').as('getCrops');
     cy.login('manager1', 'farmdata2');
     cy.visit('fd2_school/FD4_Application');
   });
@@ -12,6 +12,7 @@ describe('Tests for the Harvest form', () => {
     cy.saveSessionStorage();
   });
   it('Test initial state of the Harvest form', () => {
+    cy.wait('@getCrops');
     cy.get('[data-cy="harvest-header"]')
       .should('be.visible')
       .and('contain', 'Harvest');
@@ -56,5 +57,19 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="submit"]').find('button').should('be.disabled');
 
     cy.get('#harvest-no-plants').should('not.exist');
+  });
+  it('Test Crop Selection w/o Harvestable Plants', () => {
+    cy.get('[data-cy="crop-selector"]').find('select').select('BEAN');
+
+    cy.get('#harvest-no-plants')
+      .should('be.visible')
+      .and('contain', 'There are no BEAN plants available for harvest.');
+
+    cy.get('[data-cy="plant-table"]').should('not.exist');
+    cy.get('[data-cy="quantity-input"]').should('not.exist');
+    cy.get('[data-cy="units-select"]').should('not.exist');
+    cy.get('[data-cy="comment-box"]').should('not.exist');
+
+    cy.get('[data-cy="submit"]').find('button').should('be.disabled');
   });
 });
