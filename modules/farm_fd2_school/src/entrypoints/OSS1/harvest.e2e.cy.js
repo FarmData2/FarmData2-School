@@ -77,4 +77,70 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+
+  it('Select crop, plants, quantity, unit, and then change to a crop with no harvestable plants', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+    cy.get('[data-cy="harvest-plant-0"]').click();
+    cy.get('[data-cy="harvest-quantity"]').type('1');
+    cy.get('[data-cy="harvest-units"]').select(0);
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.disabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('PEPPERS');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.disabled');
+  });
+
+  it('Select crop, plants, quantity, unit, and then change to a crop with fewer harvestable plants', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+    cy.get('[data-cy="harvest-plant-5"]').click();
+    cy.get('[data-cy="harvest-quantity"]').type('1');
+    cy.get('[data-cy="harvest-units"]').select(0);
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.disabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ARUGULA');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.disabled');
+  });
+
+  it('Form fields carry over after switching crops', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-plant-5"]').click();
+    cy.get('[data-cy="harvest-quantity"]').type('3');
+    cy.get('[data-cy="harvest-units"]').select(2);
+    cy.get('[data-cy="harvest-comment"]').type('Harvest test');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.disabled');
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ARUGULA');
+    cy.get('[data-cy="harvest-quantity"]').should('have.value', '');
+    cy.get('[data-cy="harvest-comment"]').should('have.value', '');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.disabled');
+  });
 });

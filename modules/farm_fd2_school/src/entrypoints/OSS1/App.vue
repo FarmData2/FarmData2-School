@@ -44,7 +44,7 @@
           <th>Planted Date</th>
         </tr>
         <tr
-          v-for="plant in sortedPlantList"
+          v-for="(plant, index) in sortedPlantList"
           v-bind:key="plant.id"
         >
           <td>
@@ -53,6 +53,7 @@
               name="harvest-plant"
               v-bind:value="plant"
               v-model="pickedPlant"
+              v-bind:data-cy="`harvest-plant-${index}`"
             />
           </td>
           <td>{{ plant.location }}</td>
@@ -200,6 +201,9 @@ export default {
   },
   watch: {
     async crop() {
+      this.pickedPlant = null;
+      this.quantity = 1;
+      this.comment = '';
       if (this.crop) {
         this.plantList = await farmosUtil.getPlantAssets(
           null,
