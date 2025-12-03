@@ -17,19 +17,10 @@
     >
       Crop:
     </label>
-    <select
+    <CropSelector
       id="harvest-crop"
       v-model="crop"
-    >
-      <option
-        v-for="crop in cropList"
-        v-bind:key="crop.id"
-        v-bind:value="crop"
-      >
-        {{ crop.attributes.name }}
-      </option>
-    </select>
-
+    />
     <hr />
 
     <div
@@ -115,6 +106,7 @@
 <script>
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import DateSelector from '@comps/DateSelector/DateSelector.vue';
+import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
@@ -124,6 +116,7 @@ export default {
     CommentBox,
     SubmitResetButtons,
     NumericInput,
+    CropSelector,
   },
   data() {
     return {
