@@ -11,8 +11,28 @@ describe('Tests for the Harvest form', () => {
     cy.saveLocalStorage();
     cy.saveSessionStorage();
   });
+  it('Test initial state of the Harvest form', () => {
+    cy.get('[data-cy="harvest-header"]')
+      .should('be.visible')
+      .and('contain', 'Harvest');
 
-  it('Placeholder test', () => {
-    cy.get('[data-cy="does-not-exist"]');
+    cy.get('[data-cy="date-selector"]')
+      .should('be.visible')
+      .find('input')
+      .should('have.value', '2019-06-15');
+
+    cy.get('[data-cy="crop-selector"]')
+      .should('be.visible')
+      .find('select')
+      .should('have.value', null);
+    cy.get('[data-cy="submit"]')
+      .find('button')
+      .should('be.visible')
+      .and('be.disabled');
+
+    cy.get('[data-cy="plant-table"]').should('not.exist');
+    cy.get('[data-cy="quantity-input"]').should('not.exist');
+    cy.get('[data-cy="units-select"]').should('not.exist');
+    cy.get('[data-cy="comment-box"]').should('not.exist');
   });
 });
