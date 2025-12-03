@@ -59,11 +59,13 @@ Picklist
 pietmichal
 Pietraszko
 pinia
+Piya
 Preconfigured
 preprocess
 printlog
 proselint
 readlink
+Rohan
 rushstack
 saithodev
 setsid

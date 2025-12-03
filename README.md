@@ -1,4 +1,6 @@
-# FarmData2
+# Rohan Piya
+
+FarmData2
 
 Welcome to FarmData2. FarmData2 aims to support the day-to-day operation of diversified vegetable farms while facilitating the record keeping necessary for organic certification and for the study of sustainable farming practices. For example, FarmData2 forms enable farm workers to efficiently and reliably enter data about common operations at the time they occur:
 
@@ -56,7 +58,6 @@ FarmData2 is thankful to the following organizations for their in-kind and finan
 
 - [Dickinson College](https://www.dickinson.edu/)
 - [farmOS](https://farmos.org/)
-- [The GNOME Community Engagement Challenge](https://www.gnome.org/challenge/)
 - [The National Science Foundation (DUE-2013069)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2013069)
 - [The Non-Profit FOSS Institute](https://npfi.org/)
 - [PASA Sustainable Agriculture](https://pasafarming.org/)
