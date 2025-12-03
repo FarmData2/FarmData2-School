@@ -78,13 +78,35 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
 
-  it('Switching from harvestable plant to non-harvestable plant', () => {
+  it('Check submit button and reset form when switching between plants', () => {
     cy.get('[data-cy="harvest-crop"]')
       .find('[data-cy="crop-selector"]')
       .find('[data-cy="selector-input"]')
       .select('ARUGULA');
 
     cy.get('[data-cy="harvest-table"]').find('[type=radio]').first().check();
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+
+    cy.get('[data-cy="harvest-quantity"] input').should('have.value', '1');
+    cy.get('[data-cy="harvest-table"] [type=radio]:checked').should(
+      'not.exist'
+    );
+    cy.get('[data-cy="harvest-units"]').should('have.value', null);
+
+    cy.get('[data-cy="harvest-table"]').find('[type=radio]').first().check();
+    cy.get('[data-cy="harvest-units"]').select('BUNCH');
+
     cy.get('[data-cy="harvest-submit-reset"]')
       .find('[data-cy="submit-button"]')
       .should('be.enabled');
