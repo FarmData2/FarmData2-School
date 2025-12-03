@@ -48,3 +48,9 @@ farm.fd2_soil_disturbance:
   parent: farm.fd2_soil
   route_name: farm.fd2_soil_disturbance.content
   weight: 100
+farm.fd2_harvest:
+  title: 'Harvest'
+  description: 'Data entry form for recording a harvest.'
+  parent: farm.fd2_main
+  route_name: farm.fd2_harvest.content
+  weight: 100

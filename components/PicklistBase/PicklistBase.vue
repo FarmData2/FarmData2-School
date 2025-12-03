@@ -31,7 +31,7 @@
               <BButton
                 id="picklist-units-button"
                 data-cy="picklist-units-button"
-                v-if="allButtonVisible && units"
+                v-if="allButtonVisible && units && units != 'one'"
                 v-bind:disabled="showOverlay != null"
                 size="sm"
                 variant="primary"
@@ -97,10 +97,21 @@
                 v-on:change="(state) => handleCheckboxChange(i, state)"
                 size="lg"
               />
+              <BFormRadio
+                v-bind:id="'picklist-radio-' + i"
+                v-bind:data-cy="'picklist-radio-' + i"
+                v-if="units && units === 'one'"
+                name="picklist-radios"
+                v-bind:key="'radio' + i"
+                v-bind:disabled="showOverlay != null"
+                v-bind:checked="pickedRows[i]"
+                v-on:change="handleRadioChange(i)"
+                size="lg"
+              />
               <BFormSelect
                 v-bind:id="'picklist-quantity-' + i"
                 v-bind:data-cy="'picklist-quantity-' + i"
-                v-if="units"
+                v-if="units && units != 'one'"
                 v-bind:key="'select ' + i"
                 v-bind:name="'picklist-quantity-' + i"
                 v-bind:disabled="showOverlay != null"
@@ -303,6 +314,7 @@ import SortOrderButton from '@comps/SortOrderButton/SortOrderButton.vue';
  * ----------------------------| -----------
  * `picklist-all-button`       | The "All" `BButton` element in the leftmost column header..
  * `picklist-checkbox-i`       | The checkbox in the leftmost column of the ith row (counting from 0).
+ * `picklist-radio-i`          | The radio button in the leftmost column of the ith row (counting from 0).
  * `picklist-header-*`         | The `<th>` element for the column with header `*`.  Column headings are lowercased and ' ' are replaced with `-`.
  * `picklist-info-card`        | The `BCard` element that displays more detailed information about a row.
  * `picklist-info-card-header` | The `BCardHeader` element that is the transparent area of the info table.
@@ -387,6 +399,7 @@ export default {
     },
     /**
      * Whether the leftmost column header should be displayed.
+     * This prop is ignored if the `units` prop is `one`.
      * This header is rendered as a button that acts as a select/deselect all button.
      */
     showAllButton: {
@@ -410,7 +423,8 @@ export default {
     /**
      * The units for the leftmost column of the picklist.
      * If this prop is `null` no units are used, the button in the leftmost column heading will be "All", and the column renders as checkboxes.
-     * If this prop is not `null`, the prop value will be used in the button in the leftmost column heading, the column will render as a select element with values from 0...row[i][quantityAttribute].
+     * If this prop is `one` no units are used, there will be no select all button in the leftmost column, and the column renders as radio buttons, only one of which can be selected.
+     * If this prop is not `null` and not `one`, the prop value will be used in the button in the leftmost column heading, the column will render as a select element with values from 0...row[i][quantityAttribute].
      */
     units: {
       type: String,
@@ -567,6 +581,10 @@ export default {
       } else {
         this.pickedRows[row] = 0;
       }
+    },
+    handleRadioChange(row) {
+      this.pickedRows.fill(0);
+      this.pickedRows[row] = 1;
     },
     handleAllButton() {
       if (this.allPicked) {
