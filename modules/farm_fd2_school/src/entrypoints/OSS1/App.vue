@@ -216,6 +216,7 @@ export default {
         } else {
           this.unit = null;
         }
+        this.pickedPlant = null;
       } else {
         this.plantList = [];
         this.unitList = [];
