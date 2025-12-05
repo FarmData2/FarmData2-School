@@ -77,29 +77,29 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
-  // it('Selecting harvestable crop then switching to non-harvestable', () => {
-  //   cy.get('[data-cy="harvest-crop"]')
-  //     .find('[data-cy="crop-selector"]')
-  //     .find('[data-cy="selector-input"]')
-  //     .select('PEPPERS-BELL');
+  it('Selecting harvestable crop then switching to non-harvestable', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('PEPPERS-BELL');
 
-  //   cy.get('[type="RADIO"]').first().check();
-  //   cy.get('[data-cy="harvest-units"]').select('EACH');
-  //   cy.get('[data-cy="harvest-submit-reset"]')
-  //     .find('[data-cy="submit-button"]')
-  //     .should('be.enabled');
+    cy.get('[type="RADIO"]').first().check();
+    cy.get('[data-cy="harvest-units"]').select('EACH');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
 
-  //   cy.get('[data-cy="harvest-crop"]')
-  //     .find('[data-cy="crop-selector"]')
-  //     .find('[data-cy="selector-input"]')
-  //     .select('PEPPERS');
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('PEPPERS');
 
-  //   cy.get('[data-cy="harvest-submit-reset"]')
-  //     .find('[data-cy="submit-button"]')
-  //     .should('be.enabled');
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
 
-  //   cy.get('[data-cy="harvest-submit-reset"]')
-  //     .find('[data-cy="submit-button"]')
-  //     .should('not.be.enabled');
-  // });
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+  });
 });
