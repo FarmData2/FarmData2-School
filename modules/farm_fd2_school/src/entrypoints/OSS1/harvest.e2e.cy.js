@@ -77,4 +77,36 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+  it('Should reset the form when the crop is changed', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-table"]')
+      .find('input[type="radio"]')
+      .first()
+      .check();
+
+    cy.get('[data-cy="harvest-comment"]')
+      .find('[data-cy="comment-input"]')
+      .type('Old Comment');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ARUGULA');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+
+    cy.get('[data-cy="harvest-comment"]')
+      .find('[data-cy="comment-input"]')
+      .should('have.value', '');
+  });
 });
