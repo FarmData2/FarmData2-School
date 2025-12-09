@@ -77,4 +77,30 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
   });
+
+  it('Submit button should disable when switching from harvestable to non-harvestable crop', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="selector-input"]')
+      .select('RADISH');
+
+    cy.get('[data-cy="harvest-table"]')
+      .find('input[type="radio"]')
+      .first()
+      .check({ force: true });
+
+    cy.get('[data-cy="numeric-input"]').clear();
+    cy.get('[data-cy="numeric-input"]').type('5');
+    cy.get('[data-cy="harvest-units"]').select(1);
+    cy.get('[data-cy="submit-button"]').should('be.enabled');
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="selector-input"]')
+      .select('CARROT');
+
+    cy.get('[data-cy="submit-button"]').should('not.be.enabled');
+
+    cy.get('[data-cy="harvest-table"]').should('not.exist');
+    cy.get('[data-cy="harvest-comment"]').should('not.exist');
+    cy.get('[data-cy="harvest-quantity"]').should('not.exist');
+    cy.get('[data-cy="harvest-units"]').should('not.exist');
+  });
 });
