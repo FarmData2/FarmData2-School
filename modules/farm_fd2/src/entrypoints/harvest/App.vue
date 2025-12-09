@@ -23,6 +23,7 @@
       data-cy="harvest-crop"
       v-bind:required="true"
       v-bind:showValidityStyling="true"
+      v-bind:allowCreate="false"
       v-model:selected="crop"
       v-on:error="(msg) => showErrorToast('Network Error', msg)"
     />

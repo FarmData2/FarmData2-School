@@ -105,6 +105,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    allowCreate: {
+      type: Boolean,
+      default: true,
+    },
   },
   data() {
     return {
@@ -166,8 +170,10 @@ export default {
         this.cropList = Array.from(cropMap.keys());
         this.canCreateCrop = canCreate;
 
-        if (this.canCreateCrop) {
+        if (this.canCreateCrop && this.allowCreate) {
           this.popupUrl = '/admin/structure/taxonomy/manage/plant_type/add';
+        } else {
+          this.popUrl = null;
         }
 
         /**
