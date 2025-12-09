@@ -250,6 +250,52 @@
         <div class="card-internal-button-grid">
           <div
             class="activity-item-wrapper"
+            id="harvest-wrapper"
+            data-cy="harvest-wrapper"
+          >
+            <BButton
+              v-on:click="navigateTo('/fd2/harvest')"
+              class="launch-button"
+              variant="none"
+              id="harvest-button"
+              data-cy="harvest-button"
+            >
+              <div
+                class="button-content"
+                id="harvest-content"
+                data-cy="harvest-content"
+              >
+                <div
+                  class="icon-area"
+                  id="harvest-icon-area"
+                  data-cy="harvest-icon-area"
+                >
+                  <img
+                    id="harvest-icon"
+                    data-cy="harvest-icon"
+                    src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPCEtLSBHZW5lcmF0b3I6IEFkb2JlIElsbHVzdHJhdG9yIDI0LjMuMCwgU1ZHIEV4cG9ydCBQbHVnLUluIC4gU1ZHIFZlcnNpb246IDYuMDAgQnVpbGQgMCkgIC0tPgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHZlcnNpb249IjEuMSIgaWQ9IkNhcGFfMSIgeD0iMHB4IiB5PSIwcHgiIHZpZXdCb3g9IjAgMCAzMjAuMDA4IDMyMC4wMDgiIHN0eWxlPSJlbmFibGUtYmFja2dyb3VuZDpuZXcgMCAwIDMyMC4wMDggMzIwLjAwODsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIj4KPGc+Cgk8Zz4KCQk8cGF0aCBkPSJNMTU5Ljc0OCwxMjYuNTM2aDE0MC45MjhjMC4xOTItMS40NzIsMC4zMi0yLjk0NCwwLjUxMi00LjU0NGMxLjI4LTE0LjUyOC0zLjQ1Ni0yOS4yNDgtMTIuNjcyLTM5LjM2ICAgIGMtNy42MTYtOC4zODQtMTcuNjY0LTEzLjA1Ni0yOC4yODgtMTMuMTJjLTguNDQ4LTAuMTI4LTE2LjM4NCwyLjMwNC0yMy4yOTYsNi45NzZjMC44MzItNi4yNzIsMy4yNjQtMTQuMjcyLDEwLjMwNC0xNi44MzIgICAgYzMuMzI4LTEuMjE2LDUuMDU2LTQuODY0LDMuODQtOC4xOTJjLTEuMjE2LTMuMzI4LTQuODY0LTUuMDU2LTguMTkyLTMuODRjLTE0LjE0NCw1LjA1Ni0xNy45MiwxOS42NDgtMTguODgsMjkuMTg0ICAgIGMtMC4xMjgtMC4wNjQtMC4yNTYtMC4xMjgtMC4zODQtMC4xOTJjLTYuOTc2LTQuNzM2LTE1LjEwNC03LjEwNC0yMy40MjQtNy4wNGMtMTAuNjg4LDAuMDY0LTIwLjgsNC44LTI4LjQxNiwxMy4xODQgICAgYy05LjIxNiwxMC4xNzYtMTMuODg4LDI0LjgzMi0xMi41NDQsMzkuMzZDMTU5LjM2NCwxMjMuNTkyLDE1OS41NTYsMTI1LjA2NCwxNTkuNzQ4LDEyNi41MzZ6Ii8+CgkJPHBhdGggZD0iTTE0MC4xLDEyNi41MzZjLTQuNTQ0LTM0Ljc1Mi05LjIxNi02NS4zNDQtMTguMTc2LTg4QzExMC41OTYsOS44LDkzLjYzNi0yLjYxNiw2OS45NTYsMC40NTYgICAgYy0yMy42OCwzLjA3Mi0zNi45MjgsMTkuNDU2LTQwLjUxMiw1MC4xMTJjLTIuNDMyLDIwLjk5Mi0wLjI1Niw0Ni44NDgsMy4yNjQsNzUuOTY4SDE0MC4xeiIvPgoJCTxwYXRoIGQ9Ik0zMTUuNTg4LDE0MS41NzZjLTEuMjE2LTEuNDA4LTMuMDA4LTIuMjQtNC44NjQtMi4yNEg5LjI4NGMtMS44NTYsMC0zLjY0OCwwLjgzMi00Ljg2NCwyLjI0ICAgIGMtMS4yMTYsMS40MDgtMS43OTIsMy4yNjQtMS40NzIsNS4xMmwyMi4wOCwxNDEuMDU2YzIuOTQ0LDE4LjY4OCwxOC44MTYsMzIuMjU2LDM3LjY5NiwzMi4yNTZoMTk0LjU2ICAgIGMxOC44OCwwLDM0Ljc1Mi0xMy41NjgsMzcuNjk2LTMyLjI1NmwyMi4wOC0xNDEuMDU2QzMxNy4zOCwxNDQuODQsMzE2LjgwNCwxNDIuOTg0LDMxNS41ODgsMTQxLjU3NnogTTEwOS4wNiwyNjcuMzM2aC0wLjU3NiAgICBjLTMuMjY0LDAtNi4wOC0yLjQ5Ni02LjMzNi01LjgyNGwtNS42OTYtNjIuNTI4Yy0wLjMyLTMuNTIsMi4yNC02LjY1Niw1Ljc2LTYuOTc2YzMuNTg0LTAuMjU2LDYuNjU2LDIuMzA0LDYuOTc2LDUuODI0ICAgIGw1LjY5Niw2Mi41MjhDMTE1LjIwNCwyNjMuODgsMTEyLjU4LDI2Ny4wMTYsMTA5LjA2LDI2Ny4zMzZ6IE0xNjYuNDA0LDI2MC45MzZjMCwzLjUyLTIuODgsNi40LTYuNCw2LjRzLTYuNC0yLjg4LTYuNC02LjQgICAgdi02Mi41MjhjMC0zLjUyLDIuODgtNi40LDYuNC02LjRzNi40LDIuODgsNi40LDYuNFYyNjAuOTM2eiBNMjE3Ljg2LDI2MS41MTJjLTAuMjU2LDMuMzI4LTMuMDcyLDUuODI0LTYuMzM2LDUuODI0aC0wLjU3NiAgICBjLTMuNTItMC4zMi02LjE0NC0zLjQ1Ni01LjgyNC02Ljk3Nmw1LjY5Ni02Mi41MjhjMC4zMi0zLjUyLDMuNDU2LTYuMDgsNi45NzYtNS44MjRjMy41MiwwLjMyLDYuMDgsMy40NTYsNS43Niw2Ljk3NiAgICBMMjE3Ljg2LDI2MS41MTJ6Ii8+Cgk8L2c+CjwvZz4KCgoKCgoKCgoKCgoKCgoKPC9zdmc+Cg=="
+                    alt="Harvest"
+                    class="button-icon"
+                  />
+                </div>
+                <div
+                  class="text-area"
+                  id="harvest-text-area"
+                  data-cy="harvest-text-area"
+                >
+                  <span
+                    class="button-text"
+                    id="harvest-text"
+                    data-cy="harvest-text"
+                    >Harvest</span
+                  >
+                </div>
+              </div>
+            </BButton>
+          </div>
+
+          <div
+            class="activity-item-wrapper"
             id="transplanting-wrapper"
             data-cy="transplanting-wrapper"
           >

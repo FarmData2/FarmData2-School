@@ -50,6 +50,14 @@ describe('FarmData2 Main Page - Launch Pad', () => {
       dataCy: 'others-card',
       buttons: [
         {
+          text: 'Harvest',
+          dataCyText: 'harvest-text',
+          dataCyButton: 'harvest-button',
+          dataCyIcon: 'harvest-icon',
+          altText: 'Harvest',
+          path: '/fd2/harvest',
+        },
+        {
           text: 'Transplanting',
           dataCyText: 'transplanting-text',
           dataCyButton: 'transplanting-button',
