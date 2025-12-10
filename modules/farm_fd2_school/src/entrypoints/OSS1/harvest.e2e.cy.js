@@ -68,7 +68,7 @@ describe('Tests for the Harvest form', () => {
       .should('be.visible')
       .should(
         'contain.text',
-        'There are no CARROT plants available for harvest.'
+        'There are no ASPARAGUS plants available for harvest.'
       );
 
     cy.get('[data-cy="harvest-table"]').should('not.exist');
@@ -76,5 +76,37 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should('not.exist');
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
+  });
+  it('Should reset the form when the crop is changed', () => {
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('BEAN');
+
+    cy.get('[data-cy="harvest-table"]')
+      .find('input[type="radio"]')
+      .first()
+      .check();
+
+    cy.get('[data-cy="harvest-comment"]')
+      .find('[data-cy="comment-input"]')
+      .type('Old Comment');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('be.enabled');
+
+    cy.get('[data-cy="harvest-crop"]')
+      .find('[data-cy="crop-selector"]')
+      .find('[data-cy="selector-input"]')
+      .select('ASPARAGUS');
+
+    cy.get('[data-cy="harvest-submit-reset"]')
+      .find('[data-cy="submit-button"]')
+      .should('not.be.enabled');
+
+    cy.get('[data-cy="harvest-comment"]')
+      .find('[data-cy="comment-input"]')
+      .should('have.value', '');
   });
 });

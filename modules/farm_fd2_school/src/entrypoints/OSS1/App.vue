@@ -201,6 +201,10 @@ export default {
   watch: {
     async crop() {
       if (this.crop) {
+        this.pickedPlant = null;
+        this.quantity = 1;
+        this.unit = null;
+        this.comment = '';
         this.plantList = await farmosUtil.getPlantAssets(
           null,
           [],
