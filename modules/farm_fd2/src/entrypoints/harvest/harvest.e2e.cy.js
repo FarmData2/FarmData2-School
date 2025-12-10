@@ -4,7 +4,7 @@ describe('Tests for the Harvest form', () => {
     cy.restoreSessionStorage();
 
     cy.login('manager1', 'farmdata2');
-    cy.visit('fd2_school/OSS1');
+    cy.visit('fd2/harvest');
   });
 
   afterEach(() => {
