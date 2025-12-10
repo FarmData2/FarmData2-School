@@ -48,7 +48,7 @@ If you are considering contributing to the development of FarmData2, the sequenc
 
 If you are returning or looking for a specific part of the documentation, the [FarmData2 Documentation Index](docs/index.md) provides a comprehensive set of links to all the documentation.
 
-## Support for FarmData2
+## Support for the FarmData2
 
 FarmData2 is thankful to the following organizations for their in-kind and financial support.
 
