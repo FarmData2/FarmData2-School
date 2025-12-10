@@ -105,6 +105,9 @@ export default {
       type: Boolean,
       default: false,
     },
+    /**
+     * Whether the "+" should appear on the crop dropdown menu.
+     */
     allowAdd: {
       type: Boolean,
       default: true,
