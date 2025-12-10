@@ -173,7 +173,6 @@ export default {
         if (this.canCreateCrop && this.allowAdd) {
           this.popupUrl = '/admin/structure/taxonomy/manage/plant_type/add';
         }
-
         /**
          * The select has been populated with the list of crops and the component is ready to be used.
          */
