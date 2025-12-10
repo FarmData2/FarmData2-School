@@ -2,6 +2,7 @@
 
 # FarmData2
 
+Benjamin
 Welcome to FarmData2. FarmData2 aims to support the day-to-day operation of diversified vegetable farms while facilitating the record keeping necessary for organic certification and for the study of sustainable farming practices. For example, FarmData2 forms enable farm workers to efficiently and reliably enter data about common operations at the time they occur:
 
 <table border=0>
@@ -49,7 +50,7 @@ If you are considering contributing to the development of FarmData2, the sequenc
 
 If you are returning or looking for a specific part of the documentation, the [FarmData2 Documentation Index](docs/index.md) provides a comprehensive set of links to all the documentation.
 
-## Support for FarmData2
+## Support for the FarmData2
 
 FarmData2 is thankful to the following organizations for their in-kind and financial support.
 
@@ -58,7 +59,6 @@ FarmData2 is thankful to the following organizations for their in-kind and finan
 
 - [Dickinson College](https://www.dickinson.edu/)
 - [farmOS](https://farmos.org/)
-- [The GNOME Community Engagement Challenge]([dead link deleted])
 - [The National Science Foundation (DUE-2013069)](https://www.nsf.gov/awardsearch/showAward?AWD_ID=2013069)
 - [The Non-Profit FOSS Institute](https://npfi.org/)
 - [PASA Sustainable Agriculture](https://pasafarming.org/)
