@@ -108,4 +108,14 @@ describe('Test the CropSelector content', () => {
       .should('be.visible')
       .should('be.enabled');
   });
+
+  it('Check that allowCreate prop handles visibility of crop plus button', () => {
+    cy.mount(CropSelector, {
+      props: {
+        allowCreate: false,
+      },
+    });
+
+    cy.get('[data-cy="selector-add-button"]').should('not.exist');
+  });
 });
