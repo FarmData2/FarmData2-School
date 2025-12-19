@@ -14,16 +14,18 @@
       id="harvest-date"
       data-cy="harvest-date"
       v-bind:required="true"
-      v-bind:showValidityStyling="true"
+      v-bind:showValidityStyling="validity.show"
       v-model:date="date"
+      v-on:valid="validity.date = $event"
     />
 
     <CropSelector
       id="harvest-crop"
       data-cy="harvest-crop"
       v-bind:required="true"
-      v-bind:showValidityStyling="true"
+      v-bind:showValidityStyling="validity.show"
       v-model:selected="crop"
+      v-on:valid="validity.crop = $event"
       v-on:error="(msg) => showErrorToast('Network Error', msg)"
     />
 
@@ -66,15 +68,18 @@
         data-cy="harvest-quantity"
         label="Quantity"
         v-bind:required="true"
+        v-bind:showValidityStyling="validity.show"
         v-bind:incDecValues="[1, 5]"
         v-bind:minValue="1"
         v-model:value="quantity"
+        v-on:valid="validity.quantity = $event"
       />
+
       <select
         id="harvest-units"
         data-cy="harvest-units"
         v-model="unit"
-        v-if="this.unitList.length > 1"
+        v-if="unitList.length > 1"
       >
         <option
           v-for="unit in unitList"
@@ -84,19 +89,24 @@
           {{ unit.attributes.name }}
         </option>
       </select>
+
       <span
         data-cy="single-harvest-unit"
-        v-if="this.unitList.length === 1"
-        >{{ unit.attributes.name }}</span
+        v-if="unitList.length === 1"
       >
+        {{ unit.attributes.name }}
+      </span>
+
       <hr />
 
       <CommentBox
         id="harvest-comment"
         data-cy="harvest-comment"
         v-model:comment="comment"
+        v-on:valid="validity.comment = $event"
       />
     </div>
+
     <div
       id="harvest-no-plants-message"
       data-cy="harvest-no-plants-message"
@@ -108,8 +118,8 @@
     <SubmitResetButtons
       id="harvest-submit-reset"
       data-cy="harvest-submit-reset"
-      v-bind:enableSubmit="formValid"
-      v-bind:enableReset="true"
+      v-bind:enableSubmit="submitEnabled"
+      v-bind:enableReset="resetEnabled"
       v-on:submit="submitForm"
       v-on:reset="resetForm"
     />
@@ -126,6 +136,7 @@ import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
 
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
+
 export default {
   components: {
     DateSelector,
@@ -144,16 +155,31 @@ export default {
       comment: '',
       plantList: [],
       unitList: [],
+      validity: {
+        show: false,
+        date: null,
+        crop: null,
+        quantity: null,
+        comment: null,
+      },
+      submitting: false,
     };
   },
   computed: {
-    formValid() {
+    submitEnabled() {
+      return !this.validity.show || (this.validToSubmit && !this.submitting);
+    },
+    resetEnabled() {
+      return !this.submitting;
+    },
+    validToSubmit() {
       return (
-        this.date != '' &&
-        this.crop != null &&
+        this.validity.date === true &&
+        this.validity.crop === true &&
         this.pickedPlant != null &&
-        this.quantity > 0 &&
-        this.unit != null
+        this.validity.quantity === true &&
+        this.unit != null &&
+        this.validity.comment === true
       );
     },
     sortedPlantList() {
@@ -164,6 +190,12 @@ export default {
   },
   methods: {
     resetForm() {
+      this.validity.show = false;
+      this.validity.date = null;
+      this.validity.crop = null;
+      this.validity.quantity = null;
+      this.validity.comment = null;
+
       this.date = '2019-06-15';
       this.crop = null;
       this.pickedPlant = null;
@@ -172,30 +204,39 @@ export default {
       this.comment = '';
     },
     async submitForm() {
-      let measure = '';
-      if (this.unit.relationships.parent.length > 0) {
-        const unitMap = await farmosUtil.getUnitIdToTermMap();
-        const measureObj = unitMap.get(this.unit.relationships.parent[0].id);
-        measure = measureObj.attributes.name;
+      this.submitting = true;
+      this.validity.show = true;
+
+      if (this.validToSubmit) {
+        let measure = '';
+        if (this.unit.relationships.parent.length > 0) {
+          const unitMap = await farmosUtil.getUnitIdToTermMap();
+          const measureObj = unitMap.get(this.unit.relationships.parent[0].id);
+          measure = measureObj.attributes.name;
+        }
+
+        const quantity = await farmosUtil.createStandardQuantity(
+          measure,
+          this.quantity,
+          'harvest',
+          this.unit.attributes.name
+        );
+
+        const plantAsset = await farmosUtil.getPlantAsset(
+          this.pickedPlant.uuid
+        );
+
+        await farmosUtil.createHarvestLog(
+          this.date,
+          this.pickedPlant.location,
+          this.pickedPlant.beds,
+          plantAsset,
+          quantity,
+          this.comment
+        );
       }
 
-      const quantity = await farmosUtil.createStandardQuantity(
-        measure,
-        this.quantity,
-        'harvest',
-        this.unit.attributes.name
-      );
-
-      const plantAsset = await farmosUtil.getPlantAsset(this.pickedPlant.uuid);
-
-      await farmosUtil.createHarvestLog(
-        this.date,
-        this.pickedPlant.location,
-        this.pickedPlant.beds,
-        plantAsset,
-        quantity,
-        this.comment
-      );
+      this.submitting = false;
     },
   },
   watch: {
@@ -211,7 +252,8 @@ export default {
 
         const units = await farmosUtil.getHarvestUnits(this.crop);
         this.unitList = units;
-        if (this.unitList.length == 1) {
+
+        if (this.unitList.length === 1) {
           this.unit = this.unitList[0];
         } else {
           this.unit = null;
@@ -219,6 +261,7 @@ export default {
       } else {
         this.plantList = [];
         this.unitList = [];
+        this.unit = null;
       }
     },
   },
@@ -226,7 +269,6 @@ export default {
 </script>
 
 <style>
-/* import some styling that applies to all FD2 entry points */
 @import url('@css/fd2-mobile.css');
 
 #harvest-header {
@@ -236,10 +278,6 @@ export default {
 #harvest-date,
 #harvest-comment {
   margin-bottom: 10px;
-}
-
-.label-margin {
-  margin-right: 10px;
 }
 
 #harvest-table,
