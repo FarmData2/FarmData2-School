@@ -25,6 +25,7 @@
       v-bind:showValidityStyling="true"
       v-model:selected="crop"
       v-on:error="(msg) => showErrorToast('Network Error', msg)"
+      v-bind:allowAdd="false"
     />
 
     <hr />

@@ -4,7 +4,7 @@ describe('Tests for the Harvest form', () => {
     cy.restoreSessionStorage();
 
     cy.login('manager1', 'farmdata2');
-    cy.visit('fd2_school/OSS1');
+    cy.visit('fd2/harvest');
   });
 
   afterEach(() => {
@@ -35,6 +35,8 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should(`not.exist`);
     cy.get('[data-cy="single-harvest-unit"]').should(`not.exist`);
     cy.get('[data-cy="harvest-comment"]').should(`not.exist`);
+
+    cy.get('[data-cy="selector-add-button"]').should('not.exist');
   });
 
   it('Selecting crop with harvestable plants', () => {

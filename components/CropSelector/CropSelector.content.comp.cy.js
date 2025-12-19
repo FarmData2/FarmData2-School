@@ -108,4 +108,17 @@ describe('Test the CropSelector content', () => {
       .should('be.visible')
       .should('be.enabled');
   });
+
+  it('Crop plus button does not exist', () => {
+    const readySpy = cy.spy().as('readySpy');
+
+    cy.mount(CropSelector, {
+      props: {
+        onReady: readySpy,
+        allowAdd: false,
+      },
+    });
+
+    cy.get('[data-cy="selector-add-button"]').should('not.exist');
+  });
 });
