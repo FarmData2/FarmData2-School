@@ -106,7 +106,7 @@ export default {
       default: false,
     },
     /**
-     * Whether the "+" should appear on the crop dropdown menu.
+     * Whether the user is allowed to add a new crop or not.
      */
     allowAdd: {
       type: Boolean,
