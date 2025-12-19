@@ -35,6 +35,8 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should(`not.exist`);
     cy.get('[data-cy="single-harvest-unit"]').should(`not.exist`);
     cy.get('[data-cy="harvest-comment"]').should(`not.exist`);
+
+    cy.get('[data-cy="selector-add-button"]').should('not.exist');
   });
 
   it('Selecting crop with harvestable plants', () => {
@@ -76,8 +78,5 @@ describe('Tests for the Harvest form', () => {
     cy.get('[data-cy="harvest-units"]').should('not.exist');
     cy.get('[data-cy="single-harvest-unit"]').should('not.exist');
     cy.get('[data-cy="harvest-comment"]').should('not.exist');
-  });
-  it('Crop plus button does not exist', () => {
-    cy.get('[data-cy="selector-add-button"]').should('not.exist');
   });
 });
