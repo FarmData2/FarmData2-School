@@ -26,40 +26,29 @@
       <tr>
         <th>Prop</th>
         <th>Control</th>
+        <th>Value</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td>required</td>
+        <td>options</td>
         <td>
-          <BFormCheckbox
-            id="required-checkbox"
-            data-cy="required-checkbox"
-            switch
-            v-model="required"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>showValidityStyling</td>
-        <td>
-          <BFormCheckbox
-            id="styling-checkbox"
-            data-cy="styling-checkbox"
-            switch
-            v-model="validity.showStyling"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>showAllButton</td>
-        <td>
-          <BFormCheckbox
-            id="show-all-button-checkbox"
-            data-cy="show-all-button-checkbox"
-            switch
-            v-model="showAllButton"
-          />
+          <BButton
+            id="add-option-button"
+            data-cy="add-option-button"
+            variant="outline-primary"
+            size="sm"
+            v-on:click="
+              index = this.options.indexOf('six');
+              if (index > -1) {
+                this.options.splice(index, 1);
+              } else {
+                this.options.push('six');
+              }
+            "
+          >
+            Toggle sixth option
+          </BButton>
         </td>
       </tr>
       <tr>
@@ -84,24 +73,36 @@
         </td>
       </tr>
       <tr>
-        <td>options</td>
+        <td>required</td>
         <td>
-          <BButton
-            id="add-option-button"
-            data-cy="add-option-button"
-            variant="outline-primary"
-            size="sm"
-            v-on:click="
-              index = this.options.indexOf('six');
-              if (index > -1) {
-                this.options.splice(index, 1);
-              } else {
-                this.options.push('six');
-              }
-            "
-          >
-            Toggle sixth option
-          </BButton>
+          <BFormCheckbox
+            id="required-checkbox"
+            data-cy="required-checkbox"
+            switch
+            v-model="required"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>showAllButton</td>
+        <td>
+          <BFormCheckbox
+            id="show-all-button-checkbox"
+            data-cy="show-all-button-checkbox"
+            switch
+            v-model="showAllButton"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>showValidityStyling</td>
+        <td>
+          <BFormCheckbox
+            id="styling-checkbox"
+            data-cy="styling-checkbox"
+            switch
+            v-model="validity.showStyling"
+          />
         </td>
       </tr>
     </tbody>
