@@ -25,6 +25,7 @@
     <thead>
       <th>Prop</th>
       <th>Control</th>
+      <th>Value</th>
     </thead>
     <tbody>
       <tr>
@@ -37,6 +38,7 @@
             v-model="required"
           />
         </td>
+        <td>{{ required }}</td>
       </tr>
       <tr>
         <td>showValidityStyling</td>
@@ -48,6 +50,7 @@
             v-model="validity.showStyling"
           />
         </td>
+        <td>{{ validity.showStyling }}</td>
       </tr>
       <tr>
         <td>date</td>
@@ -62,6 +65,7 @@
             Next
           </BButton>
         </td>
+        <td>{{ form.date }}</td>
       </tr>
     </tbody>
   </table>
@@ -74,12 +78,16 @@
     </thead>
     <tbody>
       <tr>
-        <td>date</td>
+        <td>update:date</td>
         <td>{{ form.date }}</td>
       </tr>
       <tr>
         <td>valid</td>
         <td>{{ validity.date }}</td>
+      </tr>
+      <tr>
+        <td>ready</td>
+        <td>{{ createdCount == 2 }}</td>
       </tr>
     </tbody>
   </table>
