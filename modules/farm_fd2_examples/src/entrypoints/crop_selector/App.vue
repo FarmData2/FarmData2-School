@@ -25,6 +25,7 @@
       <tr>
         <th>Prop</th>
         <th>Control</th>
+        <th>Value</th>
       </tr>
     </thead>
     <tbody>
@@ -38,17 +39,7 @@
             v-model="required"
           />
         </td>
-      </tr>
-      <tr>
-        <td>showValidityStyling</td>
-        <td>
-          <BFormCheckbox
-            id="styling-checkbox"
-            data-cy="styling-checkbox"
-            switch
-            v-model="validity.showStyling"
-          />
-        </td>
+        <td>{{ required }}</td>
       </tr>
       <tr>
         <td>selected</td>
@@ -61,7 +52,7 @@
             v-on:click="this.form.selected = 'ARUGULA'"
             v-bind:disabled="this.form.selected == 'ARUGULA'"
           >
-            Select Arugula
+            Arugula
           </BButton>
           <BButton
             id="remove-button"
@@ -74,6 +65,19 @@
             Clear
           </BButton>
         </td>
+        <td>{{ form.selected }}</td>
+      </tr>
+      <tr>
+        <td>showValidityStyling</td>
+        <td>
+          <BFormCheckbox
+            id="styling-checkbox"
+            data-cy="styling-checkbox"
+            switch
+            v-model="validity.showStyling"
+          />
+        </td>
+        <td>{{ validity.showStyling }}</td>
       </tr>
     </tbody>
   </table>
