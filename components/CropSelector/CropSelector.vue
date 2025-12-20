@@ -12,7 +12,7 @@
       v-on:update:selected="handleUpdateSelected($event)"
       v-on:valid="handleValid($event)"
       v-on:add-clicked="handleAddClicked"
-      v-bind:popupUrl="popupUrl"
+      v-bind:popupUrl="showAdd ? popupUrl : null"
     />
   </div>
 </template>
@@ -83,6 +83,10 @@ export default {
   components: { SelectorBase },
   emits: ['error', 'ready', 'update:selected', 'valid'],
   props: {
+    showAdd: {
+      type: Boolean,
+      default: true,
+    },
     /**
      * Whether a crop selection is required or not.
      */
