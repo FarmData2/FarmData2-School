@@ -89,6 +89,10 @@
         <td>valid</td>
         <td>{{ validity.date }}</td>
       </tr>
+      <tr>
+        <td>ready</td>
+        <td>{{ createdCount == 2 }}</td>
+      </tr>
     </tbody>
   </table>
 
