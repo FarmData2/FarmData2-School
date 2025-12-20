@@ -70,7 +70,7 @@
     </tbody>
   </table>
 
-  <h5>Component Event Payloads</h5>
+  <h5>Component Event Payload</h5>
   <table class="example-table">
     <thead>
       <th>Event</th>
