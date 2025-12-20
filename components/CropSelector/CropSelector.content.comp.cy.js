@@ -108,4 +108,16 @@ describe('Test the CropSelector content', () => {
       .should('be.visible')
       .should('be.enabled');
   });
+  it('Crop plus button is removed when showAdd prop is false', () => {
+    const readySpy = cy.spy().as('readySpy');
+
+    cy.mount(CropSelector, {
+      props: {
+        showAdd: false,
+        onReady: readySpy,
+      },
+    });
+
+    cy.get('[data-cy="selector-add-button"]').should('not.exist');
+  });
 });

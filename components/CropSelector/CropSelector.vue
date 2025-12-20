@@ -83,6 +83,10 @@ export default {
   components: { SelectorBase },
   emits: ['error', 'ready', 'update:selected', 'valid'],
   props: {
+    showAdd: {
+      type: Boolean,
+      default: true,
+    },
     /**
      * Whether a crop selection is required or not.
      */

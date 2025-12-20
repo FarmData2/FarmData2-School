@@ -88,6 +88,9 @@
     </thead>
     <tbody>
       <tr>
+        <td>ready</td>
+      </tr>
+      <tr>
         <td>update:selected</td>
         <td>{{ form.selected }}</td>
       </tr>
