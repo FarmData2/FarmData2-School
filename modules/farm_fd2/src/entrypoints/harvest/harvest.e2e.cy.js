@@ -42,7 +42,6 @@ describe('Tests for the Harvest form', () => {
       .find('[data-cy="crop-selector"]')
       .find('[data-cy="selector-input"]')
       .select('RADISH');
-
     cy.get('[data-cy="harvest-table"]').should('be.visible');
     cy.get('[data-cy="harvest-quantity"]')
       .find('[data-cy="numeric-input"]')
