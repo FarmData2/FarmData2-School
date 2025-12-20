@@ -29,6 +29,21 @@
     </thead>
     <tbody>
       <tr>
+        <td>date</td>
+        <td>
+          <BButton
+            id="set-date-button"
+            data-cy="set-date-button"
+            variant="outline-primary"
+            size="sm"
+            v-on:click="nextDay"
+          >
+            Next
+          </BButton>
+        </td>
+        <td>{{ form.date }}</td>
+      </tr>
+      <tr>
         <td>required</td>
         <td>
           <BFormCheckbox
@@ -52,31 +67,20 @@
         </td>
         <td>{{ validity.showStyling }}</td>
       </tr>
-      <tr>
-        <td>date</td>
-        <td>
-          <BButton
-            id="set-date-button"
-            data-cy="set-date-button"
-            variant="outline-primary"
-            size="sm"
-            v-on:click="nextDay"
-          >
-            Next
-          </BButton>
-        </td>
-        <td>{{ form.date }}</td>
-      </tr>
     </tbody>
   </table>
 
-  <h5>Component Event Payloads</h5>
+  <h5>Component Event Payload</h5>
   <table class="example-table">
     <thead>
       <th>Event</th>
       <th>Payload</th>
     </thead>
     <tbody>
+      <tr>
+        <td>ready</td>
+        <td>{{ createdCount == 2 }}</td>
+      </tr>
       <tr>
         <td>update:date</td>
         <td>{{ form.date }}</td>
