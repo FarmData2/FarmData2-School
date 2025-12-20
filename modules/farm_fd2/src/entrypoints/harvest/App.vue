@@ -33,24 +33,15 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <PicklistBase
-        data-cy="harvest-table"
-        invalidFeedbackText="At least one row must be selected."
-        v-bind:required="true"
-        v-bind:showValidityStyling="validity.showStyling"
-        v-bind:columns="columns"
-        v-bind:labels="labels"
-        v-bind:rows="rows"
-        v-bind:showAllButton="false"
-        v-bind:showInfoIcons="true"
-        v-model:picked="form.picked"
-        v-on:valid="
-          (valid) => {
-            validity.option = valid;
-          }
-        "
-        v-on:ready="createdCount++"
-      />
+      <tr
+        v-for="row in rows"
+        v-bind:key="row.date"
+      >
+        <td>{{ row.location }}</td>
+        <td>{{ row.bed }}</td>
+        <td>{{ row.date }}</td>
+      </tr>
+
       <NumericInput
         id="harvest-quantity"
         data-cy="harvest-quantity"
@@ -103,6 +94,19 @@
       v-on:submit="submitForm"
       v-on:reset="resetForm"
     />
+    <PicklistBase
+      invalidFeedbackText="One row must be selected."
+      v-bind:required="true"
+      v-bind:showValidityStyling="true"
+      v-bind:columns="columns"
+      v-bind:labels="labels"
+      v-bind:rows="unit"
+      in
+      unitList[]
+      v-bind:showAllButton="false"
+      v-bind:showInfoIcons="true"
+      v-model:picked="pickedPlant"
+    />
 
     <hr />
   </div>
@@ -114,8 +118,8 @@ import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
-// eslint-disable-next-line no-unused-vars
-import SelectorBase from '@comps/PicklistBase/PicklistBase.vue';
+import PicklistBase from '@comps/PicklistBase/PicklistBase.vue';
+
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
   components: {
@@ -124,7 +128,6 @@ export default {
     NumericInput,
     CommentBox,
     SubmitResetButtons,
-    // eslint-disable-next-line no-undef
     PicklistBase,
   },
   data() {
@@ -137,39 +140,21 @@ export default {
       comment: '',
       plantList: [],
       unitList: [],
-      columns: ['color', 'size', 'price'],
-      labels: ['Color', 'Size', 'Price'],
-      rows: [
-        {
-          color: 'Red',
-          size: 'Small',
-          price: '$10',
-          note: 'Size runs larger than normal',
-        },
-        {
-          color: 'Green',
-          size: 'Medium',
-          price: '$20',
-          note: 'Size runs smaller than normal',
-        },
-        {
-          color: 'Blue',
-          size: 'Large',
-          price: '$30',
-          note: 'Color is darer than appears',
-        },
-      ],
+      columns: ['location', 'bed', 'date'],
+      labels: ['Location', 'Bed', 'Planted Date'],
       form: {
         picked: null,
       },
-      validity: {
-        showStyling: false,
-        picked: false,
-      },
-      createdCount: 0,
     };
   },
   computed: {
+    rows() {
+      return this.sortedPlantList.map((plant) => ({
+        location: plant.location,
+        bed: plant.bed,
+        date: plant.date,
+      }));
+    },
     formValid() {
       return (
         this.date != '' &&
