@@ -57,6 +57,14 @@ describe('FarmData2 Main Page - Launch Pad', () => {
           altText: 'Transplanting',
           path: '/fd2/transplanting',
         },
+        {
+          text: 'Harvest',
+          dataCyText: 'harvest-text',
+          dataCyButton: 'harvest-button',
+          dataCyIcon: 'harvest-icon',
+          altText: 'Harvest',
+          path: '/fd2/harvest',
+        },
       ],
     },
   ];
