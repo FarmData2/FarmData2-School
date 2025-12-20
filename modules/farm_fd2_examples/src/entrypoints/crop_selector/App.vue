@@ -92,6 +92,10 @@
     </thead>
     <tbody>
       <tr>
+        <td>ready</td>
+        <td></td>
+      </tr>
+      <tr>
         <td>update:selected</td>
         <td>{{ form.selected }}</td>
       </tr>
