@@ -3,8 +3,151 @@
     id="HTML-CSS"
     data-cy="HTML-CSS"
   >
-    <p>Add HTML for Harvest form here.</p>
+    <h1>Harvest</h1>
   </div>
+  <body>
+    <form action="action_page.php">
+      <label for="date">Date:</label>
+      <input
+        type="date"
+        value="2019-06-15"
+        label="date"
+        name="date"
+      />
+    </form>
+
+    <form for="crop">Crop:</form>
+    <select
+      name="crops"
+      id="crops"
+      value="RADISH"
+      autofocus
+    >
+      <option value="ARUGULA">ARUGULA</option>
+      <option value="ASPARAGUS">ASPARAGUS</option>
+      <option value="BEAN">BEAN</option>
+      <option
+        value="RADISH"
+        selected
+      >
+        RADISH
+      </option>
+    </select>
+
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Location</th>
+          <th>Bed</th>
+          <th>Planted Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        <form>
+          <tr>
+            <td>
+              <div class="radio">
+                <label
+                  ><input
+                    type="radio"
+                    name="line1"
+                /></label>
+              </div>
+            </td>
+            <td>D</td>
+            <td></td>
+            <td>04/02/2019</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="radio">
+                <label
+                  ><input
+                    type="radio"
+                    name="line2"
+                /></label>
+              </div>
+            </td>
+            <td>GHANA</td>
+            <td>GHANA-2</td>
+            <td>04/02/2019</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="radio">
+                <label
+                  ><input
+                    type="radio"
+                    name="line3"
+                /></label>
+              </div>
+            </td>
+            <td>GHANA</td>
+            <td>GHANA-4</td>
+            <td>04/02/2019</td>
+          </tr>
+          <tr>
+            <td>
+              <div class="radio">
+                <label
+                  ><input
+                    type="radio"
+                    name="line4"
+                /></label>
+              </div>
+            </td>
+            <td>E</td>
+            <td></td>
+            <td>06/05/2019</td>
+          </tr>
+        </form>
+      </tbody>
+    </table>
+
+    <label for="quantity">Quantity:</label>
+    <input
+      type="number"
+      id="quantity"
+      name="quantity"
+      min="1"
+      value="1"
+    />
+    <select
+      name="quantity1"
+      id="quantity1"
+      value="BUNCH"
+    >
+      <option value="BUNCH">BUNCH</option>
+      <option value="EACH">EACH</option>
+      <option value="POUND">POUND</option>
+    </select>
+    <br />
+
+    <label for="comment"></label>
+    <textarea
+      id="comment"
+      name="comment"
+      rows="5"
+      cols="30"
+      placeholder="Add a comment..."
+    >
+    </textarea
+    ><br />
+
+    <button
+      type="button"
+      id="submit"
+    >
+      <b>Submit</b>
+    </button>
+    <button
+      type="button"
+      id="reset"
+    >
+      <b>Reset</b>
+    </button>
+  </body>
 </template>
 
 <script></script>
@@ -13,5 +156,20 @@
 /* import some styling that applies to all FD2 entry points */
 @import url('@css/fd2-mobile.css');
 
-/* Add CSS for harvest form here */
+h1 {
+  text-align: center;
+}
+
+#submit {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 75px;
+  margin-right: 6px;
+}
+#reset {
+  background-color: orange;
+  border: none;
+  padding: 5px 30px;
+}
 </style>

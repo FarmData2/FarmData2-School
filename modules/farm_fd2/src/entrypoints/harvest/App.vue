@@ -33,33 +33,14 @@
       id="harvest-table-quantity-unit"
       v-if="plantList.length > 0"
     >
-      <table
-        id="harvest-table"
-        data-cy="harvest-table"
+      <tr
+        v-for="row in rows"
+        v-bind:key="row.date"
       >
-        <tr id="harvest-table-header">
-          <th></th>
-          <th>Location</th>
-          <th>Bed</th>
-          <th>Planted Date</th>
-        </tr>
-        <tr
-          v-for="plant in sortedPlantList"
-          v-bind:key="plant.id"
-        >
-          <td>
-            <input
-              type="radio"
-              name="harvest-plant"
-              v-bind:value="plant"
-              v-model="pickedPlant"
-            />
-          </td>
-          <td>{{ plant.location }}</td>
-          <td>{{ plant.beds.join(', ') }}</td>
-          <td>{{ plant.timestamp }}</td>
-        </tr>
-      </table>
+        <td>{{ row.location }}</td>
+        <td>{{ row.bed }}</td>
+        <td>{{ row.date }}</td>
+      </tr>
 
       <NumericInput
         id="harvest-quantity"
@@ -113,6 +94,19 @@
       v-on:submit="submitForm"
       v-on:reset="resetForm"
     />
+    <PicklistBase
+      invalidFeedbackText="One row must be selected."
+      v-bind:required="true"
+      v-bind:showValidityStyling="true"
+      v-bind:columns="columns"
+      v-bind:labels="labels"
+      v-bind:rows="unit"
+      in
+      unitList[]
+      v-bind:showAllButton="false"
+      v-bind:showInfoIcons="true"
+      v-model:picked="pickedPlant"
+    />
 
     <hr />
   </div>
@@ -124,6 +118,7 @@ import CropSelector from '@comps/CropSelector/CropSelector.vue';
 import NumericInput from '@comps/NumericInput/NumericInput.vue';
 import CommentBox from '@comps/CommentBox/CommentBox.vue';
 import SubmitResetButtons from '@comps/SubmitResetButtons/SubmitResetButtons.vue';
+import PicklistBase from '@comps/PicklistBase/PicklistBase.vue';
 
 import * as farmosUtil from '@libs/farmosUtil/farmosUtil';
 export default {
@@ -133,6 +128,7 @@ export default {
     NumericInput,
     CommentBox,
     SubmitResetButtons,
+    PicklistBase,
   },
   data() {
     return {
@@ -144,9 +140,21 @@ export default {
       comment: '',
       plantList: [],
       unitList: [],
+      columns: ['location', 'bed', 'date'],
+      labels: ['Location', 'Bed', 'Planted Date'],
+      form: {
+        picked: null,
+      },
     };
   },
   computed: {
+    rows() {
+      return this.sortedPlantList.map((plant) => ({
+        location: plant.location,
+        bed: plant.bed,
+        date: plant.date,
+      }));
+    },
     formValid() {
       return (
         this.date != '' &&

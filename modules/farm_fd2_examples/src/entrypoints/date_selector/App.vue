@@ -25,30 +25,9 @@
     <thead>
       <th>Prop</th>
       <th>Control</th>
+      <th>Value</th>
     </thead>
     <tbody>
-      <tr>
-        <td>required</td>
-        <td>
-          <BFormCheckbox
-            id="required-checkbox"
-            data-cy="required-checkbox"
-            switch
-            v-model="required"
-          />
-        </td>
-      </tr>
-      <tr>
-        <td>showValidityStyling</td>
-        <td>
-          <BFormCheckbox
-            id="styling-checkbox"
-            data-cy="styling-checkbox"
-            switch
-            v-model="validity.showStyling"
-          />
-        </td>
-      </tr>
       <tr>
         <td>date</td>
         <td>
@@ -62,11 +41,36 @@
             Next
           </BButton>
         </td>
+        <td>{{ form.date }}</td>
+      </tr>
+      <tr>
+        <td>required</td>
+        <td>
+          <BFormCheckbox
+            id="required-checkbox"
+            data-cy="required-checkbox"
+            switch
+            v-model="required"
+          />
+        </td>
+        <td>{{ required }}</td>
+      </tr>
+      <tr>
+        <td>showValidityStyling</td>
+        <td>
+          <BFormCheckbox
+            id="styling-checkbox"
+            data-cy="styling-checkbox"
+            switch
+            v-model="validity.showStyling"
+          />
+        </td>
+        <td>{{ validity.showStyling }}</td>
       </tr>
     </tbody>
   </table>
 
-  <h5>Component Event Payloads</h5>
+  <h5>Component Event Payload</h5>
   <table class="example-table">
     <thead>
       <th>Event</th>
@@ -74,12 +78,20 @@
     </thead>
     <tbody>
       <tr>
-        <td>date</td>
+        <td>ready</td>
+        <td>{{ createdCount == 2 }}</td>
+      </tr>
+      <tr>
+        <td>update:date</td>
         <td>{{ form.date }}</td>
       </tr>
       <tr>
         <td>valid</td>
         <td>{{ validity.date }}</td>
+      </tr>
+      <tr>
+        <td>ready</td>
+        <td>{{ createdCount == 2 }}</td>
       </tr>
     </tbody>
   </table>
